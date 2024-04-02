@@ -1,4 +1,4 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
@@ -119,7 +119,7 @@ class LoginForm extends HookConsumerWidget {
           TextFormField(
             decoration: InputDecoration(
               hintText: 'Password',
-              suffix: IconButton(
+              suffixIcon: IconButton(
                 icon: Icon(isPasswordVisible.value == true ? Icons.visibility_off_outlined : Icons.visibility_outlined),
                 onPressed: () {
                   isPasswordVisible.value = !isPasswordVisible.value;
@@ -153,7 +153,9 @@ class LoginForm extends HookConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.router.pushNamed('/register');
+                },
                 child: const Text('Register'),
               ),
               const Gap(8),
