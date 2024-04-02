@@ -133,10 +133,10 @@ class LoginForm extends HookConsumerWidget {
             width: double.infinity,
             child: FilledButton(
               onPressed: () {},
-              child: Text('Login'),
+              child: const Text('Login'),
             ),
           ),
-          Divider(
+          const Divider(
             thickness: 2,
             height: 64,
           ),
@@ -149,14 +149,14 @@ class LoginForm extends HookConsumerWidget {
             children: [
               OutlinedButton(
                 onPressed: () {},
-                child: Text('Register'),
+                child: const Text('Register'),
               ),
               const Gap(8),
-              Text('or'),
+              const Text('or'),
               const Gap(8),
               OutlinedButton(
                 onPressed: () {},
-                child: Text('Continue as guest'),
+                child: const Text('Continue as guest'),
               ),
             ],
           )
