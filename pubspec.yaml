@@ -45,3 +45,10 @@ flutter:
   assets:
     - assets/logo/
     - assets/anim/
+
+flutter_launcher_icons:
+  image_path: "assets/logo/color.png"
+  android:
+    - adaptive_icon_background: "#ffffff"
+    - adaptive_icon_foreground: "assets/logo/color.png"
+  ios: true
