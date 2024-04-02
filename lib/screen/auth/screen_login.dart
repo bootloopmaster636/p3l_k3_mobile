@@ -136,14 +136,19 @@ class LoginForm extends HookConsumerWidget {
               child: const Text('Login'),
             ),
           ),
+          TextButton(
+            onPressed: () {},
+            child: const Text('Forgot password?'),
+          ),
           const Divider(
             thickness: 2,
-            height: 64,
+            height: 36,
           ),
           Text(
             "Don't have an account? You can either",
             style: Theme.of(context).textTheme.bodyMedium,
           ),
+          const Gap(4),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
