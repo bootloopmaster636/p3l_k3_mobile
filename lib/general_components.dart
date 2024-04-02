@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:p3l_k3_mobile/constants.dart';
 
 class LogoAtmaKitchen extends StatelessWidget {
-  const LogoAtmaKitchen({required this.type, required this.showBrand, required this.height, super.key});
+  const LogoAtmaKitchen({this.type = LogoType.black, this.showBrand = true, this.height = 64, super.key});
   final LogoType type;
   final bool showBrand;
   final double height;

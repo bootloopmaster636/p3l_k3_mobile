@@ -4,7 +4,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import 'package:p3l_k3_mobile/constants.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
@@ -72,9 +71,7 @@ class LoginPageContent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const LogoAtmaKitchen(
-              type: LogoType.black,
               showBrand: false,
-              height: 64,
             ),
             const Gap(16),
             Text(
