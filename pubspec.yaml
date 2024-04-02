@@ -25,6 +25,7 @@ dependencies:
   auto_route: ^8.0.3
   tinycolor2: ^3.0.1
   lottie: ^3.1.0
+  card_swiper: ^3.0.1
 
 dev_dependencies:
   build_runner: ^2.4.8
