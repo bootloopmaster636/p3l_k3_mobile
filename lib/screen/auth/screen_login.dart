@@ -80,7 +80,7 @@ class LoginPageContent extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             Text(
-              'where perfection meets the taste',
+              'where perfection meets the taste 👌',
               style: Theme.of(context).textTheme.titleMedium,
               textAlign: TextAlign.center,
             ),
