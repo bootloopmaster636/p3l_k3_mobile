@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:lottie/lottie.dart';
 import 'package:p3l_k3_mobile/constants.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 import 'package:tinycolor2/tinycolor2.dart';
@@ -48,7 +49,10 @@ class LoginScreen extends ConsumerWidget {
               ),
             ),
           ),
-          LoginPageContent(),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: LoginPageContent(),
+          ),
         ],
       ),
     );
@@ -69,9 +73,10 @@ class LoginPageContent extends StatelessWidget {
           children: <Widget>[
             const LogoAtmaKitchen(
               type: LogoType.black,
+              showBrand: false,
               height: 64,
             ),
-            const Gap(24),
+            const Gap(16),
             Text(
               'Welcome to Atma Kitchen!',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -83,11 +88,9 @@ class LoginPageContent extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const Gap(24),
-            Container(
-              // TOOD(bootloopmaster636): replace this with lottie animation later
-              height: 300,
-              width: 300,
-              color: Colors.green.withOpacity(0.4),
+            Lottie.asset(
+              'assets/anim/cake_login.json',
+              repeat: false,
             ),
             const Gap(24),
             const Padding(
@@ -120,8 +123,7 @@ class LoginForm extends HookConsumerWidget {
             decoration: InputDecoration(
               hintText: 'Password',
               suffix: IconButton(
-                icon:
-                    Icon(isPasswordVisible.value == true ? Icons.visibility_off_outlined : Icons.visibility_outlined),
+                icon: Icon(isPasswordVisible.value == true ? Icons.visibility_off_outlined : Icons.visibility_outlined),
                 onPressed: () {
                   isPasswordVisible.value = !isPasswordVisible.value;
                 },
