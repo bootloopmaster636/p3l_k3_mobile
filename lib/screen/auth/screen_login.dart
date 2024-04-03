@@ -5,7 +5,8 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
-import 'package:tinycolor2/tinycolor2.dart';
+
+import '../../constants.dart';
 
 @RoutePage()
 class LoginScreen extends ConsumerWidget {
@@ -25,8 +26,8 @@ class LoginScreen extends ConsumerWidget {
               decoration: BoxDecoration(
                 gradient: RadialGradient(
                   colors: <Color>[
-                    TinyColor.fromString('B1E1EE').toColor(),
-                    Theme.of(context).scaffoldBackgroundColor,
+                    Colors.cyan.withOpacity(0.3),
+                    Theme.of(context).scaffoldBackgroundColor.withOpacity(0.3),
                   ],
                 ),
               ),
@@ -41,8 +42,8 @@ class LoginScreen extends ConsumerWidget {
               decoration: BoxDecoration(
                 gradient: RadialGradient(
                   colors: <Color>[
-                    TinyColor.fromString('EECDD3').toColor(),
-                    Theme.of(context).scaffoldBackgroundColor,
+                    Colors.pink.withOpacity(0.3),
+                    Theme.of(context).scaffoldBackgroundColor.withOpacity(0.3),
                   ],
                 ),
               ),
@@ -70,8 +71,9 @@ class LoginPageContent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const LogoAtmaKitchen(
+            LogoAtmaKitchen(
               showBrand: false,
+              type: Theme.of(context).brightness == Brightness.light ? LogoType.black : LogoType.white,
             ),
             const Gap(16),
             Text(
