@@ -45,6 +45,7 @@ flutter:
   assets:
     - assets/logo/
     - assets/anim/
+    - assets/pictures/
 
 flutter_launcher_icons:
   image_path: "assets/logo/color.png"

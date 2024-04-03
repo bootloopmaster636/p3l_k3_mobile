@@ -23,3 +23,6 @@ Atma Kitchen's Mobile App
 * [ ]  [Owner/MO] Laporan stok bahan baku
 * [ ]  [Owner/MO] Laporan bahan baku periode tertentu
 * [ ]  [Owner/MO] Laporan pemasukan pengeluaran bulanan
+
+# Credits
+Some images is designed by Freepik
