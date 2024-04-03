@@ -72,26 +72,14 @@ class LoginPageContent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             LogoAtmaKitchen(
-              showBrand: false,
               type: Theme.of(context).brightness == Brightness.light ? LogoType.black : LogoType.white,
             ),
             const Gap(16),
-            Text(
-              'Welcome to Atma Kitchen!',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              'where perfection meets the taste 👌',
-              style: Theme.of(context).textTheme.titleMedium,
-              textAlign: TextAlign.center,
-            ),
-            const Gap(24),
             Lottie.asset(
-              'assets/anim/cake_login.json',
-              repeat: false,
+              'assets/anim/mascot_login.json',
+              height: 350,
             ),
-            const Gap(24),
+            const Gap(16),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 48),
               child: LoginForm(),
@@ -134,7 +122,10 @@ class LoginForm extends HookConsumerWidget {
           SizedBox(
             width: double.infinity,
             child: FilledButton(
-              onPressed: () {},
+              onPressed: () {
+                // TODO(bootloopmaster636): Implement login logic
+                context.router.replaceNamed('/customer');
+              },
               child: const Text('Login'),
             ),
           ),
