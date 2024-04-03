@@ -98,12 +98,18 @@ class Intro extends StatelessWidget {
       height: 350,
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(48),
-          bottomRight: Radius.circular(48),
-        ),
-        color: Theme.of(context).colorScheme.secondaryContainer,
-      ),
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(48),
+            bottomRight: Radius.circular(48),
+          ),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Theme.of(context).colorScheme.primaryContainer,
+              Theme.of(context).colorScheme.tertiaryContainer,
+            ],
+          )),
       child: Column(
         children: <Widget>[
           const Gap(16),
