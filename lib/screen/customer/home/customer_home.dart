@@ -1,39 +1,194 @@
+import 'dart:math';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/constants.dart';
+import 'package:p3l_k3_mobile/data/test_product_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 
 @RoutePage()
-class CustomerHomeScreen extends StatelessWidget {
+class CustomerHomeScreen extends HookWidget {
   const CustomerHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final ScrollController scrollCtl = useScrollController();
+    final TextEditingController searchTermCtl = useTextEditingController();
+    final List<TestProduct> products = exampleProduct;
+
     return Scaffold(
+      floatingActionButton: ListenableBuilder(
+        // for back to top button
+        listenable: scrollCtl,
+        builder: (BuildContext context, Widget? widget) => Visibility(
+          visible: scrollCtl.offset > 100,
+          child: widget ?? const SizedBox(),
+        ),
+        child: FloatingActionButton(
+          onPressed: () {
+            scrollCtl.animateTo(
+              scrollCtl.position.minScrollExtent,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeOutQuint,
+            );
+          },
+          child: const Icon(Icons.keyboard_arrow_up_outlined),
+        ),
+      ),
       body: CustomScrollView(
+        controller: scrollCtl,
         physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
           const SliverAppBar(
-            expandedHeight: 420,
-            stretch: true,
+            expandedHeight: 380,
             flexibleSpace: FlexibleSpaceBar(
               background: Header(),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (_, int index) {
-                return ListTile(
-                  title: Text('$index'),
-                );
-              },
-              childCount: 20,
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  top: 10, left: 16, right: 16, bottom: 6),
+              child: Row(
+                children: [
+                  Text(
+                    'Our Products',
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const Spacer(),
+                  const FilterButton()
+                ],
+              ),
             ),
           ),
+          SliverPadding(
+            padding: const EdgeInsets.all(8).copyWith(top: 0),
+            sliver: SliverGrid(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return ProductCard(
+                    product: products[index],
+                  );
+                },
+                childCount: products.length,
+              ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 2,
+                crossAxisSpacing: 2,
+                childAspectRatio: 0.8,
+              ),
+            ),
+          ),
+          const SliverGap(32),
         ],
+      ),
+    );
+  }
+}
+
+class FilterButton extends StatelessWidget {
+  const FilterButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: () {
+        showModalBottomSheet<Widget>(
+            context: context,
+            showDragHandle: true,
+            builder: (BuildContext context) {
+              return const SizedBox.expand(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Text('NOT YET IMPLEMENTED :D')],
+                ),
+              );
+            });
+      },
+      style: OutlinedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+      ),
+      child: Row(
+        children: <Widget>[
+          const Icon(
+            Icons.filter_list,
+            size: 16,
+          ),
+          const Gap(4),
+          Text(
+            'Filter',
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  const ProductCard({required this.product, super.key});
+
+  final TestProduct product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3,
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () {},
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              color: Theme.of(context).colorScheme.primaryContainer,
+              height: 150,
+              width: double.infinity,
+              child: Image.network(
+                product.imageUrl,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    product.name,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Rp. ${product.price.toString()}',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const Gap(4),
+                  Text(
+                    product.description,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -70,17 +225,24 @@ class Header extends ConsumerWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 48, left: 20, right: 20, bottom: 20),
+          padding: const EdgeInsets.all(20).copyWith(top: 48),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Row(
-                children: [
+                children: <Widget>[
                   LogoAtmaKitchen(
                     height: 48,
-                    type: Theme.of(context).brightness == Brightness.light ? LogoType.black : LogoType.white,
+                    type: Theme.of(context).brightness == Brightness.light
+                        ? LogoType.black
+                        : LogoType.white,
                   ),
                   const Spacer(),
+                  IconButton(
+                    icon: const Icon(Icons.shopping_bag_outlined),
+                    onPressed: () {},
+                  ),
+                  const Gap(4),
                   const CircleAvatar(
                     backgroundColor: Colors.green,
                   ),
@@ -90,7 +252,10 @@ class Header extends ConsumerWidget {
               Text(
                 'Greetings, user!',
                 textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
               Text(
                 'What sweet thing did you want to eat today?',
@@ -98,31 +263,45 @@ class Header extends ConsumerWidget {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const Gap(16),
-              Expanded(
-                child: Swiper(
-                  itemCount: 4,
-                  viewportFraction: 0.8,
-                  scale: 0.9,
-                  fade: 0.6,
-                  autoplay: true,
-                  autoplayDelay: 6000,
-                  duration: 800,
-                  pagination: const SwiperPagination(),
-                  outer: true,
-                  itemBuilder: (BuildContext context, int index) => Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Theme.of(context).colorScheme.primary, width: 2),
-                    ),
-                    child: Center(child: Text(index.toString())),
-                  ),
-                ),
-              )
+              const Expanded(
+                child: Announcements(),
+              ),
             ],
           ),
-        )
+        ),
       ],
+    );
+  }
+}
+
+class Announcements extends StatelessWidget {
+  const Announcements({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Swiper(
+      itemCount: 4,
+      viewportFraction: 0.8,
+      scale: 0.9,
+      fade: 0.6,
+      autoplay: true,
+      autoplayDelay: 6000,
+      duration: 800,
+      pagination: const SwiperPagination(),
+      outer: true,
+      itemBuilder: (BuildContext context, int index) => Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: Theme.of(context).colorScheme.primary,
+            width: 2,
+          ),
+        ),
+        child: Center(child: Text(index.toString())),
+      ),
     );
   }
 }

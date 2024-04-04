@@ -23,6 +23,7 @@ class MainApp extends StatelessWidget {
         colorSchemeSeed: TinyColor.fromString('F96F22').toColor(),
         fontFamily: GoogleFonts.poppins().fontFamily,
       ),
+      themeMode: ThemeMode.light,
       routerConfig: _appRouter.config(),
     );
   }
