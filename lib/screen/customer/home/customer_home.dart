@@ -5,7 +5,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:p3l_k3_mobile/constants.dart';
 import 'package:p3l_k3_mobile/data/test_product_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 import 'package:p3l_k3_mobile/router.dart';
@@ -17,7 +16,6 @@ class CustomerHomeScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollCtl = useScrollController();
-    final TextEditingController searchTermCtl = useTextEditingController();
     final List<TestProduct> products = exampleProduct;
 
     return Scaffold(
@@ -51,8 +49,7 @@ class CustomerHomeScreen extends HookWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.only(
-                  top: 10, left: 16, right: 16, bottom: 6),
+              padding: const EdgeInsets.only(top: 10, left: 16, right: 16, bottom: 6),
               child: Row(
                 children: [
                   Text(
@@ -175,10 +172,7 @@ class ProductCard extends StatelessWidget {
                 children: [
                   Text(
                     product.name,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   Text(
                     'Rp. ${product.price.toString()}',
@@ -211,7 +205,7 @@ class Header extends ConsumerWidget {
       children: <Widget>[
         Image.asset(
           Theme.of(context).brightness == Brightness.light
-              ? 'assets/pictures/cakes.png'
+              ? 'assets/pictures/cakes-light.png'
               : 'assets/pictures/cakes-dark.png',
           fit: BoxFit.cover,
           height: double.infinity,
@@ -238,11 +232,8 @@ class Header extends ConsumerWidget {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  LogoAtmaKitchen(
+                  const LogoAtmaKitchen(
                     height: 48,
-                    type: Theme.of(context).brightness == Brightness.light
-                        ? LogoType.black
-                        : LogoType.white,
                   ),
                   const Spacer(),
                   IconButton(
@@ -250,8 +241,13 @@ class Header extends ConsumerWidget {
                     onPressed: () {},
                   ),
                   const Gap(4),
-                  const CircleAvatar(
-                    backgroundColor: Colors.green,
+                  InkWell(
+                    onTap: () {
+                      context.router.push(const SettingsRoute());
+                    },
+                    child: const CircleAvatar(
+                      backgroundColor: Colors.green,
+                    ),
                   ),
                 ],
               ),
@@ -259,10 +255,7 @@ class Header extends ConsumerWidget {
               Text(
                 'Greetings, user!',
                 textAlign: TextAlign.start,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               Text(
                 'What sweet thing did you want to eat today?',

@@ -7,8 +7,6 @@ import 'package:lottie/lottie.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 import 'package:p3l_k3_mobile/router.dart';
 
-import '../../constants.dart';
-
 @RoutePage()
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
@@ -72,11 +70,7 @@ class LoginPageContent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            LogoAtmaKitchen(
-              type: Theme.of(context).brightness == Brightness.light
-                  ? LogoType.black
-                  : LogoType.white,
-            ),
+            const LogoAtmaKitchen(),
             const Gap(16),
             Lottie.asset(
               'assets/anim/mascot_login.json',
@@ -113,9 +107,7 @@ class LoginForm extends HookConsumerWidget {
             decoration: InputDecoration(
               hintText: 'Password',
               suffixIcon: IconButton(
-                icon: Icon(isPasswordVisible.value == true
-                    ? Icons.visibility_off_outlined
-                    : Icons.visibility_outlined),
+                icon: Icon(isPasswordVisible.value == true ? Icons.visibility_off_outlined : Icons.visibility_outlined),
                 onPressed: () {
                   isPasswordVisible.value = !isPasswordVisible.value;
                 },
