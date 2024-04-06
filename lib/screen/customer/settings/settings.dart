@@ -90,10 +90,16 @@ class Header extends StatelessWidget {
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  Colors.red.withOpacity(0.2),
-                  Colors.orange.withOpacity(0.2),
-                ]),
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.yellow.withOpacity(0.2),
+                    Colors.orange.withOpacity(0.2),
+                  ],
+                ),
+              ),
+              child: Image.asset(
+                'assets/pictures/cakes-light.png',
+                fit: BoxFit.cover,
               ),
             ),
             Padding(
