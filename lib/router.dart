@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:p3l_k3_mobile/screen/auth/screen_login.dart';
 import 'package:p3l_k3_mobile/screen/auth/screen_register.dart';
 import 'package:p3l_k3_mobile/screen/customer/home/customer_home.dart';
 import 'package:p3l_k3_mobile/screen/customer/product/product_details.dart';
+import 'package:p3l_k3_mobile/screen/customer/settings/profile.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/settings.dart';
 
 part 'router.gr.dart';
@@ -35,6 +37,12 @@ class AppRouter extends _$AppRouter {
           transitionsBuilder: TransitionsBuilders.fadeIn,
           durationInMilliseconds: 300,
           path: '/settings',
+        ),
+        CustomRoute(
+          page: ProfileRoute.page,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+          durationInMilliseconds: 300,
+          path: '/profile',
         ),
       ];
 }

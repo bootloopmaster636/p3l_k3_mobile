@@ -31,7 +31,16 @@ abstract class _$AppRouter extends RootStackRouter {
       final args = routeData.argsAs<ProductDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: ProductDetailScreen(productID: args.productID),
+        child: ProductDetailScreen(
+          productID: args.productID,
+          key: args.key,
+        ),
+      );
+    },
+    ProfileRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ProfileScreen(),
       );
     },
     RegisterRoute.name: (routeData) {
@@ -82,10 +91,14 @@ class LoginRoute extends PageRouteInfo<void> {
 class ProductDetailRoute extends PageRouteInfo<ProductDetailRouteArgs> {
   ProductDetailRoute({
     required int productID,
+    Key? key,
     List<PageRouteInfo>? children,
   }) : super(
           ProductDetailRoute.name,
-          args: ProductDetailRouteArgs(productID: productID),
+          args: ProductDetailRouteArgs(
+            productID: productID,
+            key: key,
+          ),
           initialChildren: children,
         );
 
@@ -96,14 +109,33 @@ class ProductDetailRoute extends PageRouteInfo<ProductDetailRouteArgs> {
 }
 
 class ProductDetailRouteArgs {
-  const ProductDetailRouteArgs({required this.productID});
+  const ProductDetailRouteArgs({
+    required this.productID,
+    this.key,
+  });
 
   final int productID;
 
+  final Key? key;
+
   @override
   String toString() {
-    return 'ProductDetailRouteArgs{productID: $productID}';
+    return 'ProductDetailRouteArgs{productID: $productID, key: $key}';
   }
+}
+
+/// generated route for
+/// [ProfileScreen]
+class ProfileRoute extends PageRouteInfo<void> {
+  const ProfileRoute({List<PageRouteInfo>? children})
+      : super(
+          ProfileRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfileRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

@@ -9,7 +9,9 @@ import 'package:pinch_zoom/pinch_zoom.dart';
 
 @RoutePage()
 class ProductDetailScreen extends HookWidget {
-  const ProductDetailScreen({required this.productID, super.key,
+  const ProductDetailScreen({
+    required this.productID,
+    super.key,
   });
   final int productID;
 
@@ -61,7 +63,8 @@ class ProductDetailScreen extends HookWidget {
 
 class ProductInfo extends StatelessWidget {
   const ProductInfo({
-    required this.product, super.key,
+    required this.product,
+    super.key,
   });
 
   final TestProduct product;
