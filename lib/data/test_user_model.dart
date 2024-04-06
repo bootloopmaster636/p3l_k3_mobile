@@ -16,7 +16,7 @@ class TestUser with _$TestUser {
 const TestUser exampleUser = TestUser(
   name: 'John Doe',
   email: 'doe@bruh.com',
-  alamat: ['somewhere in planet earth'],
+  alamat: <String>['somewhere in planet earth'],
   poin: 100,
   saldo: 34000,
 );

@@ -9,8 +9,7 @@ import 'package:pinch_zoom/pinch_zoom.dart';
 
 @RoutePage()
 class ProductDetailScreen extends HookWidget {
-  const ProductDetailScreen({
-    required this.productID,
+  const ProductDetailScreen({required this.productID, super.key,
   });
   final int productID;
 
@@ -23,7 +22,7 @@ class ProductDetailScreen extends HookWidget {
       body: CustomScrollView(
         controller: scrollCtl,
         physics: const BouncingScrollPhysics(),
-        slivers: [
+        slivers: <Widget>[
           SliverAppBar(
             expandedHeight: 400,
             stretch: true,
@@ -62,8 +61,7 @@ class ProductDetailScreen extends HookWidget {
 
 class ProductInfo extends StatelessWidget {
   const ProductInfo({
-    super.key,
-    required this.product,
+    required this.product, super.key,
   });
 
   final TestProduct product;
@@ -124,7 +122,7 @@ class ProductAdditionalInfo extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+          children: <Widget>[
             Text(
               'Additional info',
               style: Theme.of(context).textTheme.bodyLarge,
@@ -132,15 +130,14 @@ class ProductAdditionalInfo extends StatelessWidget {
             ),
             const Gap(4),
             Table(
-              defaultVerticalAlignment: TableCellVerticalAlignment.top,
-              children: [
+              children: <TableRow>[
                 TableRow(
-                  children: [
+                  children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                        children: <Widget>[
                           Text(
                             'Stock',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
@@ -154,7 +151,7 @@ class ProductAdditionalInfo extends StatelessWidget {
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: <Widget>[
                         Text(
                           'Product category',
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
@@ -168,18 +165,18 @@ class ProductAdditionalInfo extends StatelessWidget {
                   ],
                 ),
                 TableRow(
-                  children: [
+                  children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                        children: <Widget>[
                           Text(
                             'Availability',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            product.stockType == ProductStockType.onDemand ? "Ready in store" : "Should pre-order",
+                            product.stockType == ProductStockType.onDemand ? 'Ready in store' : 'Should pre-order',
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],

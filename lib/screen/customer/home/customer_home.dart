@@ -51,7 +51,7 @@ class CustomerHomeScreen extends HookWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 10, left: 16, right: 16, bottom: 6),
               child: Row(
-                children: [
+                children: <Widget>[
                   Text(
                     'Our Products',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -59,7 +59,7 @@ class CustomerHomeScreen extends HookWidget {
                         ),
                   ),
                   const Spacer(),
-                  const FilterButton()
+                  const FilterButton(),
                 ],
               ),
             ),
@@ -114,10 +114,10 @@ class FilterButton extends StatelessWidget {
               return const SizedBox.expand(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Text('NOT YET IMPLEMENTED :D')],
+                  children: <Widget>[Text('NOT YET IMPLEMENTED :D')],
                 ),
               );
-            });
+            },);
       },
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -166,16 +166,16 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: <Widget>[
                   Text(
                     product.name,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    'Rp. ${product.price.toString()}',
+                    'Rp. ${product.price}',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -187,7 +187,7 @@ class ProductCard extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

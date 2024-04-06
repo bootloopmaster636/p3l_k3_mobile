@@ -30,7 +30,7 @@ class SettingsContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverList(
-      delegate: SliverChildListDelegate.fixed([
+      delegate: SliverChildListDelegate.fixed(<Widget>[
         const Gap(4),
         ListTile(
           title: const Text('Your profile'),
@@ -62,9 +62,9 @@ class SettingsContent extends StatelessWidget {
             onPressed: () {
               context.router.back();
             },
-            child: const Text("Return to home"),
+            child: const Text('Return to home'),
           ),
-        )
+        ),
       ]),
     );
   }
@@ -91,7 +91,7 @@ class Header extends StatelessWidget {
               width: double.infinity,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [
+                  colors: <Color>[
                     Colors.yellow.withOpacity(0.2),
                     Colors.orange.withOpacity(0.2),
                   ],
@@ -105,8 +105,7 @@ class Header extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(32),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: <Widget>[
                   const SizedBox(
                     height: 84,
                     width: 84,
@@ -118,7 +117,7 @@ class Header extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: <Widget>[
                       Text(
                         user.name,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -129,13 +128,13 @@ class Header extends StatelessWidget {
                       ),
                       const Gap(8),
                       Row(
-                        children: [
+                        children: <Widget>[
                           const Icon(
                             Icons.monetization_on_outlined,
                             size: 20,
                           ),
                           const Gap(4),
-                          Text('${user.poin.toString()} point'),
+                          Text('${user.poin} point'),
                           const Gap(24),
                           const Icon(
                             Icons.payments_outlined,
@@ -156,11 +155,11 @@ class Header extends StatelessWidget {
                               Icons.help_outline_outlined,
                               size: 16,
                             ),
-                          )
+                          ),
                         ],
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

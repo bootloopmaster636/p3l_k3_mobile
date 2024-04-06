@@ -41,7 +41,7 @@ class RegisterForm extends HookConsumerWidget {
     final ValueNotifier<bool> isPasswordHidden = useState(true);
     return Form(
       child: Column(
-        children: [
+        children: <Widget>[
           TextFormField(
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
@@ -74,7 +74,7 @@ class RegisterForm extends HookConsumerWidget {
               labelText: 'Confirm Password',
             ),
           ),
-          Gap(16),
+          const Gap(16),
           SizedBox(
             width: double.infinity,
             height: 48,
@@ -98,7 +98,7 @@ class Intro extends StatelessWidget {
       height: 360,
       width: double.infinity,
       decoration: BoxDecoration(
-        boxShadow: [
+        boxShadow: <BoxShadow>[
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
             blurRadius: 8,
@@ -108,7 +108,7 @@ class Intro extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [
+          colors: <Color>[
             Theme.of(context).colorScheme.primaryContainer,
             Theme.of(context).colorScheme.tertiaryContainer,
           ],
@@ -143,7 +143,7 @@ class Intro extends StatelessWidget {
   }
 }
 
-final List<BenefitComponentBuilder> benefits = [
+final List<BenefitComponentBuilder> benefits = <BenefitComponentBuilder>[
   const BenefitComponentBuilder(
     lottiePath: 'assets/anim/shop_mobile.json',
     message: 'Order whenever you want, wherever you want.',

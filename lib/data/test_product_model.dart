@@ -24,7 +24,6 @@ List<TestProduct> exampleProduct = const <TestProduct>[
     price: 120000,
     imageUrl: 'https://i1.theportalwiki.net/img/0/0a/Portal_Cake.png',
     stock: 10,
-    stockType: ProductStockType.preorder,
   ),
   TestProduct(
     id: 1,
@@ -44,7 +43,6 @@ List<TestProduct> exampleProduct = const <TestProduct>[
     imageUrl:
         'https://www.recipetineats.com/wp-content/uploads/2020/08/My-best-Vanilla-Cake_9.jpg?resize=650,910',
     stock: 3,
-    stockType: ProductStockType.preorder,
   ),
   TestProduct(
     id: 3,

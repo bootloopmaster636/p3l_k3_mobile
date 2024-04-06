@@ -49,7 +49,7 @@ class LoginScreen extends ConsumerWidget {
             ),
           ),
           const Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8),
             child: LoginPageContent(),
           ),
         ],
@@ -96,7 +96,7 @@ class LoginForm extends HookConsumerWidget {
     final ValueNotifier<bool> isPasswordVisible = useState(false);
     return Form(
       child: Column(
-        children: [
+        children: <Widget>[
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'Username',
@@ -141,7 +141,7 @@ class LoginForm extends HookConsumerWidget {
           const Gap(4),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: <Widget>[
               OutlinedButton(
                 onPressed: () {
                   context.router.pushNamed('/register');
@@ -156,7 +156,7 @@ class LoginForm extends HookConsumerWidget {
                 child: const Text('Continue as guest'),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
