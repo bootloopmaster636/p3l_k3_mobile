@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:p3l_k3_mobile/screen/auth/screen_login.dart';
 import 'package:p3l_k3_mobile/screen/auth/screen_register.dart';
 import 'package:p3l_k3_mobile/screen/customer/home/customer_home.dart';
+import 'package:p3l_k3_mobile/screen/customer/product/product_details.dart';
 
 part 'router.gr.dart';
 
@@ -20,7 +21,13 @@ class AppRouter extends _$AppRouter {
         ),
         AutoRoute(
           page: CustomerHomeRoute.page,
-          path: '/customer',
+          path: '/profile',
+        ),
+        CustomRoute(
+          page: ProductDetailRoute.page,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+          durationInMilliseconds: 300,
+          path: '/product',
         ),
       ];
 }

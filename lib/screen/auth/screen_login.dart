@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
+import 'package:p3l_k3_mobile/router.dart';
 
 import '../../constants.dart';
 
@@ -72,7 +73,9 @@ class LoginPageContent extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             LogoAtmaKitchen(
-              type: Theme.of(context).brightness == Brightness.light ? LogoType.black : LogoType.white,
+              type: Theme.of(context).brightness == Brightness.light
+                  ? LogoType.black
+                  : LogoType.white,
             ),
             const Gap(16),
             Lottie.asset(
@@ -110,7 +113,9 @@ class LoginForm extends HookConsumerWidget {
             decoration: InputDecoration(
               hintText: 'Password',
               suffixIcon: IconButton(
-                icon: Icon(isPasswordVisible.value == true ? Icons.visibility_off_outlined : Icons.visibility_outlined),
+                icon: Icon(isPasswordVisible.value == true
+                    ? Icons.visibility_off_outlined
+                    : Icons.visibility_outlined),
                 onPressed: () {
                   isPasswordVisible.value = !isPasswordVisible.value;
                 },
@@ -124,7 +129,7 @@ class LoginForm extends HookConsumerWidget {
             child: FilledButton(
               onPressed: () {
                 // TODO(bootloopmaster636): Implement login logic
-                context.router.replaceNamed('/customer');
+                context.router.replace(const CustomerHomeRoute());
               },
               child: const Text('Login'),
             ),

@@ -27,6 +27,13 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginScreen(),
       );
     },
+    ProductDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<ProductDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ProductDetailScreen(productID: args.productID),
+      );
+    },
     RegisterRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -62,6 +69,35 @@ class LoginRoute extends PageRouteInfo<void> {
   static const String name = 'LoginRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ProductDetailScreen]
+class ProductDetailRoute extends PageRouteInfo<ProductDetailRouteArgs> {
+  ProductDetailRoute({
+    required int productID,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ProductDetailRoute.name,
+          args: ProductDetailRouteArgs(productID: productID),
+          initialChildren: children,
+        );
+
+  static const String name = 'ProductDetailRoute';
+
+  static const PageInfo<ProductDetailRouteArgs> page =
+      PageInfo<ProductDetailRouteArgs>(name);
+}
+
+class ProductDetailRouteArgs {
+  const ProductDetailRouteArgs({required this.productID});
+
+  final int productID;
+
+  @override
+  String toString() {
+    return 'ProductDetailRouteArgs{productID: $productID}';
+  }
 }
 
 /// generated route for

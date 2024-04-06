@@ -1,17 +1,14 @@
-import 'dart:math';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:card_swiper/card_swiper.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/constants.dart';
 import 'package:p3l_k3_mobile/data/test_product_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
+import 'package:p3l_k3_mobile/router.dart';
 
 @RoutePage()
 class CustomerHomeScreen extends HookWidget {
@@ -31,7 +28,7 @@ class CustomerHomeScreen extends HookWidget {
           visible: scrollCtl.offset > 100,
           child: widget ?? const SizedBox(),
         ),
-        child: FloatingActionButton(
+        child: FloatingActionButton.small(
           onPressed: () {
             scrollCtl.animateTo(
               scrollCtl.position.minScrollExtent,
@@ -77,7 +74,15 @@ class CustomerHomeScreen extends HookWidget {
                 (BuildContext context, int index) {
                   return ProductCard(
                     product: products[index],
-                  );
+                  )
+                      .animate(
+                        adapter: ScrollAdapter(
+                          scrollCtl,
+                          begin: 360,
+                          end: 0,
+                        ),
+                      )
+                      .scale(begin: const Offset(0.95, 0.95));
                 },
                 childCount: products.length,
               ),
@@ -148,7 +153,9 @@ class ProductCard extends StatelessWidget {
       elevation: 3,
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          context.router.push(ProductDetailRoute(productID: product.id));
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
