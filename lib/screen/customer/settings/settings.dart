@@ -3,6 +3,7 @@ import 'package:el_tooltip/el_tooltip.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/data/test_user_model.dart';
+import 'package:p3l_k3_mobile/router.dart';
 
 @RoutePage()
 class SettingsScreen extends StatelessWidget {
@@ -35,7 +36,9 @@ class SettingsContent extends StatelessWidget {
         ListTile(
           title: const Text('Your profile'),
           leading: const Icon(Icons.person_outline_outlined),
-          onTap: () {},
+          onTap: () {
+            context.router.push(const ProfileRoute());
+          },
         ),
         ListTile(
           title: const Text('Transfer balance'),
@@ -106,11 +109,12 @@ class Header extends StatelessWidget {
               padding: const EdgeInsets.all(32),
               child: Row(
                 children: <Widget>[
-                  const SizedBox(
+                  SizedBox(
                     height: 84,
                     width: 84,
                     child: CircleAvatar(
-                      backgroundColor: Colors.lightGreen,
+                      backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                      foregroundImage: NetworkImage(user.profilePictURL),
                     ),
                   ),
                   const Gap(16),

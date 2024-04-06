@@ -6,6 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/data/test_product_model.dart';
+import 'package:p3l_k3_mobile/data/test_user_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 import 'package:p3l_k3_mobile/router.dart';
 
@@ -108,16 +109,17 @@ class FilterButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: () {
         showModalBottomSheet<Widget>(
-            context: context,
-            showDragHandle: true,
-            builder: (BuildContext context) {
-              return const SizedBox.expand(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[Text('NOT YET IMPLEMENTED :D')],
-                ),
-              );
-            },);
+          context: context,
+          showDragHandle: true,
+          builder: (BuildContext context) {
+            return const SizedBox.expand(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[Text('NOT YET IMPLEMENTED :D')],
+              ),
+            );
+          },
+        );
       },
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -200,6 +202,7 @@ class Header extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const TestUser user = exampleUser;
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
@@ -245,8 +248,9 @@ class Header extends ConsumerWidget {
                     onTap: () {
                       context.router.push(const SettingsRoute());
                     },
-                    child: const CircleAvatar(
-                      backgroundColor: Colors.green,
+                    child: CircleAvatar(
+                      backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                      foregroundImage: NetworkImage(user.profilePictURL),
                     ),
                   ),
                 ],

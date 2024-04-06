@@ -21,6 +21,7 @@ mixin _$TestUser {
   List<String> get alamat => throw _privateConstructorUsedError;
   int get poin => throw _privateConstructorUsedError;
   double get saldo => throw _privateConstructorUsedError;
+  String get profilePictURL => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TestUserCopyWith<TestUser> get copyWith =>
@@ -33,7 +34,12 @@ abstract class $TestUserCopyWith<$Res> {
       _$TestUserCopyWithImpl<$Res, TestUser>;
   @useResult
   $Res call(
-      {String name, String email, List<String> alamat, int poin, double saldo});
+      {String name,
+      String email,
+      List<String> alamat,
+      int poin,
+      double saldo,
+      String profilePictURL});
 }
 
 /// @nodoc
@@ -54,6 +60,7 @@ class _$TestUserCopyWithImpl<$Res, $Val extends TestUser>
     Object? alamat = null,
     Object? poin = null,
     Object? saldo = null,
+    Object? profilePictURL = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -76,6 +83,10 @@ class _$TestUserCopyWithImpl<$Res, $Val extends TestUser>
           ? _value.saldo
           : saldo // ignore: cast_nullable_to_non_nullable
               as double,
+      profilePictURL: null == profilePictURL
+          ? _value.profilePictURL
+          : profilePictURL // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -89,7 +100,12 @@ abstract class _$$TestUserImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name, String email, List<String> alamat, int poin, double saldo});
+      {String name,
+      String email,
+      List<String> alamat,
+      int poin,
+      double saldo,
+      String profilePictURL});
 }
 
 /// @nodoc
@@ -108,6 +124,7 @@ class __$$TestUserImplCopyWithImpl<$Res>
     Object? alamat = null,
     Object? poin = null,
     Object? saldo = null,
+    Object? profilePictURL = null,
   }) {
     return _then(_$TestUserImpl(
       name: null == name
@@ -130,6 +147,10 @@ class __$$TestUserImplCopyWithImpl<$Res>
           ? _value.saldo
           : saldo // ignore: cast_nullable_to_non_nullable
               as double,
+      profilePictURL: null == profilePictURL
+          ? _value.profilePictURL
+          : profilePictURL // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -142,7 +163,8 @@ class _$TestUserImpl implements _TestUser {
       required this.email,
       required final List<String> alamat,
       required this.poin,
-      required this.saldo})
+      required this.saldo,
+      required this.profilePictURL})
       : _alamat = alamat;
 
   @override
@@ -161,10 +183,12 @@ class _$TestUserImpl implements _TestUser {
   final int poin;
   @override
   final double saldo;
+  @override
+  final String profilePictURL;
 
   @override
   String toString() {
-    return 'TestUser(name: $name, email: $email, alamat: $alamat, poin: $poin, saldo: $saldo)';
+    return 'TestUser(name: $name, email: $email, alamat: $alamat, poin: $poin, saldo: $saldo, profilePictURL: $profilePictURL)';
   }
 
   @override
@@ -176,12 +200,20 @@ class _$TestUserImpl implements _TestUser {
             (identical(other.email, email) || other.email == email) &&
             const DeepCollectionEquality().equals(other._alamat, _alamat) &&
             (identical(other.poin, poin) || other.poin == poin) &&
-            (identical(other.saldo, saldo) || other.saldo == saldo));
+            (identical(other.saldo, saldo) || other.saldo == saldo) &&
+            (identical(other.profilePictURL, profilePictURL) ||
+                other.profilePictURL == profilePictURL));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, email,
-      const DeepCollectionEquality().hash(_alamat), poin, saldo);
+  int get hashCode => Object.hash(
+      runtimeType,
+      name,
+      email,
+      const DeepCollectionEquality().hash(_alamat),
+      poin,
+      saldo,
+      profilePictURL);
 
   @JsonKey(ignore: true)
   @override
@@ -196,7 +228,8 @@ abstract class _TestUser implements TestUser {
       required final String email,
       required final List<String> alamat,
       required final int poin,
-      required final double saldo}) = _$TestUserImpl;
+      required final double saldo,
+      required final String profilePictURL}) = _$TestUserImpl;
 
   @override
   String get name;
@@ -208,6 +241,8 @@ abstract class _TestUser implements TestUser {
   int get poin;
   @override
   double get saldo;
+  @override
+  String get profilePictURL;
   @override
   @JsonKey(ignore: true)
   _$$TestUserImplCopyWith<_$TestUserImpl> get copyWith =>
