@@ -29,7 +29,7 @@ class LogoAtmaKitchen extends StatelessWidget {
             children: <Widget>[
               Text(
                 'Atma Kitchen',
-                style: TextStyle(fontSize: 16 * (height / 60), fontWeight: FontWeight.bold, color: textColor),
+                style: TextStyle(fontSize: 16 * (height / 60), fontWeight: FontWeight.w800, color: textColor),
               ),
               Text(
                 'Since 2024 - Cake & Drinks',
