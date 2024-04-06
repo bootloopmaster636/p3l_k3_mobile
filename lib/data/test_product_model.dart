@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:p3l_k3_mobile/constants.dart';
 
 part 'test_product_model.freezed.dart';
 
@@ -10,6 +11,8 @@ class TestProduct with _$TestProduct {
     required String description,
     required double price,
     required String imageUrl,
+    @Default(0) int stock,
+    @Default(ProductStockType.preorder) ProductStockType stockType,
   }) = _TestProduct;
 }
 
@@ -20,6 +23,8 @@ List<TestProduct> exampleProduct = const <TestProduct>[
     description: 'A delicious chocolate cake',
     price: 120000,
     imageUrl: 'https://i1.theportalwiki.net/img/0/0a/Portal_Cake.png',
+    stock: 10,
+    stockType: ProductStockType.preorder,
   ),
   TestProduct(
     id: 1,
@@ -28,6 +33,8 @@ List<TestProduct> exampleProduct = const <TestProduct>[
     price: 150000,
     imageUrl:
         'https://preppykitchen.com/wp-content/uploads/2022/05/Strawberry-Cake-Feature.jpg',
+    stock: 2,
+    stockType: ProductStockType.onDemand,
   ),
   TestProduct(
     id: 2,
@@ -36,6 +43,8 @@ List<TestProduct> exampleProduct = const <TestProduct>[
     price: 140000,
     imageUrl:
         'https://www.recipetineats.com/wp-content/uploads/2020/08/My-best-Vanilla-Cake_9.jpg?resize=650,910',
+    stock: 3,
+    stockType: ProductStockType.preorder,
   ),
   TestProduct(
     id: 3,

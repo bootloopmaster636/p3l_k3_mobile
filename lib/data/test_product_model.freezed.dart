@@ -21,6 +21,8 @@ mixin _$TestProduct {
   String get description => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
+  int get stock => throw _privateConstructorUsedError;
+  ProductStockType get stockType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TestProductCopyWith<TestProduct> get copyWith =>
@@ -34,7 +36,13 @@ abstract class $TestProductCopyWith<$Res> {
       _$TestProductCopyWithImpl<$Res, TestProduct>;
   @useResult
   $Res call(
-      {int id, String name, String description, double price, String imageUrl});
+      {int id,
+      String name,
+      String description,
+      double price,
+      String imageUrl,
+      int stock,
+      ProductStockType stockType});
 }
 
 /// @nodoc
@@ -55,6 +63,8 @@ class _$TestProductCopyWithImpl<$Res, $Val extends TestProduct>
     Object? description = null,
     Object? price = null,
     Object? imageUrl = null,
+    Object? stock = null,
+    Object? stockType = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -77,6 +87,14 @@ class _$TestProductCopyWithImpl<$Res, $Val extends TestProduct>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      stock: null == stock
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
+              as int,
+      stockType: null == stockType
+          ? _value.stockType
+          : stockType // ignore: cast_nullable_to_non_nullable
+              as ProductStockType,
     ) as $Val);
   }
 }
@@ -90,7 +108,13 @@ abstract class _$$TestProductImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id, String name, String description, double price, String imageUrl});
+      {int id,
+      String name,
+      String description,
+      double price,
+      String imageUrl,
+      int stock,
+      ProductStockType stockType});
 }
 
 /// @nodoc
@@ -109,6 +133,8 @@ class __$$TestProductImplCopyWithImpl<$Res>
     Object? description = null,
     Object? price = null,
     Object? imageUrl = null,
+    Object? stock = null,
+    Object? stockType = null,
   }) {
     return _then(_$TestProductImpl(
       id: null == id
@@ -131,6 +157,14 @@ class __$$TestProductImplCopyWithImpl<$Res>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      stock: null == stock
+          ? _value.stock
+          : stock // ignore: cast_nullable_to_non_nullable
+              as int,
+      stockType: null == stockType
+          ? _value.stockType
+          : stockType // ignore: cast_nullable_to_non_nullable
+              as ProductStockType,
     ));
   }
 }
@@ -143,7 +177,9 @@ class _$TestProductImpl implements _TestProduct {
       required this.name,
       required this.description,
       required this.price,
-      required this.imageUrl});
+      required this.imageUrl,
+      this.stock = 0,
+      this.stockType = ProductStockType.preorder});
 
   @override
   final int id;
@@ -155,10 +191,16 @@ class _$TestProductImpl implements _TestProduct {
   final double price;
   @override
   final String imageUrl;
+  @override
+  @JsonKey()
+  final int stock;
+  @override
+  @JsonKey()
+  final ProductStockType stockType;
 
   @override
   String toString() {
-    return 'TestProduct(id: $id, name: $name, description: $description, price: $price, imageUrl: $imageUrl)';
+    return 'TestProduct(id: $id, name: $name, description: $description, price: $price, imageUrl: $imageUrl, stock: $stock, stockType: $stockType)';
   }
 
   @override
@@ -172,12 +214,15 @@ class _$TestProductImpl implements _TestProduct {
                 other.description == description) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl));
+                other.imageUrl == imageUrl) &&
+            (identical(other.stock, stock) || other.stock == stock) &&
+            (identical(other.stockType, stockType) ||
+                other.stockType == stockType));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, description, price, imageUrl);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, description, price, imageUrl, stock, stockType);
 
   @JsonKey(ignore: true)
   @override
@@ -192,7 +237,9 @@ abstract class _TestProduct implements TestProduct {
       required final String name,
       required final String description,
       required final double price,
-      required final String imageUrl}) = _$TestProductImpl;
+      required final String imageUrl,
+      final int stock,
+      final ProductStockType stockType}) = _$TestProductImpl;
 
   @override
   int get id;
@@ -204,6 +251,10 @@ abstract class _TestProduct implements TestProduct {
   double get price;
   @override
   String get imageUrl;
+  @override
+  int get stock;
+  @override
+  ProductStockType get stockType;
   @override
   @JsonKey(ignore: true)
   _$$TestProductImplCopyWith<_$TestProductImpl> get copyWith =>

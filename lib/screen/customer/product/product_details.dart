@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:p3l_k3_mobile/constants.dart';
 import 'package:p3l_k3_mobile/data/test_product_model.dart';
-import 'package:card_swiper/card_swiper.dart';
+import 'package:pinch_zoom/pinch_zoom.dart';
 
 @RoutePage()
 class ProductDetailScreen extends HookWidget {
@@ -20,42 +21,41 @@ class ProductDetailScreen extends HookWidget {
 
     return Scaffold(
       body: CustomScrollView(
+        controller: scrollCtl,
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
             expandedHeight: 400,
             stretch: true,
             flexibleSpace: FlexibleSpaceBar(
-              background: Swiper(
-                  itemCount: 3,
-                  pagination: const SwiperPagination(),
-                  itemBuilder: (context, index) {
-                    return Image.network(
-                      product.imageUrl,
-                      fit: BoxFit.cover,
+              background: PinchZoom(
+                child: Image.network(
+                  product.imageUrl,
+                  fit: BoxFit.cover,
+                )
+                    .animate()
+                    .scale(
+                      delay: 400.ms,
+                      duration: 600.ms,
+                      begin: const Offset(0.8, 0.8),
+                      end: const Offset(1, 1),
+                      curve: Curves.easeOutExpo,
                     )
-                        .animate()
-                        .scale(
-                          delay: 400.ms,
-                          duration: 600.ms,
-                          begin: const Offset(0.8, 0.8),
-                          end: const Offset(1, 1),
-                          curve: Curves.easeOutExpo,
-                        )
-                        .fade(duration: 500.ms);
-                  }),
+                    .fade(duration: 500.ms),
+              ),
             ),
           ),
           const SliverGap(24),
           ProductInfo(product: product),
         ],
       ),
-      bottomSheet:
-          const AddToCartButton().animate().fadeIn(delay: 1000.ms).slideY(
-                begin: 2,
-                duration: 500.ms,
-                curve: Curves.easeOutExpo,
-              ),
+      bottomSheet: AddToCartButton(
+        product: product,
+      ).animate().fadeIn(delay: 1000.ms).slideY(
+            begin: 2,
+            duration: 500.ms,
+            curve: Curves.easeOutExpo,
+          ),
     );
   }
 }
@@ -70,33 +70,31 @@ class ProductInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildListDelegate(
-        <Widget>[
-          Text(
-            product.name,
-            textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headlineMedium
-                ?.copyWith(fontWeight: FontWeight.bold),
-          ).animate().fadeIn(delay: 400.ms, duration: 300.ms).slideY(
-                begin: 2,
-                duration: 600.ms,
-                curve: Curves.easeOutExpo,
-              ),
-          Text(
-            'Rp. ${product.price.toInt()}',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleLarge,
-          ).animate().fadeIn(delay: 500.ms, duration: 300.ms).slideY(
-                begin: 2,
-                duration: 600.ms,
-                curve: Curves.easeOutExpo,
-              ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-            child: Card(
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      sliver: SliverList(
+        delegate: SliverChildListDelegate(
+          <Widget>[
+            Text(
+              product.name,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+            ).animate().fadeIn(delay: 400.ms, duration: 300.ms).slideY(
+                  begin: 2,
+                  duration: 600.ms,
+                  curve: Curves.easeOutExpo,
+                ),
+            Text(
+              'Rp. ${product.price.toInt()}',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleLarge,
+            ).animate().fadeIn(delay: 500.ms, duration: 300.ms).slideY(
+                  begin: 2,
+                  duration: 600.ms,
+                  curve: Curves.easeOutExpo,
+                ),
+            const Gap(8),
+            Card(
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Text(
@@ -106,29 +104,90 @@ class ProductInfo extends StatelessWidget {
                 ),
               ),
             ).animate().fadeIn(delay: 800.ms),
-          ),
-        ],
+            const Gap(4),
+            ProductAdditionalInfo(product: product).animate().fadeIn(delay: 1000.ms),
+          ],
+        ),
       ),
     );
   }
 }
 
 class ProductAdditionalInfo extends StatelessWidget {
-  const ProductAdditionalInfo({super.key});
+  const ProductAdditionalInfo({required this.product, super.key});
+  final TestProduct product;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(12),
-      child: Card(
-        child: Table(
-          border: TableBorder.all(),
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TableRow(
+            Text(
+              'Additional info',
+              style: Theme.of(context).textTheme.bodyLarge,
+              textAlign: TextAlign.start,
+            ),
+            const Gap(4),
+            Table(
+              defaultVerticalAlignment: TableCellVerticalAlignment.top,
               children: [
-                Column(
-                  children: [],
-                )
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Stock',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '${product.stock} available',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Product category',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          'soon(tm)',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                TableRow(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Availability',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            product.stockType == ProductStockType.onDemand ? "Ready in store" : "Should pre-order",
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(),
+                  ],
+                ),
               ],
             ),
           ],
@@ -140,8 +199,10 @@ class ProductAdditionalInfo extends StatelessWidget {
 
 class AddToCartButton extends StatelessWidget {
   const AddToCartButton({
+    required this.product,
     super.key,
   });
+  final TestProduct product;
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +213,7 @@ class AddToCartButton extends StatelessWidget {
         height: 48,
         child: FilledButton(
           onPressed: () {},
-          child: Text('Add to cart'),
+          child: product.stockType == ProductStockType.onDemand ? const Text('Add to cart') : const Text('Pre-order'),
         ),
       ),
     );
