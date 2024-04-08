@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:el_tooltip/el_tooltip.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/data/test_user_model.dart';
 import 'package:p3l_k3_mobile/router.dart';
@@ -39,6 +40,11 @@ class SettingsContent extends StatelessWidget {
           onTap: () {
             context.router.push(const ProfileRoute());
           },
+        ),
+        ListTile(
+          title: const Text('Order History'),
+          leading: const Icon(Icons.history),
+          onTap: () {},
         ),
         ListTile(
           title: const Text('Transfer balance'),
@@ -133,8 +139,8 @@ class Header extends StatelessWidget {
                       const Gap(8),
                       Row(
                         children: <Widget>[
-                          const Icon(
-                            Icons.monetization_on_outlined,
+                          const FaIcon(
+                            FontAwesomeIcons.coins,
                             size: 20,
                           ),
                           const Gap(4),
