@@ -33,12 +33,6 @@ class AppRouter extends _$AppRouter {
           path: '/product',
         ),
         CustomRoute(
-          page: SettingsRoute.page,
-          transitionsBuilder: TransitionsBuilders.fadeIn,
-          durationInMilliseconds: 300,
-          path: '/settings',
-        ),
-        CustomRoute(
           page: ProfileRoute.page,
           transitionsBuilder: TransitionsBuilders.fadeIn,
           durationInMilliseconds: 300,

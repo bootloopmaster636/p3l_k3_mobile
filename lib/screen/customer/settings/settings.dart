@@ -7,8 +7,8 @@ import 'package:p3l_k3_mobile/data/test_user_model.dart';
 import 'package:p3l_k3_mobile/router.dart';
 
 @RoutePage()
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+class LegacySettingsScreen extends StatelessWidget {
+  const LegacySettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

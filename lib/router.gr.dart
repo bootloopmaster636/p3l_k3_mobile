@@ -21,6 +21,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CustomerHomeScreen(),
       );
     },
+    LegacySettingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LegacySettingsScreen(),
+      );
+    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -49,12 +55,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const RegisterScreen(),
       );
     },
-    SettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SettingsScreen(),
-      );
-    },
   };
 }
 
@@ -68,6 +68,20 @@ class CustomerHomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CustomerHomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LegacySettingsScreen]
+class LegacySettingsRoute extends PageRouteInfo<void> {
+  const LegacySettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          LegacySettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LegacySettingsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -148,20 +162,6 @@ class RegisterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'RegisterRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [SettingsScreen]
-class SettingsRoute extends PageRouteInfo<void> {
-  const SettingsRoute({List<PageRouteInfo>? children})
-      : super(
-          SettingsRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SettingsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
