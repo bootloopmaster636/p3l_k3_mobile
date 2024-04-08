@@ -5,7 +5,6 @@ import 'package:p3l_k3_mobile/screen/auth/screen_register.dart';
 import 'package:p3l_k3_mobile/screen/customer/home/customer_home.dart';
 import 'package:p3l_k3_mobile/screen/customer/product/product_details.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/profile.dart';
-import 'package:p3l_k3_mobile/screen/customer/settings/settings.dart';
 
 part 'router.gr.dart';
 

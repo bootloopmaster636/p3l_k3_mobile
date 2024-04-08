@@ -9,6 +9,7 @@ import 'package:p3l_k3_mobile/data/test_product_model.dart';
 import 'package:p3l_k3_mobile/data/test_user_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 import 'package:p3l_k3_mobile/router.dart';
+import 'package:p3l_k3_mobile/screen/customer/home/settings_dialog.dart';
 
 @RoutePage()
 class CustomerHomeScreen extends HookWidget {
@@ -246,7 +247,13 @@ class Header extends ConsumerWidget {
                   const Gap(4),
                   InkWell(
                     onTap: () {
-                      context.router.push(const SettingsRoute());
+                      showDialog<Widget>(
+                        context: context,
+                        barrierColor: Colors.black26,
+                        builder: (context) {
+                          return SettingsDialog();
+                        },
+                      );
                     },
                     child: CircleAvatar(
                       backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,

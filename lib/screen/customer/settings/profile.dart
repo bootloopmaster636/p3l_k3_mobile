@@ -5,7 +5,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:logger/logger.dart';
 import 'package:p3l_k3_mobile/data/test_user_model.dart';
+import 'package:p3l_k3_mobile/router.dart';
 
 @RoutePage()
 class ProfileScreen extends StatelessWidget {
@@ -22,7 +24,10 @@ class ProfileScreen extends StatelessWidget {
             leading: Padding(
               padding: const EdgeInsets.only(left: 4),
               child: IconButton(
-                onPressed: () => context.router.back(),
+                onPressed: () {
+                  Logger().d('Back');
+                  context.router.navigate(const CustomerHomeRoute());
+                },
                 icon: const Icon(Icons.arrow_back),
               ),
             ),
@@ -175,6 +180,19 @@ class Header extends ConsumerWidget {
                 Text(
                   '${user.poin} point',
                   style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const Gap(4),
+                const ElTooltip(
+                  position: ElTooltipPosition.bottomCenter,
+                  appearAnimationDuration: Duration(milliseconds: 100),
+                  disappearAnimationDuration: Duration(milliseconds: 100),
+                  modalConfiguration: ModalConfiguration(opacity: 0.2),
+                  content: Text('This is the bonus coins you get from ordering, each coin worth Rp. 100.\n\n'
+                      'You can use it for discount at your next order.'),
+                  child: Icon(
+                    Icons.help_outline_outlined,
+                    size: 16,
+                  ),
                 ),
                 const Gap(32),
                 const Icon(

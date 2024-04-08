@@ -21,12 +21,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CustomerHomeScreen(),
       );
     },
-    LegacySettingsRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const LegacySettingsScreen(),
-      );
-    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -68,20 +62,6 @@ class CustomerHomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CustomerHomeRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [LegacySettingsScreen]
-class LegacySettingsRoute extends PageRouteInfo<void> {
-  const LegacySettingsRoute({List<PageRouteInfo>? children})
-      : super(
-          LegacySettingsRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'LegacySettingsRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
