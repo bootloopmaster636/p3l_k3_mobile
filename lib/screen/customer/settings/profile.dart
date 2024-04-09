@@ -70,17 +70,32 @@ class ProfileSettingsContent extends StatelessWidget {
             ),
             const Gap(8),
             ListTile(
-              title: Text('Change personal information'),
-              leading: Icon(Icons.person_outline_outlined),
+              title: Text(
+                'Change personal information',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              leading: Icon(
+                Icons.person_outline_outlined,
+                size: 24,
+              ),
               onTap: () {},
             ),
             ListTile(
-              title: Text('Change password'),
-              leading: Icon(Icons.vpn_key_outlined),
+              title: Text(
+                'Change password',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              leading: Icon(
+                Icons.vpn_key_outlined,
+                size: 20,
+              ),
               onTap: () {},
             ),
             ListTile(
-              title: Text('Add or modify delivery address'),
+              title: Text(
+                'Add or modify delivery address',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
               leading: FaIcon(
                 FontAwesomeIcons.truckFast,
                 size: 18,
@@ -92,17 +107,31 @@ class ProfileSettingsContent extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 'Things you might looking for',
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
             const Gap(8),
             ListTile(
-              title: Text('Order history'),
-              leading: Icon(Icons.history),
+              onTap: () {},
+              title: Text(
+                'Order history',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              leading: Icon(
+                Icons.history,
+                size: 24,
+              ),
             ),
             ListTile(
-              title: Text('Transfer balance'),
-              leading: Icon(Icons.payments_outlined),
+              onTap: () {},
+              title: Text(
+                'Transfer balance',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              leading: Icon(
+                Icons.payments_outlined,
+                size: 24,
+              ),
             ),
           ],
         )

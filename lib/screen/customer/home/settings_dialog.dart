@@ -12,7 +12,7 @@ class SettingsDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Gap(72),
+        const Gap(64),
         Padding(
           padding: const EdgeInsets.all(16),
           child: Container(
@@ -171,7 +171,7 @@ class Profile extends StatelessWidget {
                 const Gap(16),
                 OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       )),
@@ -181,7 +181,7 @@ class Profile extends StatelessWidget {
                   },
                   child: Text(
                     'Manage your profile',
-                    style: Theme.of(context).textTheme.bodyMedium,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
               ],
@@ -212,8 +212,14 @@ class About extends StatelessWidget {
       },
       child: Column(
         children: [
-          Text('Atma Kitchen Mobile'),
-          Text('v${versionString}'),
+          Text(
+            'Atma Kitchen Mobile',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.primary),
+          ),
+          Text(
+            'v${versionString}',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.primary),
+          ),
         ],
       ),
     );
