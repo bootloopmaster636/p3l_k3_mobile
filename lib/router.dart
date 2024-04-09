@@ -4,6 +4,9 @@ import 'package:p3l_k3_mobile/screen/auth/screen_login.dart';
 import 'package:p3l_k3_mobile/screen/auth/screen_register.dart';
 import 'package:p3l_k3_mobile/screen/customer/home/customer_home.dart';
 import 'package:p3l_k3_mobile/screen/customer/product/product_details.dart';
+import 'package:p3l_k3_mobile/screen/customer/settings/edit_address.dart';
+import 'package:p3l_k3_mobile/screen/customer/settings/edit_password.dart';
+import 'package:p3l_k3_mobile/screen/customer/settings/edit_profile.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/profile.dart';
 
 part 'router.gr.dart';
@@ -21,9 +24,10 @@ class AppRouter extends _$AppRouter {
           page: RegisterRoute.page,
           path: '/register',
         ),
-        AutoRoute(
+        CustomRoute(
           page: CustomerHomeRoute.page,
-          path: '/profile',
+          transitionsBuilder: TransitionsBuilders.slideBottom,
+          path: '/home',
         ),
         CustomRoute(
           page: ProductDetailRoute.page,
@@ -36,6 +40,24 @@ class AppRouter extends _$AppRouter {
           transitionsBuilder: TransitionsBuilders.fadeIn,
           durationInMilliseconds: 300,
           path: '/profile',
+        ),
+        CustomRoute(
+          page: EditProfileRoute.page,
+          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+          durationInMilliseconds: 300,
+          path: '/editProfile',
+        ),
+        CustomRoute(
+          page: EditPasswordRoute.page,
+          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+          durationInMilliseconds: 300,
+          path: '/forgotPassword',
+        ),
+        CustomRoute(
+          page: EditAddressRoute.page,
+          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
+          durationInMilliseconds: 300,
+          path: '/myAdress',
         ),
       ];
 }

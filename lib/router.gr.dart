@@ -21,6 +21,24 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const CustomerHomeScreen(),
       );
     },
+    EditAddressRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const EditAddressScreen(),
+      );
+    },
+    EditPasswordRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const EditPasswordScreen(),
+      );
+    },
+    EditProfileRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const EditProfileScreen(),
+      );
+    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -62,6 +80,48 @@ class CustomerHomeRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CustomerHomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [EditAddressScreen]
+class EditAddressRoute extends PageRouteInfo<void> {
+  const EditAddressRoute({List<PageRouteInfo>? children})
+      : super(
+          EditAddressRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'EditAddressRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [EditPasswordScreen]
+class EditPasswordRoute extends PageRouteInfo<void> {
+  const EditPasswordRoute({List<PageRouteInfo>? children})
+      : super(
+          EditPasswordRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'EditPasswordRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [EditProfileScreen]
+class EditProfileRoute extends PageRouteInfo<void> {
+  const EditProfileRoute({List<PageRouteInfo>? children})
+      : super(
+          EditProfileRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'EditProfileRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -5,7 +5,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
-import 'package:logger/logger.dart';
 import 'package:p3l_k3_mobile/data/test_user_model.dart';
 import 'package:p3l_k3_mobile/router.dart';
 
@@ -25,7 +24,6 @@ class ProfileScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 4),
               child: IconButton(
                 onPressed: () {
-                  Logger().d('Back');
                   context.router.navigate(const CustomerHomeRoute());
                 },
                 icon: const Icon(Icons.arrow_back),
@@ -52,7 +50,7 @@ class ProfileSettingsContent extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             const Gap(20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -74,33 +72,39 @@ class ProfileSettingsContent extends StatelessWidget {
                 'Change personal information',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.person_outline_outlined,
                 size: 24,
               ),
-              onTap: () {},
+              onTap: () {
+                context.router.push(const EditProfileRoute());
+              },
             ),
             ListTile(
               title: Text(
                 'Change password',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.vpn_key_outlined,
                 size: 20,
               ),
-              onTap: () {},
+              onTap: () {
+                context.router.push(const EditPasswordRoute());
+              },
             ),
             ListTile(
               title: Text(
                 'Add or modify delivery address',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              leading: FaIcon(
+              leading: const FaIcon(
                 FontAwesomeIcons.truckFast,
                 size: 18,
               ),
-              onTap: () {},
+              onTap: () {
+                context.router.push(const EditAddressRoute());
+              },
             ),
             const Gap(24),
             Padding(
@@ -117,7 +121,7 @@ class ProfileSettingsContent extends StatelessWidget {
                 'Order history',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.history,
                 size: 24,
               ),
@@ -128,7 +132,7 @@ class ProfileSettingsContent extends StatelessWidget {
                 'Transfer balance',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-              leading: Icon(
+              leading: const Icon(
                 Icons.payments_outlined,
                 size: 24,
               ),
