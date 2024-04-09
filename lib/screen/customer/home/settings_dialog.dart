@@ -171,7 +171,7 @@ class Profile extends StatelessWidget {
                 const Gap(16),
                 OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       )),
@@ -181,7 +181,7 @@ class Profile extends StatelessWidget {
                   },
                   child: Text(
                     'Manage your profile',
-                    style: Theme.of(context).textTheme.bodyMedium,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
               ],
