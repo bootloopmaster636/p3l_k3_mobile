@@ -142,19 +142,29 @@ class FilterButton extends StatelessWidget {
   }
 }
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends HookWidget {
   const ProductCard({required this.product, super.key});
 
   final TestProduct product;
 
   @override
   Widget build(BuildContext context) {
+    final isTapped = useState(false);
     return Card(
-      elevation: 3,
+      elevation: 4,
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () {
           context.router.push(ProductDetailRoute(productID: product.id));
+        },
+        onTapDown: (TapDownDetails tap) {
+          isTapped.value = true;
+        },
+        onTapUp: (TapUpDetails tap) {
+          isTapped.value = false;
+        },
+        onTapCancel: () {
+          isTapped.value = false;
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,7 +204,12 @@ class ProductCard extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ).animate(target: isTapped.value ? 1 : 0).scale(
+          begin: const Offset(1, 1),
+          end: const Offset(0.95, 0.95),
+          duration: 200.ms,
+          curve: Curves.easeInOutCubic,
+        );
   }
 }
 
@@ -250,8 +265,8 @@ class Header extends ConsumerWidget {
                       showDialog<Widget>(
                         context: context,
                         barrierColor: Colors.black26,
-                        builder: (context) {
-                          return SettingsDialog();
+                        builder: (BuildContext context) {
+                          return const SettingsDialog();
                         },
                       );
                     },
