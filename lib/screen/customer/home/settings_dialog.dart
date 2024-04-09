@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:el_tooltip/el_tooltip.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/constants.dart';
@@ -8,10 +9,12 @@ import 'package:p3l_k3_mobile/data/test_user_model.dart';
 import 'package:p3l_k3_mobile/router.dart';
 
 class SettingsDialog extends StatelessWidget {
+  const SettingsDialog({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         const Gap(64),
         Padding(
           padding: const EdgeInsets.all(16),
@@ -26,7 +29,10 @@ class SettingsDialog extends StatelessWidget {
           ),
         ),
       ],
-    );
+    )
+        .animate()
+        .scaleY(begin: 0.8, end: 1, alignment: Alignment.topRight, duration: 300.ms, curve: Curves.easeOutExpo)
+        .fadeIn();
   }
 }
 
@@ -37,10 +43,10 @@ class DialogContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const user = exampleUser;
+    const TestUser user = exampleUser;
     return const Column(
       mainAxisSize: MainAxisSize.min,
-      children: [
+      children: <Widget>[
         Profile(user: user),
         Gap(4),
         SettingsContent(),
@@ -61,7 +67,7 @@ class SettingsContent extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         child: Column(
-          children: [
+          children: <Widget>[
             ListTile(
               onTap: () {},
               title: Text(
@@ -84,6 +90,18 @@ class SettingsContent extends StatelessWidget {
                 size: 20,
               ),
             ),
+            ListTile(
+              onTap: () {},
+              title: Text(
+                'Log out',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.error),
+              ),
+              leading: Icon(
+                Icons.logout_outlined,
+                size: 20,
+                color: Theme.of(context).colorScheme.error,
+              ),
+            ),
           ],
         ),
       ),
@@ -93,8 +111,8 @@ class SettingsContent extends StatelessWidget {
 
 class Profile extends StatelessWidget {
   const Profile({
-    super.key,
     required this.user,
+    super.key,
   });
 
   final TestUser user;
@@ -106,7 +124,7 @@ class Profile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: Row(
-          children: [
+          children: <Widget>[
             SizedBox(
               height: 64,
               width: 64,
@@ -118,7 +136,7 @@ class Profile extends StatelessWidget {
             const Gap(16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: <Widget>[
                 Text(
                   user.name,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
@@ -171,10 +189,11 @@ class Profile extends StatelessWidget {
                 const Gap(16),
                 OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      )),
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                     context.router.push(const ProfileRoute());
@@ -211,13 +230,13 @@ class About extends StatelessWidget {
         );
       },
       child: Column(
-        children: [
+        children: <Widget>[
           Text(
             'Atma Kitchen Mobile',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.primary),
           ),
           Text(
-            'v${versionString}',
+            'v$versionString',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.primary),
           ),
         ],
