@@ -74,7 +74,7 @@ class CustomerHomeScreen extends HookWidget {
                 crossAxisCount: 2,
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 12,
-                childAspectRatio: 0.75,
+                childAspectRatio: 0.7,
               ),
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
@@ -167,7 +167,7 @@ class ProductCard extends HookWidget {
       child: Container(
         decoration: BoxDecoration(
           color: TinyColor.fromColor(Colors.orange).desaturate(40).lighten(46).toColor(),
-          border: Border.all(color: Colors.black12, width: 2, strokeAlign: BorderSide.strokeAlignCenter),
+          border: Border.all(color: Colors.black12, width: 1, strokeAlign: BorderSide.strokeAlignCenter),
           borderRadius: BorderRadius.circular(12),
           boxShadow: const <BoxShadow>[
             BoxShadow(blurRadius: 4, spreadRadius: 1, color: Colors.black12, offset: Offset(0, 2)),
@@ -177,18 +177,28 @@ class ProductCard extends HookWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container(
-              color: Theme.of(context).colorScheme.primaryContainer,
-              height: 150,
-              width: double.infinity,
-              child: Image.network(
-                product.imageUrl,
-                fit: BoxFit.cover,
+            Padding(
+              padding: const EdgeInsets.all(12).copyWith(bottom: 0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: const <BoxShadow>[
+                    BoxShadow(blurRadius: 2, color: Colors.black38),
+                  ],
+                ),
+                height: 150,
+                width: double.infinity,
+                clipBehavior: Clip.antiAlias,
+                child: Image.network(
+                  product.imageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(12),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
