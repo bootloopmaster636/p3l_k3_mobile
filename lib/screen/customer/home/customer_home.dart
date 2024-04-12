@@ -10,6 +10,7 @@ import 'package:p3l_k3_mobile/data/test_user_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 import 'package:p3l_k3_mobile/router.dart';
 import 'package:p3l_k3_mobile/screen/customer/home/settings_dialog.dart';
+import 'package:tinycolor2/tinycolor2.dart';
 
 @RoutePage()
 class CustomerHomeScreen extends HookWidget {
@@ -69,6 +70,12 @@ class CustomerHomeScreen extends HookWidget {
           SliverPadding(
             padding: const EdgeInsets.all(8).copyWith(top: 0),
             sliver: SliverGrid(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                childAspectRatio: 0.75,
+              ),
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   return ProductCard(
@@ -81,15 +88,9 @@ class CustomerHomeScreen extends HookWidget {
                           end: 0,
                         ),
                       )
-                      .scale(begin: const Offset(0.95, 0.95));
+                      .scale(begin: const Offset(0.96, 0.96));
                 },
                 childCount: products.length,
-              ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 2,
-                crossAxisSpacing: 2,
-                childAspectRatio: 0.8,
               ),
             ),
           ),
@@ -150,22 +151,29 @@ class ProductCard extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final isTapped = useState(false);
-    return Card(
-      elevation: 4,
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: () {
-          context.router.push(ProductDetailRoute(productID: product.id));
-        },
-        onTapDown: (TapDownDetails tap) {
-          isTapped.value = true;
-        },
-        onTapUp: (TapUpDetails tap) {
-          isTapped.value = false;
-        },
-        onTapCancel: () {
-          isTapped.value = false;
-        },
+    return GestureDetector(
+      onTap: () {
+        context.router.push(ProductDetailRoute(productID: product.id));
+      },
+      onTapDown: (TapDownDetails tap) {
+        isTapped.value = true;
+      },
+      onTapUp: (TapUpDetails tap) {
+        isTapped.value = false;
+      },
+      onTapCancel: () {
+        isTapped.value = false;
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: TinyColor.fromColor(Colors.orange).desaturate(40).lighten(46).toColor(),
+          border: Border.all(color: Colors.black12, width: 2, strokeAlign: BorderSide.strokeAlignCenter),
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: const <BoxShadow>[
+            BoxShadow(blurRadius: 4, spreadRadius: 1, color: Colors.black12, offset: Offset(0, 2)),
+          ],
+        ),
+        clipBehavior: Clip.antiAlias,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -178,38 +186,65 @@ class ProductCard extends HookWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    product.name,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    'Rp. ${product.price}',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontWeight: FontWeight.bold,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      product.name,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Rp. ${product.price}',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    const Gap(4),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Text(
+                          product.description,
+                          style: Theme.of(context).textTheme.bodySmall,
                         ),
-                  ),
-                  const Gap(4),
-                  Text(
-                    product.description,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ],
+                      ),
+                    ),
+                    const Gap(8),
+                    SizedBox(
+                      height: 32,
+                      child: OutlinedButton(
+                          onPressed: () {},
+                          style: OutlinedButton.styleFrom(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.add,
+                                size: 16,
+                              ),
+                              Text(
+                                'Add to cart',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ],
+                          )),
+                    )
+                  ],
+                ),
               ),
             ),
           ],
         ),
-      ),
-    ).animate(target: isTapped.value ? 1 : 0).scale(
-          begin: const Offset(1, 1),
-          end: const Offset(0.95, 0.95),
-          duration: 200.ms,
-          curve: Curves.easeInOutCubic,
-        );
+      ).animate(target: isTapped.value ? 1 : 0).scale(
+            begin: const Offset(1, 1),
+            end: const Offset(0.95, 0.95),
+            duration: 200.ms,
+            curve: Curves.easeInOutCubic,
+          ),
+    );
   }
 }
 
