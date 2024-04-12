@@ -43,21 +43,32 @@ class AppRouter extends _$AppRouter {
         ),
         CustomRoute(
           page: EditProfileRoute.page,
-          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-          durationInMilliseconds: 300,
+          transitionsBuilder: _slideLeftWithEase,
+          durationInMilliseconds: 400,
           path: '/editProfile',
         ),
         CustomRoute(
           page: EditPasswordRoute.page,
-          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-          durationInMilliseconds: 300,
+          transitionsBuilder: _slideLeftWithEase,
+          durationInMilliseconds: 400,
           path: '/forgotPassword',
         ),
         CustomRoute(
           page: EditAddressRoute.page,
-          transitionsBuilder: TransitionsBuilders.slideLeftWithFade,
-          durationInMilliseconds: 300,
+          transitionsBuilder: _slideLeftWithEase,
+          durationInMilliseconds: 400,
           path: '/myAdress',
         ),
       ];
+
+  Widget _slideLeftWithEase(
+      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+    return SlideTransition(
+      position: Tween<Offset>(
+        begin: const Offset(1.0, 0.0),
+        end: Offset.zero,
+      ).chain(CurveTween(curve: Curves.easeOutQuint)).animate(animation),
+      child: child,
+    );
+  }
 }
