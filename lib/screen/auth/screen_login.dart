@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -31,7 +32,12 @@ class LoginScreen extends ConsumerWidget {
                 ),
               ),
             ),
-          ),
+          )
+              .animate(
+                autoPlay: true,
+                onPlay: (controller) => controller.repeat(),
+              )
+              .shake(offset: const Offset(20, 10), hz: 0.2, duration: 8.seconds),
           Positioned(
             right: -250,
             bottom: -250,
@@ -47,7 +53,12 @@ class LoginScreen extends ConsumerWidget {
                 ),
               ),
             ),
-          ),
+          )
+              .animate(
+                autoPlay: true,
+                onPlay: (controller) => controller.repeat(),
+              )
+              .shake(offset: const Offset(-20, -10), hz: 0.2, duration: 8.seconds),
           const Padding(
             padding: EdgeInsets.all(8),
             child: LoginPageContent(),
