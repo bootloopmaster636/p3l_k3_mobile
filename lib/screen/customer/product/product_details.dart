@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/constants.dart';
 import 'package:p3l_k3_mobile/data/test_product_model.dart';
-import 'package:pinch_zoom/pinch_zoom.dart';
+import 'package:zoom_pinch_overlay/zoom_pinch_overlay.dart';
 
 @RoutePage()
 class ProductDetailScreen extends HookWidget {
@@ -29,16 +29,23 @@ class ProductDetailScreen extends HookWidget {
             expandedHeight: 400,
             stretch: true,
             flexibleSpace: FlexibleSpaceBar(
-              background: PinchZoom(
+              background: ZoomOverlay(
                 child: Image.network(
                   product.imageUrl,
                   fit: BoxFit.cover,
                 )
                     .animate()
+                    .slideY(
+                      duration: 600.ms,
+                      delay: 400.ms,
+                      begin: 0.4,
+                      end: 0,
+                      curve: Curves.easeOutExpo,
+                    )
                     .scale(
                       delay: 400.ms,
                       duration: 600.ms,
-                      begin: const Offset(0.8, 0.8),
+                      begin: const Offset(0.6, 0.6),
                       end: const Offset(1, 1),
                       curve: Curves.easeOutExpo,
                     )
@@ -213,7 +220,7 @@ class AddToCartButton extends StatelessWidget {
         height: 48,
         child: FilledButton(
           onPressed: () {},
-          child: product.stockType == ProductStockType.onDemand ? const Text('Add to cart') : const Text('Pre-order'),
+          child: const Text('Add to cart'),
         ),
       ),
     );
