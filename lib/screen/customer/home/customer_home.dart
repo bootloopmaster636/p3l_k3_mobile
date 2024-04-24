@@ -300,11 +300,6 @@ class Header extends ConsumerWidget {
                     height: 48,
                   ),
                   const Spacer(),
-                  IconButton(
-                    icon: const Icon(Icons.shopping_bag_outlined),
-                    onPressed: () {},
-                  ),
-                  const Gap(4),
                   InkWell(
                     onTap: () {
                       showDialog<Widget>(
@@ -318,6 +313,7 @@ class Header extends ConsumerWidget {
                     child: CircleAvatar(
                       backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
                       foregroundImage: NetworkImage(user.profilePictURL),
+                      radius: 22,
                     ),
                   ),
                 ],

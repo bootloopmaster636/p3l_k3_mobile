@@ -38,7 +38,8 @@ class ProductDetailScreen extends HookWidget {
                     .slideY(
                       duration: 600.ms,
                       delay: 400.ms,
-                      begin: 0.4,
+                      begin: 0.4
+                  ,
                       end: 0,
                       curve: Curves.easeOutExpo,
                     )

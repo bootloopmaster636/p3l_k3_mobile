@@ -71,6 +71,17 @@ class SettingsContent extends StatelessWidget {
             ListTile(
               onTap: () {},
               title: Text(
+                'My cart (website)',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              leading: const Icon(
+                Icons.shopping_cart_outlined,
+                size: 20,
+              ),
+            ),
+            ListTile(
+              onTap: () {},
+              title: Text(
                 'Transfer Balance',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
