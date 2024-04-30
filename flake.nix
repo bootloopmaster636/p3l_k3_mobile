@@ -17,15 +17,15 @@
         androidEnv = pkgs.androidenv.override { licenseAccepted = true; };
         androidComposition = androidEnv.composeAndroidPackages {
           cmdLineToolsVersion = "8.0"; # emulator related: newer versions are not only compatible with avdmanager
-          platformToolsVersion = "34.0.4";
-          buildToolsVersions = [ "34.0.0" ];
-          platformVersions = [ "34" ];
+          platformToolsVersion = "33.0.3";
+          buildToolsVersions = [ "33.0.3" ];
+          platformVersions = [ "33" ];
           abiVersions = [ "x86_64" ]; # emulator related: on an ARM machine, replace "x86_64" with
           # either "armeabi-v7a" or "arm64-v8a", depending on the architecture of your workstation.
           includeNDK = false;
-          includeSystemImages = true; # emulator related: system images are needed for the emulator.
+          includeSystemImages = false; # emulator related: system images are needed for the emulator.
           systemImageTypes = [ "google_apis" "google_apis_playstore" ];
-          includeEmulator = true; # emulator related: if it should be enabled or not
+          includeEmulator = false; # emulator related: if it should be enabled or not
           useGoogleAPIs = true;
           extraLicenses = [
             "android-googletv-license"
