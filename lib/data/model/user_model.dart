@@ -7,6 +7,7 @@ part 'user_model.g.dart';
 @freezed
 class User with _$User {
   const factory User({
+    required int id,
     @JsonKey(name: 'role_id') required int roleId,
     required String fullName,
     required String email,

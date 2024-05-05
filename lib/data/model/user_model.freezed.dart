@@ -20,6 +20,7 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
+  int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'role_id')
   int get roleId => throw _privateConstructorUsedError;
   String get fullName => throw _privateConstructorUsedError;
@@ -41,7 +42,8 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'role_id') int roleId,
+      {int id,
+      @JsonKey(name: 'role_id') int roleId,
       String fullName,
       String email,
       String password,
@@ -64,6 +66,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? roleId = null,
     Object? fullName = null,
     Object? email = null,
@@ -74,6 +77,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? active = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       roleId: null == roleId
           ? _value.roleId
           : roleId // ignore: cast_nullable_to_non_nullable
@@ -118,7 +125,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'role_id') int roleId,
+      {int id,
+      @JsonKey(name: 'role_id') int roleId,
       String fullName,
       String email,
       String password,
@@ -138,6 +146,7 @@ class __$$UserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? roleId = null,
     Object? fullName = null,
     Object? email = null,
@@ -148,6 +157,10 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? active = null,
   }) {
     return _then(_$UserImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       roleId: null == roleId
           ? _value.roleId
           : roleId // ignore: cast_nullable_to_non_nullable
@@ -188,7 +201,8 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl with DiagnosticableTreeMixin implements _User {
   const _$UserImpl(
-      {@JsonKey(name: 'role_id') required this.roleId,
+      {required this.id,
+      @JsonKey(name: 'role_id') required this.roleId,
       required this.fullName,
       required this.email,
       required this.password,
@@ -200,6 +214,8 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
+  @override
+  final int id;
   @override
   @JsonKey(name: 'role_id')
   final int roleId;
@@ -220,7 +236,7 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(roleId: $roleId, fullName: $fullName, email: $email, password: $password, phoneNumber: $phoneNumber, gender: $gender, dateOfBirth: $dateOfBirth, active: $active)';
+    return 'User(id: $id, roleId: $roleId, fullName: $fullName, email: $email, password: $password, phoneNumber: $phoneNumber, gender: $gender, dateOfBirth: $dateOfBirth, active: $active)';
   }
 
   @override
@@ -228,6 +244,7 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'User'))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('roleId', roleId))
       ..add(DiagnosticsProperty('fullName', fullName))
       ..add(DiagnosticsProperty('email', email))
@@ -243,6 +260,7 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.roleId, roleId) || other.roleId == roleId) &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
@@ -259,7 +277,7 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, roleId, fullName, email,
+  int get hashCode => Object.hash(runtimeType, id, roleId, fullName, email,
       password, phoneNumber, gender, dateOfBirth, active);
 
   @JsonKey(ignore: true)
@@ -278,7 +296,8 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
 
 abstract class _User implements User {
   const factory _User(
-      {@JsonKey(name: 'role_id') required final int roleId,
+      {required final int id,
+      @JsonKey(name: 'role_id') required final int roleId,
       required final String fullName,
       required final String email,
       required final String password,
@@ -289,6 +308,8 @@ abstract class _User implements User {
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
+  @override
+  int get id;
   @override
   @JsonKey(name: 'role_id')
   int get roleId;
