@@ -11,11 +11,11 @@ class User with _$User {
     @JsonKey(name: 'role_id') required int roleId,
     required String fullName,
     required String email,
-    required String password,
+    // @Default('') String? password,
     required String phoneNumber,
     required String gender,
     required DateTime dateOfBirth,
-    required bool active,
+    required int active,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -23,13 +23,12 @@ class User with _$User {
 
 User generateEmptyUser() {
   return User(
-    active: false,
+    active: 0,
     dateOfBirth: DateTime.now(),
     email: '',
     fullName: '',
     gender: '',
     id: 0,
-    password: '',
     phoneNumber: '',
     roleId: 0,
   );

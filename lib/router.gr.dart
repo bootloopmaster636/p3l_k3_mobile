@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    BridgeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BridgeScreen(),
+      );
+    },
     CustomerHomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -68,6 +74,20 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [BridgeScreen]
+class BridgeRoute extends PageRouteInfo<void> {
+  const BridgeRoute({List<PageRouteInfo>? children})
+      : super(
+          BridgeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BridgeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

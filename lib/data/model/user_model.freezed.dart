@@ -24,12 +24,12 @@ mixin _$User {
   @JsonKey(name: 'role_id')
   int get roleId => throw _privateConstructorUsedError;
   String get fullName => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
+  String get email =>
+      throw _privateConstructorUsedError; // @Default('') String? password,
   String get phoneNumber => throw _privateConstructorUsedError;
   String get gender => throw _privateConstructorUsedError;
   DateTime get dateOfBirth => throw _privateConstructorUsedError;
-  bool get active => throw _privateConstructorUsedError;
+  int get active => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,11 +46,10 @@ abstract class $UserCopyWith<$Res> {
       @JsonKey(name: 'role_id') int roleId,
       String fullName,
       String email,
-      String password,
       String phoneNumber,
       String gender,
       DateTime dateOfBirth,
-      bool active});
+      int active});
 }
 
 /// @nodoc
@@ -70,7 +69,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? roleId = null,
     Object? fullName = null,
     Object? email = null,
-    Object? password = null,
     Object? phoneNumber = null,
     Object? gender = null,
     Object? dateOfBirth = null,
@@ -93,10 +91,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
       phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
@@ -112,7 +106,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       active: null == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
     ) as $Val);
   }
 }
@@ -129,11 +123,10 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       @JsonKey(name: 'role_id') int roleId,
       String fullName,
       String email,
-      String password,
       String phoneNumber,
       String gender,
       DateTime dateOfBirth,
-      bool active});
+      int active});
 }
 
 /// @nodoc
@@ -150,7 +143,6 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? roleId = null,
     Object? fullName = null,
     Object? email = null,
-    Object? password = null,
     Object? phoneNumber = null,
     Object? gender = null,
     Object? dateOfBirth = null,
@@ -173,10 +165,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
       phoneNumber: null == phoneNumber
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
@@ -192,7 +180,7 @@ class __$$UserImplCopyWithImpl<$Res>
       active: null == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
     ));
   }
 }
@@ -205,7 +193,6 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
       @JsonKey(name: 'role_id') required this.roleId,
       required this.fullName,
       required this.email,
-      required this.password,
       required this.phoneNumber,
       required this.gender,
       required this.dateOfBirth,
@@ -223,8 +210,7 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
   final String fullName;
   @override
   final String email;
-  @override
-  final String password;
+// @Default('') String? password,
   @override
   final String phoneNumber;
   @override
@@ -232,11 +218,11 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
   @override
   final DateTime dateOfBirth;
   @override
-  final bool active;
+  final int active;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, roleId: $roleId, fullName: $fullName, email: $email, password: $password, phoneNumber: $phoneNumber, gender: $gender, dateOfBirth: $dateOfBirth, active: $active)';
+    return 'User(id: $id, roleId: $roleId, fullName: $fullName, email: $email, phoneNumber: $phoneNumber, gender: $gender, dateOfBirth: $dateOfBirth, active: $active)';
   }
 
   @override
@@ -248,7 +234,6 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
       ..add(DiagnosticsProperty('roleId', roleId))
       ..add(DiagnosticsProperty('fullName', fullName))
       ..add(DiagnosticsProperty('email', email))
-      ..add(DiagnosticsProperty('password', password))
       ..add(DiagnosticsProperty('phoneNumber', phoneNumber))
       ..add(DiagnosticsProperty('gender', gender))
       ..add(DiagnosticsProperty('dateOfBirth', dateOfBirth))
@@ -265,8 +250,6 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password) &&
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
             (identical(other.gender, gender) || other.gender == gender) &&
@@ -278,7 +261,7 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, roleId, fullName, email,
-      password, phoneNumber, gender, dateOfBirth, active);
+      phoneNumber, gender, dateOfBirth, active);
 
   @JsonKey(ignore: true)
   @override
@@ -300,11 +283,10 @@ abstract class _User implements User {
       @JsonKey(name: 'role_id') required final int roleId,
       required final String fullName,
       required final String email,
-      required final String password,
       required final String phoneNumber,
       required final String gender,
       required final DateTime dateOfBirth,
-      required final bool active}) = _$UserImpl;
+      required final int active}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -317,16 +299,14 @@ abstract class _User implements User {
   String get fullName;
   @override
   String get email;
-  @override
-  String get password;
-  @override
+  @override // @Default('') String? password,
   String get phoneNumber;
   @override
   String get gender;
   @override
   DateTime get dateOfBirth;
   @override
-  bool get active;
+  int get active;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

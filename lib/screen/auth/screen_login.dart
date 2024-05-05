@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -6,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:lottie/lottie.dart';
+import 'package:p3l_k3_mobile/data/model/auth_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 import 'package:p3l_k3_mobile/logic/auth_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
@@ -39,7 +41,8 @@ class LoginScreen extends ConsumerWidget {
                 autoPlay: true,
                 onPlay: (controller) => controller.repeat(),
               )
-              .shake(offset: const Offset(20, 10), hz: 0.2, duration: 8.seconds),
+              .shake(
+                  offset: const Offset(20, 10), hz: 0.2, duration: 8.seconds),
           Positioned(
             right: -250,
             bottom: -250,
@@ -60,7 +63,8 @@ class LoginScreen extends ConsumerWidget {
                 autoPlay: true,
                 onPlay: (controller) => controller.repeat(),
               )
-              .shake(offset: const Offset(-20, -10), hz: 0.2, duration: 8.seconds),
+              .shake(
+                  offset: const Offset(-20, -10), hz: 0.2, duration: 8.seconds),
           const Padding(
             padding: EdgeInsets.all(8),
             child: LoginPageContent(),
@@ -109,6 +113,8 @@ class LoginForm extends HookConsumerWidget {
     final TextEditingController emailCtl = useTextEditingController();
     final TextEditingController passwordCtl = useTextEditingController();
     final ValueNotifier<bool> isPasswordVisible = useState(false);
+    final AsyncValue<Auth> authData = ref.watch(authLogicProvider);
+
     return Form(
       child: Column(
         children: <Widget>[
@@ -123,7 +129,9 @@ class LoginForm extends HookConsumerWidget {
             decoration: InputDecoration(
               hintText: 'Password',
               suffixIcon: IconButton(
-                icon: Icon(isPasswordVisible.value == true ? Icons.visibility_off_outlined : Icons.visibility_outlined),
+                icon: Icon(isPasswordVisible.value == true
+                    ? Icons.visibility_off_outlined
+                    : Icons.visibility_outlined),
                 onPressed: () {
                   isPasswordVisible.value = !isPasswordVisible.value;
                 },
@@ -136,15 +144,27 @@ class LoginForm extends HookConsumerWidget {
           SizedBox(
             width: double.infinity,
             child: FilledButton(
-              onPressed: () {
-                try {
-                  ref.read(authLogicProvider.notifier).login(emailCtl.text, passwordCtl.text);
-                  context.router.replace(const CustomerHomeRoute());
-                } catch(e) {
-                  Logger().e(e);
-                }
-              },
-              child: const Text('Login'),
+              onPressed: authData.isLoading == false
+                  ? () async {
+                      try {
+                        await ref
+                            .read(authLogicProvider.notifier)
+                            .login(emailCtl.text, passwordCtl.text);
+                      } on DioException catch (e) {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                e.response?.data.toString() ??
+                                    'Unknown error occured',
+                              ),
+                            ),
+                          );
+                        }
+                      }
+                    }
+                  : null,
+              child: Text(authData.isLoading == true ? 'Loading...' : 'Login'),
             ),
           ),
           TextButton(

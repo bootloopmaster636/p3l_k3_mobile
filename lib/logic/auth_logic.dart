@@ -1,3 +1,4 @@
+import 'package:logger/logger.dart';
 import 'package:p3l_k3_mobile/data/api/auth_api.dart';
 import 'package:p3l_k3_mobile/data/model/auth_model.dart';
 import 'package:p3l_k3_mobile/data/model/user_model.dart';
@@ -21,10 +22,18 @@ class AuthLogic extends _$AuthLogic {
   Future<void> login(String email, String password) async {
     state = const AsyncLoading<Auth>();
 
-    state = await AsyncValue.guard(() async {
+    try {
       final Auth auth = await loginApi(email, password);
-      return auth;
-    });
+      state = AsyncData<Auth>(auth);
+      Logger().i(state);
+    } catch (e) {
+      state = AsyncError<Auth>(e, StackTrace.current);
+      rethrow;
+    }
+  }
+
+  void logout() {
+    state = AsyncData<Auth>(Auth(accessToken: '', user: generateEmptyUser()));
   }
 
   Future<void> register() async {
