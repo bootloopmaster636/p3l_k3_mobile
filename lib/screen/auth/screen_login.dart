@@ -4,8 +4,10 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:lottie/lottie.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
+import 'package:p3l_k3_mobile/logic/auth_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
 
 @RoutePage()
@@ -104,6 +106,8 @@ class LoginForm extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final TextEditingController emailCtl = useTextEditingController();
+    final TextEditingController passwordCtl = useTextEditingController();
     final ValueNotifier<bool> isPasswordVisible = useState(false);
     return Form(
       child: Column(
@@ -112,6 +116,7 @@ class LoginForm extends HookConsumerWidget {
             decoration: const InputDecoration(
               hintText: 'Username',
             ),
+            controller: emailCtl,
           ),
           const Gap(8),
           TextFormField(
@@ -125,14 +130,19 @@ class LoginForm extends HookConsumerWidget {
               ),
             ),
             obscureText: !isPasswordVisible.value,
+            controller: passwordCtl,
           ),
           const Gap(16),
           SizedBox(
             width: double.infinity,
             child: FilledButton(
               onPressed: () {
-                // TODO(bootloopmaster636): Implement login logic
-                context.router.replace(const CustomerHomeRoute());
+                try {
+                  ref.read(authLogicProvider.notifier).login(emailCtl.text, passwordCtl.text);
+                  context.router.replace(const CustomerHomeRoute());
+                } catch(e) {
+                  Logger().e(e);
+                }
               },
               child: const Text('Login'),
             ),

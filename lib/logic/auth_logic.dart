@@ -31,8 +31,13 @@ class AuthLogic extends _$AuthLogic {
   Future<void> login(String email, String password) async {
     state = const AsyncLoading<Auth>();
 
-    state = AsyncValue.guard(() async {
-      return await loginApi(email, password);
+    state = await AsyncValue.guard(() async {
+      final Auth auth = await loginApi(email, password);
+      return auth;
     });
+  }
+
+  Future<void> register() async {
+    // TODO(bootloopmaster636): make register if i have time
   }
 }
