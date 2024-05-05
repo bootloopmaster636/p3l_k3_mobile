@@ -5,8 +5,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:p3l_k3_mobile/data/test_product_model.dart';
-import 'package:p3l_k3_mobile/data/test_user_model.dart';
+import 'package:p3l_k3_mobile/data/model/test_product_model.dart';
+import 'package:p3l_k3_mobile/data/model/user_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 import 'package:p3l_k3_mobile/router.dart';
 import 'package:p3l_k3_mobile/screen/customer/home/settings_dialog.dart';
@@ -52,7 +52,8 @@ class CustomerHomeScreen extends HookWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.only(top: 10, left: 16, right: 16, bottom: 6),
+              padding: const EdgeInsets.only(
+                  top: 10, left: 16, right: 16, bottom: 6),
               child: Row(
                 children: <Widget>[
                   Text(
@@ -166,11 +167,21 @@ class ProductCard extends HookWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: TinyColor.fromColor(Colors.orange).desaturate(40).lighten(46).toColor(),
-          border: Border.all(color: Colors.black12, width: 1, strokeAlign: BorderSide.strokeAlignCenter),
+          color: TinyColor.fromColor(Colors.orange)
+              .desaturate(40)
+              .lighten(46)
+              .toColor(),
+          border: Border.all(
+              color: Colors.black12,
+              width: 1,
+              strokeAlign: BorderSide.strokeAlignCenter),
           borderRadius: BorderRadius.circular(12),
           boxShadow: const <BoxShadow>[
-            BoxShadow(blurRadius: 4, spreadRadius: 1, color: Colors.black12, offset: Offset(0, 2)),
+            BoxShadow(
+                blurRadius: 4,
+                spreadRadius: 1,
+                color: Colors.black12,
+                offset: Offset(0, 2)),
           ],
         ),
         clipBehavior: Clip.antiAlias,
@@ -204,7 +215,10 @@ class ProductCard extends HookWidget {
                   children: <Widget>[
                     Text(
                       product.name,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     Text(
                       'Rp. ${product.price}',
@@ -227,7 +241,8 @@ class ProductCard extends HookWidget {
                       child: OutlinedButton(
                           onPressed: () {},
                           style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4))),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -311,7 +326,8 @@ class Header extends ConsumerWidget {
                       );
                     },
                     child: CircleAvatar(
-                      backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                      backgroundColor:
+                          Theme.of(context).colorScheme.tertiaryContainer,
                       foregroundImage: NetworkImage(user.profilePictURL),
                       radius: 22,
                     ),
@@ -322,7 +338,10 @@ class Header extends ConsumerWidget {
               Text(
                 'Greetings, user!',
                 textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
               Text(
                 'What sweet thing did you want to eat today?',

@@ -5,7 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
-import 'package:p3l_k3_mobile/data/test_user_model.dart';
+import 'package:p3l_k3_mobile/data/model/user_model.dart';
 import 'package:p3l_k3_mobile/router.dart';
 
 @RoutePage()
@@ -111,7 +111,10 @@ class ProfileSettingsContent extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 'Things you might looking for',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
             const Gap(8),
@@ -140,7 +143,8 @@ class ProfileSettingsContent extends StatelessWidget {
           ],
         )
             .animate(delay: 600.ms)
-            .slideY(begin: 1, end: 0, duration: 800.ms, curve: Curves.easeOutQuint)
+            .slideY(
+                begin: 1, end: 0, duration: 800.ms, curve: Curves.easeOutQuint)
             .fadeIn(duration: 800.ms),
       ),
     );
@@ -187,20 +191,49 @@ class Header extends ConsumerWidget {
               width: 128,
               height: 128,
               child: CircleAvatar(
-                backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                backgroundColor:
+                    Theme.of(context).colorScheme.tertiaryContainer,
                 foregroundImage: NetworkImage(user.profilePictURL),
-              ).animate(delay: 400.ms).rotate(begin: 1, end: 0, duration: 600.ms, curve: Curves.easeOutBack),
-            ).animate(delay: 400.ms).slideY(begin: 2, end: 0, duration: 600.ms, curve: Curves.easeOutBack).fadeIn(),
+              ).animate(delay: 400.ms).rotate(
+                  begin: 1,
+                  end: 0,
+                  duration: 600.ms,
+                  curve: Curves.easeOutBack),
+            )
+                .animate(delay: 400.ms)
+                .slideY(
+                    begin: 2,
+                    end: 0,
+                    duration: 600.ms,
+                    curve: Curves.easeOutBack)
+                .fadeIn(),
             const Gap(8),
             Text(
               user.name,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
-            ).animate(delay: 1000.ms).slideY(begin: -1, end: 0, duration: 500.ms, curve: Curves.easeOutExpo).fadeIn(),
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium
+                  ?.copyWith(fontWeight: FontWeight.bold),
+            )
+                .animate(delay: 1000.ms)
+                .slideY(
+                    begin: -1,
+                    end: 0,
+                    duration: 500.ms,
+                    curve: Curves.easeOutExpo)
+                .fadeIn(),
             const Gap(4),
             Text(
               user.email,
               style: Theme.of(context).textTheme.titleMedium,
-            ).animate(delay: 1200.ms).slideY(begin: -1, end: 0, duration: 500.ms, curve: Curves.easeOutExpo).fadeIn(),
+            )
+                .animate(delay: 1200.ms)
+                .slideY(
+                    begin: -1,
+                    end: 0,
+                    duration: 500.ms,
+                    curve: Curves.easeOutExpo)
+                .fadeIn(),
             const Gap(16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -220,7 +253,8 @@ class Header extends ConsumerWidget {
                   appearAnimationDuration: Duration(milliseconds: 100),
                   disappearAnimationDuration: Duration(milliseconds: 100),
                   modalConfiguration: ModalConfiguration(opacity: 0.2),
-                  content: Text('This is the bonus coins you get from ordering, each coin worth Rp. 100.\n\n'
+                  content: Text(
+                      'This is the bonus coins you get from ordering, each coin worth Rp. 100.\n\n'
                       'You can use it for discount at your next order.'),
                   child: Icon(
                     Icons.help_outline_outlined,
@@ -243,7 +277,8 @@ class Header extends ConsumerWidget {
                   appearAnimationDuration: Duration(milliseconds: 100),
                   disappearAnimationDuration: Duration(milliseconds: 100),
                   modalConfiguration: ModalConfiguration(opacity: 0.2),
-                  content: Text('Money will be refunded to this account when you paid but the order is cancelled.\n\n'
+                  content: Text(
+                      'Money will be refunded to this account when you paid but the order is cancelled.\n\n'
                       'You can transfer it to your bank account using "Transfer Balance" menu below.'),
                   child: Icon(
                     Icons.help_outline_outlined,
@@ -251,7 +286,14 @@ class Header extends ConsumerWidget {
                   ),
                 ),
               ],
-            ).animate(delay: 1400.ms).slideY(begin: -1, end: 0, duration: 500.ms, curve: Curves.easeOutExpo).fadeIn(),
+            )
+                .animate(delay: 1400.ms)
+                .slideY(
+                    begin: -1,
+                    end: 0,
+                    duration: 500.ms,
+                    curve: Curves.easeOutExpo)
+                .fadeIn(),
           ],
         ),
       ],

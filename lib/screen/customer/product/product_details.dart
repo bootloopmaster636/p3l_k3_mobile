@@ -4,7 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/constants.dart';
-import 'package:p3l_k3_mobile/data/test_product_model.dart';
+import 'package:p3l_k3_mobile/data/model/test_product_model.dart';
 import 'package:zoom_pinch_overlay/zoom_pinch_overlay.dart';
 
 @RoutePage()
@@ -38,8 +38,7 @@ class ProductDetailScreen extends HookWidget {
                     .slideY(
                       duration: 600.ms,
                       delay: 400.ms,
-                      begin: 0.4
-                  ,
+                      begin: 0.4,
                       end: 0,
                       curve: Curves.easeOutExpo,
                     )
@@ -87,7 +86,10 @@ class ProductInfo extends StatelessWidget {
             Text(
               product.name,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium
+                  ?.copyWith(fontWeight: FontWeight.bold),
             ).animate().fadeIn(delay: 400.ms, duration: 300.ms).slideY(
                   begin: 2,
                   duration: 600.ms,
@@ -114,7 +116,9 @@ class ProductInfo extends StatelessWidget {
               ),
             ).animate().fadeIn(delay: 800.ms),
             const Gap(4),
-            ProductAdditionalInfo(product: product).animate().fadeIn(delay: 1000.ms),
+            ProductAdditionalInfo(product: product)
+                .animate()
+                .fadeIn(delay: 1000.ms),
           ],
         ),
       ),
@@ -151,7 +155,10 @@ class ProductAdditionalInfo extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             'Stock',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
                             '${product.stock} available',
@@ -165,7 +172,10 @@ class ProductAdditionalInfo extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Product category',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         Text(
                           'soon(tm)',
@@ -184,10 +194,15 @@ class ProductAdditionalInfo extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             'Availability',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            product.stockType == ProductStockType.onDemand ? 'Ready in store' : 'Should pre-order',
+                            product.stockType == ProductStockType.onDemand
+                                ? 'Ready in store'
+                                : 'Should pre-order',
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],

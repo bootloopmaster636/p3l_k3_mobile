@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:p3l_k3_mobile/data/test_user_model.dart';
+import 'package:p3l_k3_mobile/data/model/user_model.dart';
 
 @RoutePage()
 class EditAddressScreen extends StatelessWidget {
@@ -51,7 +51,8 @@ class AddAdressForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height * .75),
+      constraints:
+          BoxConstraints(minHeight: MediaQuery.of(context).size.height * .75),
       padding: const EdgeInsets.all(16),
       child: SingleChildScrollView(
         child: Column(

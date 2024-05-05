@@ -5,7 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/constants.dart';
-import 'package:p3l_k3_mobile/data/test_user_model.dart';
+import 'package:p3l_k3_mobile/data/model/user_model.dart';
 import 'package:p3l_k3_mobile/router.dart';
 
 class SettingsDialog extends StatelessWidget {
@@ -31,7 +31,12 @@ class SettingsDialog extends StatelessWidget {
       ],
     )
         .animate()
-        .scaleY(begin: 0.8, end: 1, alignment: Alignment.topRight, duration: 300.ms, curve: Curves.easeOutExpo)
+        .scaleY(
+            begin: 0.8,
+            end: 1,
+            alignment: Alignment.topRight,
+            duration: 300.ms,
+            curve: Curves.easeOutExpo)
         .fadeIn();
   }
 }
@@ -105,7 +110,10 @@ class SettingsContent extends StatelessWidget {
               onTap: () {},
               title: Text(
                 'Log out',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.error),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(color: Theme.of(context).colorScheme.error),
               ),
               leading: Icon(
                 Icons.logout_outlined,
@@ -140,7 +148,8 @@ class Profile extends StatelessWidget {
               height: 64,
               width: 64,
               child: CircleAvatar(
-                backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                backgroundColor:
+                    Theme.of(context).colorScheme.tertiaryContainer,
                 foregroundImage: NetworkImage(user.profilePictURL),
               ),
             ),
@@ -150,7 +159,10 @@ class Profile extends StatelessWidget {
               children: <Widget>[
                 Text(
                   user.name,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 const Gap(4),
                 Row(
@@ -167,7 +179,8 @@ class Profile extends StatelessWidget {
                       appearAnimationDuration: Duration(milliseconds: 100),
                       disappearAnimationDuration: Duration(milliseconds: 100),
                       modalConfiguration: ModalConfiguration(opacity: 0.2),
-                      content: Text('This is the bonus coins you get from ordering, each coin worth Rp. 100.\n\n'
+                      content: Text(
+                          'This is the bonus coins you get from ordering, each coin worth Rp. 100.\n\n'
                           'You can use it for discount at your next order.'),
                       child: Icon(
                         Icons.help_outline_outlined,
@@ -187,9 +200,9 @@ class Profile extends StatelessWidget {
                       appearAnimationDuration: Duration(milliseconds: 100),
                       disappearAnimationDuration: Duration(milliseconds: 100),
                       modalConfiguration: ModalConfiguration(opacity: 0.2),
-                      content:
-                          Text('Money will be refunded to this account when you paid but the order is cancelled.\n\n'
-                              'You can transfer it to your bank account using "Transfer Balance" menu below.'),
+                      content: Text(
+                          'Money will be refunded to this account when you paid but the order is cancelled.\n\n'
+                          'You can transfer it to your bank account using "Transfer Balance" menu below.'),
                       child: Icon(
                         Icons.help_outline_outlined,
                         size: 16,
@@ -235,7 +248,8 @@ class About extends StatelessWidget {
         showAboutDialog(
           context: context,
           applicationName: 'Atma Kitchen Mobile',
-          applicationLegalese: 'Made by Christopher Hartono, I Kadek Dendy Pramartha, and I Gede Bala Putra '
+          applicationLegalese:
+              'Made by Christopher Hartono, I Kadek Dendy Pramartha, and I Gede Bala Putra '
               'for the purpose of P3L (Projek Pengembangan Perangkat Lunak). The app code is NOT open source.\n\n'
               'Some picture is taken from Freepik',
         );
@@ -244,11 +258,17 @@ class About extends StatelessWidget {
         children: <Widget>[
           Text(
             'Atma Kitchen Mobile',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.primary),
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall
+                ?.copyWith(color: Theme.of(context).colorScheme.primary),
           ),
           Text(
             'v$versionString',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.primary),
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall
+                ?.copyWith(color: Theme.of(context).colorScheme.primary),
           ),
         ],
       ),
