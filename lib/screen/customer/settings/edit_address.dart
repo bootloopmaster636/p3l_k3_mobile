@@ -10,7 +10,7 @@ class EditAddressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = exampleUser;
+    final User user = generateEmptyUser();
     return Scaffold(
       appBar: AppBar(
         title: Text('Your addresses'),
@@ -31,15 +31,15 @@ class EditAddressScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         child: SingleChildScrollView(
-          child: Column(
-            children: user.alamat.map((e) {
-              return Card(
-                  child: ListTile(
-                title: Text(e),
-              ));
-            }).toList(),
-          ),
-        ),
+            // child: Column(
+            //   children: address.map((e) {
+            //     return Card(
+            //         child: ListTile(
+            //       title: Text(e),
+            //     ));
+            //   }).toList(),
+            // ),
+            ),
       ),
     );
   }

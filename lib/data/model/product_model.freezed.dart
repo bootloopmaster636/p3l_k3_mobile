@@ -26,17 +26,17 @@ mixin _$Product {
   @JsonKey(name: 'category_id')
   int get categoryId => throw _privateConstructorUsedError;
   @JsonKey(name: 'product_name')
-  String get productName => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'ready_stock')
   int get readyStock => throw _privateConstructorUsedError;
   @JsonKey(name: 'daily_stock')
   int get dailyStock => throw _privateConstructorUsedError;
   @JsonKey(name: 'product_price')
-  int get productPrice => throw _privateConstructorUsedError;
+  int get price => throw _privateConstructorUsedError;
   @JsonKey(name: 'product_status')
-  String get productStatus => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'product_picture')
-  String get productPicture => throw _privateConstructorUsedError;
+  String get picture => throw _privateConstructorUsedError;
   bool get active => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
 
@@ -54,12 +54,12 @@ abstract class $ProductCopyWith<$Res> {
       {int id,
       @JsonKey(name: 'consignor_id') int consignorId,
       @JsonKey(name: 'category_id') int categoryId,
-      @JsonKey(name: 'product_name') String productName,
+      @JsonKey(name: 'product_name') String name,
       @JsonKey(name: 'ready_stock') int readyStock,
       @JsonKey(name: 'daily_stock') int dailyStock,
-      @JsonKey(name: 'product_price') int productPrice,
-      @JsonKey(name: 'product_status') String productStatus,
-      @JsonKey(name: 'product_picture') String productPicture,
+      @JsonKey(name: 'product_price') int price,
+      @JsonKey(name: 'product_status') String status,
+      @JsonKey(name: 'product_picture') String picture,
       bool active,
       String description});
 }
@@ -80,12 +80,12 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? id = null,
     Object? consignorId = null,
     Object? categoryId = null,
-    Object? productName = null,
+    Object? name = null,
     Object? readyStock = null,
     Object? dailyStock = null,
-    Object? productPrice = null,
-    Object? productStatus = null,
-    Object? productPicture = null,
+    Object? price = null,
+    Object? status = null,
+    Object? picture = null,
     Object? active = null,
     Object? description = null,
   }) {
@@ -102,9 +102,9 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
               as int,
-      productName: null == productName
-          ? _value.productName
-          : productName // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       readyStock: null == readyStock
           ? _value.readyStock
@@ -114,17 +114,17 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.dailyStock
           : dailyStock // ignore: cast_nullable_to_non_nullable
               as int,
-      productPrice: null == productPrice
-          ? _value.productPrice
-          : productPrice // ignore: cast_nullable_to_non_nullable
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
               as int,
-      productStatus: null == productStatus
-          ? _value.productStatus
-          : productStatus // ignore: cast_nullable_to_non_nullable
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
               as String,
-      productPicture: null == productPicture
-          ? _value.productPicture
-          : productPicture // ignore: cast_nullable_to_non_nullable
+      picture: null == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
               as String,
       active: null == active
           ? _value.active
@@ -149,12 +149,12 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       {int id,
       @JsonKey(name: 'consignor_id') int consignorId,
       @JsonKey(name: 'category_id') int categoryId,
-      @JsonKey(name: 'product_name') String productName,
+      @JsonKey(name: 'product_name') String name,
       @JsonKey(name: 'ready_stock') int readyStock,
       @JsonKey(name: 'daily_stock') int dailyStock,
-      @JsonKey(name: 'product_price') int productPrice,
-      @JsonKey(name: 'product_status') String productStatus,
-      @JsonKey(name: 'product_picture') String productPicture,
+      @JsonKey(name: 'product_price') int price,
+      @JsonKey(name: 'product_status') String status,
+      @JsonKey(name: 'product_picture') String picture,
       bool active,
       String description});
 }
@@ -173,12 +173,12 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? id = null,
     Object? consignorId = null,
     Object? categoryId = null,
-    Object? productName = null,
+    Object? name = null,
     Object? readyStock = null,
     Object? dailyStock = null,
-    Object? productPrice = null,
-    Object? productStatus = null,
-    Object? productPicture = null,
+    Object? price = null,
+    Object? status = null,
+    Object? picture = null,
     Object? active = null,
     Object? description = null,
   }) {
@@ -195,9 +195,9 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
               as int,
-      productName: null == productName
-          ? _value.productName
-          : productName // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
       readyStock: null == readyStock
           ? _value.readyStock
@@ -207,17 +207,17 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.dailyStock
           : dailyStock // ignore: cast_nullable_to_non_nullable
               as int,
-      productPrice: null == productPrice
-          ? _value.productPrice
-          : productPrice // ignore: cast_nullable_to_non_nullable
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
               as int,
-      productStatus: null == productStatus
-          ? _value.productStatus
-          : productStatus // ignore: cast_nullable_to_non_nullable
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
               as String,
-      productPicture: null == productPicture
-          ? _value.productPicture
-          : productPicture // ignore: cast_nullable_to_non_nullable
+      picture: null == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
               as String,
       active: null == active
           ? _value.active
@@ -238,12 +238,12 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
       {required this.id,
       @JsonKey(name: 'consignor_id') required this.consignorId,
       @JsonKey(name: 'category_id') required this.categoryId,
-      @JsonKey(name: 'product_name') required this.productName,
+      @JsonKey(name: 'product_name') required this.name,
       @JsonKey(name: 'ready_stock') required this.readyStock,
       @JsonKey(name: 'daily_stock') required this.dailyStock,
-      @JsonKey(name: 'product_price') required this.productPrice,
-      @JsonKey(name: 'product_status') required this.productStatus,
-      @JsonKey(name: 'product_picture') required this.productPicture,
+      @JsonKey(name: 'product_price') required this.price,
+      @JsonKey(name: 'product_status') required this.status,
+      @JsonKey(name: 'product_picture') required this.picture,
       required this.active,
       required this.description});
 
@@ -260,7 +260,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
   final int categoryId;
   @override
   @JsonKey(name: 'product_name')
-  final String productName;
+  final String name;
   @override
   @JsonKey(name: 'ready_stock')
   final int readyStock;
@@ -269,13 +269,13 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
   final int dailyStock;
   @override
   @JsonKey(name: 'product_price')
-  final int productPrice;
+  final int price;
   @override
   @JsonKey(name: 'product_status')
-  final String productStatus;
+  final String status;
   @override
   @JsonKey(name: 'product_picture')
-  final String productPicture;
+  final String picture;
   @override
   final bool active;
   @override
@@ -283,7 +283,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Product(id: $id, consignorId: $consignorId, categoryId: $categoryId, productName: $productName, readyStock: $readyStock, dailyStock: $dailyStock, productPrice: $productPrice, productStatus: $productStatus, productPicture: $productPicture, active: $active, description: $description)';
+    return 'Product(id: $id, consignorId: $consignorId, categoryId: $categoryId, name: $name, readyStock: $readyStock, dailyStock: $dailyStock, price: $price, status: $status, picture: $picture, active: $active, description: $description)';
   }
 
   @override
@@ -294,12 +294,12 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('consignorId', consignorId))
       ..add(DiagnosticsProperty('categoryId', categoryId))
-      ..add(DiagnosticsProperty('productName', productName))
+      ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('readyStock', readyStock))
       ..add(DiagnosticsProperty('dailyStock', dailyStock))
-      ..add(DiagnosticsProperty('productPrice', productPrice))
-      ..add(DiagnosticsProperty('productStatus', productStatus))
-      ..add(DiagnosticsProperty('productPicture', productPicture))
+      ..add(DiagnosticsProperty('price', price))
+      ..add(DiagnosticsProperty('status', status))
+      ..add(DiagnosticsProperty('picture', picture))
       ..add(DiagnosticsProperty('active', active))
       ..add(DiagnosticsProperty('description', description));
   }
@@ -314,18 +314,14 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
                 other.consignorId == consignorId) &&
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId) &&
-            (identical(other.productName, productName) ||
-                other.productName == productName) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.readyStock, readyStock) ||
                 other.readyStock == readyStock) &&
             (identical(other.dailyStock, dailyStock) ||
                 other.dailyStock == dailyStock) &&
-            (identical(other.productPrice, productPrice) ||
-                other.productPrice == productPrice) &&
-            (identical(other.productStatus, productStatus) ||
-                other.productStatus == productStatus) &&
-            (identical(other.productPicture, productPicture) ||
-                other.productPicture == productPicture) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.picture, picture) || other.picture == picture) &&
             (identical(other.active, active) || other.active == active) &&
             (identical(other.description, description) ||
                 other.description == description));
@@ -338,12 +334,12 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
       id,
       consignorId,
       categoryId,
-      productName,
+      name,
       readyStock,
       dailyStock,
-      productPrice,
-      productStatus,
-      productPicture,
+      price,
+      status,
+      picture,
       active,
       description);
 
@@ -366,12 +362,12 @@ abstract class _Product implements Product {
       {required final int id,
       @JsonKey(name: 'consignor_id') required final int consignorId,
       @JsonKey(name: 'category_id') required final int categoryId,
-      @JsonKey(name: 'product_name') required final String productName,
+      @JsonKey(name: 'product_name') required final String name,
       @JsonKey(name: 'ready_stock') required final int readyStock,
       @JsonKey(name: 'daily_stock') required final int dailyStock,
-      @JsonKey(name: 'product_price') required final int productPrice,
-      @JsonKey(name: 'product_status') required final String productStatus,
-      @JsonKey(name: 'product_picture') required final String productPicture,
+      @JsonKey(name: 'product_price') required final int price,
+      @JsonKey(name: 'product_status') required final String status,
+      @JsonKey(name: 'product_picture') required final String picture,
       required final bool active,
       required final String description}) = _$ProductImpl;
 
@@ -387,7 +383,7 @@ abstract class _Product implements Product {
   int get categoryId;
   @override
   @JsonKey(name: 'product_name')
-  String get productName;
+  String get name;
   @override
   @JsonKey(name: 'ready_stock')
   int get readyStock;
@@ -396,13 +392,13 @@ abstract class _Product implements Product {
   int get dailyStock;
   @override
   @JsonKey(name: 'product_price')
-  int get productPrice;
+  int get price;
   @override
   @JsonKey(name: 'product_status')
-  String get productStatus;
+  String get status;
   @override
   @JsonKey(name: 'product_picture')
-  String get productPicture;
+  String get picture;
   @override
   bool get active;
   @override

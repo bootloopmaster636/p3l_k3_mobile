@@ -5,6 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/constants.dart';
+import 'package:p3l_k3_mobile/data/model/customer_model.dart';
 import 'package:p3l_k3_mobile/data/model/user_model.dart';
 import 'package:p3l_k3_mobile/router.dart';
 
@@ -48,15 +49,21 @@ class DialogContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const TestUser user = exampleUser;
-    return const Column(
+    final Customer user = Customer(
+      id: 0,
+      user: generateEmptyUser(),
+      nominalBalance: 0,
+      point: 0,
+      userId: 0,
+    );
+    return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Profile(user: user),
-        Gap(4),
-        SettingsContent(),
-        Gap(8),
-        About(),
+        const Gap(4),
+        const SettingsContent(),
+        const Gap(8),
+        const About(),
       ],
     );
   }
@@ -134,7 +141,7 @@ class Profile extends StatelessWidget {
     super.key,
   });
 
-  final TestUser user;
+  final Customer user;
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +157,7 @@ class Profile extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor:
                     Theme.of(context).colorScheme.tertiaryContainer,
-                foregroundImage: NetworkImage(user.profilePictURL),
+                // foregroundImage: NetworkImage(user.profilePictURL),
               ),
             ),
             const Gap(16),
@@ -158,7 +165,7 @@ class Profile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  user.name,
+                  user.user.fullName,
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium
@@ -172,7 +179,7 @@ class Profile extends StatelessWidget {
                       size: 16,
                     ),
                     const Gap(4),
-                    Text('${user.poin} point'),
+                    Text('${user.point} point'),
                     const Gap(4),
                     const ElTooltip(
                       position: ElTooltipPosition.bottomCenter,
@@ -193,7 +200,7 @@ class Profile extends StatelessWidget {
                       size: 16,
                     ),
                     const Gap(4),
-                    Text('Rp. ${user.saldo.toInt()}'),
+                    Text('Rp. ${user.nominalBalance}'),
                     const Gap(4),
                     const ElTooltip(
                       position: ElTooltipPosition.bottomEnd,

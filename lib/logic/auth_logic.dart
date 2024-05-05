@@ -12,17 +12,7 @@ class AuthLogic extends _$AuthLogic {
   Future<Auth> build() {
     return Future<Auth>(
       () => Auth(
-        user: User(
-          active: false,
-          dateOfBirth: DateTime.now(),
-          email: '',
-          fullName: '',
-          gender: '',
-          id: 0,
-          password: '',
-          phoneNumber: '',
-          roleId: 0,
-        ),
+        user: generateEmptyUser(),
         accessToken: '',
       ),
     );

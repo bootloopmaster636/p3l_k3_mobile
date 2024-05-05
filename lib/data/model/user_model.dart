@@ -20,3 +20,17 @@ class User with _$User {
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
+
+User generateEmptyUser() {
+  return User(
+    active: false,
+    dateOfBirth: DateTime.now(),
+    email: '',
+    fullName: '',
+    gender: '',
+    id: 0,
+    password: '',
+    phoneNumber: '',
+    roleId: 0,
+  );
+}

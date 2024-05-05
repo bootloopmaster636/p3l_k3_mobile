@@ -5,7 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:p3l_k3_mobile/data/model/test_product_model.dart';
+import 'package:p3l_k3_mobile/data/model/product_model.dart';
 import 'package:p3l_k3_mobile/data/model/user_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 import 'package:p3l_k3_mobile/router.dart';
@@ -19,7 +19,7 @@ class CustomerHomeScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollCtl = useScrollController();
-    final List<TestProduct> products = exampleProduct;
+    final List<Product> products = [];
 
     return Scaffold(
       floatingActionButton: ListenableBuilder(
@@ -147,7 +147,7 @@ class FilterButton extends StatelessWidget {
 class ProductCard extends HookWidget {
   const ProductCard({required this.product, super.key});
 
-  final TestProduct product;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -202,7 +202,7 @@ class ProductCard extends HookWidget {
                 width: double.infinity,
                 clipBehavior: Clip.antiAlias,
                 child: Image.network(
-                  product.imageUrl,
+                  product.picture,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -278,7 +278,7 @@ class Header extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const TestUser user = exampleUser;
+    final User user = generateEmptyUser();
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
@@ -328,7 +328,7 @@ class Header extends ConsumerWidget {
                     child: CircleAvatar(
                       backgroundColor:
                           Theme.of(context).colorScheme.tertiaryContainer,
-                      foregroundImage: NetworkImage(user.profilePictURL),
+                      // foregroundImage: NetworkImage(user.fullName),
                       radius: 22,
                     ),
                   ),

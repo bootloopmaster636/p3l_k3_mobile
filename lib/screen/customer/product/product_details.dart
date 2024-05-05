@@ -4,7 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/constants.dart';
-import 'package:p3l_k3_mobile/data/model/test_product_model.dart';
+import 'package:p3l_k3_mobile/data/model/product_model.dart';
 import 'package:zoom_pinch_overlay/zoom_pinch_overlay.dart';
 
 @RoutePage()
@@ -18,7 +18,19 @@ class ProductDetailScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollCtl = useScrollController();
-    final TestProduct product = exampleProduct[productID];
+    const Product product = Product(
+      id: 0,
+      name: 'Product name',
+      description: 'Product description',
+      price: 0,
+      dailyStock: 0,
+      readyStock: 10,
+      picture: '',
+      status: 'ready',
+      active: true,
+      categoryId: 1,
+      consignorId: 1,
+    );
 
     return Scaffold(
       body: CustomScrollView(
@@ -31,7 +43,7 @@ class ProductDetailScreen extends HookWidget {
             flexibleSpace: FlexibleSpaceBar(
               background: ZoomOverlay(
                 child: Image.network(
-                  product.imageUrl,
+                  product.picture,
                   fit: BoxFit.cover,
                 )
                     .animate()
@@ -74,7 +86,7 @@ class ProductInfo extends StatelessWidget {
     super.key,
   });
 
-  final TestProduct product;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +140,7 @@ class ProductInfo extends StatelessWidget {
 
 class ProductAdditionalInfo extends StatelessWidget {
   const ProductAdditionalInfo({required this.product, super.key});
-  final TestProduct product;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +173,7 @@ class ProductAdditionalInfo extends StatelessWidget {
                                 ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '${product.stock} available',
+                            '${product.readyStock} available',
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
@@ -200,7 +212,7 @@ class ProductAdditionalInfo extends StatelessWidget {
                                 ?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            product.stockType == ProductStockType.onDemand
+                            product.status == ProductStockType.onDemand
                                 ? 'Ready in store'
                                 : 'Should pre-order',
                             style: Theme.of(context).textTheme.bodySmall,
@@ -225,7 +237,7 @@ class AddToCartButton extends StatelessWidget {
     required this.product,
     super.key,
   });
-  final TestProduct product;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
