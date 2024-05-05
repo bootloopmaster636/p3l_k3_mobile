@@ -17,7 +17,7 @@ _$EmployeeImpl _$$EmployeeImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$EmployeeImplToJson(_$EmployeeImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'users': instance.user,
+      'users': instance.user.toJson(),
       'userId': instance.userId,
       'work_start_date': instance.workStartDate.toIso8601String(),
     };

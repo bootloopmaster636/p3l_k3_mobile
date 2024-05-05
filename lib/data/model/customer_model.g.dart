@@ -20,6 +20,6 @@ Map<String, dynamic> _$$CustomerImplToJson(_$CustomerImpl instance) =>
       'id': instance.id,
       'point': instance.point,
       'nominal_balance': instance.nominalBalance,
-      'users': instance.user,
+      'users': instance.user.toJson(),
       'userId': instance.userId,
     };
