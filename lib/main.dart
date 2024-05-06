@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:p3l_k3_mobile/router.dart';
 import 'package:tinycolor2/tinycolor2.dart';
+import 'package:toastification/toastification.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,12 +19,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      theme: ThemeData(
-        colorSchemeSeed: TinyColor.fromString('F96F22').toColor(),
-        fontFamily: GoogleFonts.poppins().fontFamily,
+    return ToastificationWrapper(
+      child: MaterialApp.router(
+        theme: ThemeData(
+          colorSchemeSeed: TinyColor.fromString('F96F22').toColor(),
+          fontFamily: GoogleFonts.poppins().fontFamily,
+        ),
+        routerConfig: _appRouter.config(),
       ),
-      routerConfig: _appRouter.config(),
     );
   }
 }

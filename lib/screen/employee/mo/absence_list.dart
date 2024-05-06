@@ -10,6 +10,7 @@ import 'package:p3l_k3_mobile/data/model/user_model.dart';
 import 'package:p3l_k3_mobile/logic/absence_logic.dart';
 import 'package:p3l_k3_mobile/logic/employee_logic.dart';
 import 'package:p3l_k3_mobile/utility.dart';
+import 'package:toastification/toastification.dart';
 
 @RoutePage()
 class AbsenceListScreen extends ConsumerWidget {
@@ -73,8 +74,31 @@ class AbsenceTile extends ConsumerWidget {
         trailing: IconButton(
           icon: const Icon(Icons.delete_outline),
           onPressed: () async {
-            await ref.read(absenceLogicProvider.notifier).delete(absence.id);
-            await ref.read(absenceLogicProvider.notifier).fetchAll(); // refresh
+            await showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text('Delete Absence'),
+                  content: const Text(
+                      'Are you sure you want to delete this absence?'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        deleteAbsence(absence, context, ref);
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Delete'),
+                    ),
+                  ],
+                );
+              },
+            );
           },
         ),
       ),
@@ -89,7 +113,6 @@ class AddAbsence extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<List<Employee>> employeeList =
         ref.watch(employeeLogicProvider);
-    Logger().d(employeeList.value);
 
     final ValueNotifier<int> selectedEmployee = useState(1);
     final ValueNotifier<DateTime> selectedDate = useState(DateTime.now());
@@ -161,13 +184,22 @@ class AddAbsence extends HookConsumerWidget {
                             .read(absenceLogicProvider.notifier)
                             .create(selectedEmployee.value, selectedDate.value)
                             .then((void value) {
-                          ref
-                              .read(absenceLogicProvider.notifier)
-                              .fetchAll(); // refresh
-                        });
-                        if (context.mounted) {
+                          toastification.show(
+                            context: context,
+                            type: ToastificationType.success,
+                            style: ToastificationStyle.flat,
+                            title: const Text('Success'),
+                            description: const Text(
+                              'This person is added to absence list',
+                            ),
+                            alignment: Alignment.bottomCenter,
+                            autoCloseDuration: const Duration(seconds: 5),
+                            icon: const Icon(Icons.add_outlined),
+                            boxShadow: lowModeShadow,
+                            dragToClose: true,
+                          );
                           Navigator.of(context).pop();
-                        }
+                        });
                       },
                       child: const Text('Save'),
                     ),
@@ -176,5 +208,28 @@ class AddAbsence extends HookConsumerWidget {
               ),
             ),
           );
+  }
+}
+
+void deleteAbsence(Absence absence, BuildContext context, WidgetRef ref) async {
+  try {
+    await ref.read(absenceLogicProvider.notifier).delete(absence.id).then(
+      (void value) {
+        toastification.show(
+          context: context,
+          type: ToastificationType.success,
+          style: ToastificationStyle.flat,
+          title: const Text('Success'),
+          description: const Text('This person is removed from absence list'),
+          alignment: Alignment.bottomCenter,
+          autoCloseDuration: const Duration(seconds: 5),
+          icon: const Icon(Icons.delete_outline),
+          boxShadow: lowModeShadow,
+          dragToClose: true,
+        );
+      },
+    );
+  } catch (e) {
+    Logger().e(e);
   }
 }

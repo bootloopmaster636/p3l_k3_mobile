@@ -2,13 +2,18 @@ import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:p3l_k3_mobile/data/api/dio.dart';
 import 'package:p3l_k3_mobile/data/model/absence_model.dart';
+import 'package:p3l_k3_mobile/logic/auth_logic.dart';
 
-Future<List<Absence>> fetchAllAbsence() async {
+Future<List<Absence>> fetchAllAbsence(String token) async {
   final Response response;
 
   try {
-    response = await dio.get('/absence');
-    Logger().i(response.data['data']);
+    response = await dio.get('/absence',
+        options: Options(
+          headers: <String, String>{
+            'Authorization': 'Bearer $token',
+          },
+        ));
     return (response.data['data'] as List<dynamic>).map((data) {
       return Absence.fromJson(data as Map<String, dynamic>);
     }).toList();
@@ -25,7 +30,11 @@ Future<List<Absence>> fetchAllAbsence() async {
   }
 }
 
-Future<void> createAbsence(int employeeId, DateTime absenceDate) async {
+Future<void> createAbsence(
+  int employeeId,
+  DateTime absenceDate,
+  String token,
+) async {
   final Response response;
 
   try {
@@ -34,8 +43,15 @@ Future<void> createAbsence(int employeeId, DateTime absenceDate) async {
       'absence_date': absenceDate.toIso8601String(),
     };
 
-    response = await dio.post('/absence', data: absence);
-    Logger().i(response.data);
+    response = await dio.post(
+      '/absence',
+      data: absence,
+      options: Options(
+        headers: <String, String>{
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
   } on DioException catch (e) {
     if (e.response != null) {
       Logger().e(e.response?.data);
@@ -49,12 +65,15 @@ Future<void> createAbsence(int employeeId, DateTime absenceDate) async {
   }
 }
 
-Future<void> deleteAbsence(int id) async {
-  final Response<Absence> response;
+Future<void> deleteAbsence(int id, String token) async {
+  final Response response;
 
   try {
-    response = await dio.delete('/absence/$id');
-    Logger().i(response.data);
+    response = await dio.delete(
+      '/absence/$id',
+      options:
+          Options(headers: <String, String>{'Authorization': 'Bearer $token'}),
+    );
   } on DioException catch (e) {
     if (e.response != null) {
       Logger().e(e.response?.data);

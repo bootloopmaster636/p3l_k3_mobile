@@ -6,7 +6,7 @@ part of 'employee_logic.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$employeeLogicHash() => r'8f960514e7ad97184d06720c3958f313904b3214';
+String _$employeeLogicHash() => r'db73bb5961c9ebf7ddc14108c4390e509b60458a';
 
 /// See also [EmployeeLogic].
 @ProviderFor(EmployeeLogic)
