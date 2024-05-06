@@ -6,7 +6,7 @@ part of 'absence_logic.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$absenceLogicHash() => r'249177a7656ec21307c1145c159bd22000cc9450';
+String _$absenceLogicHash() => r'21fcf0a044a44b01ff939adb49576c920dfb2cd3';
 
 /// See also [AbsenceLogic].
 @ProviderFor(AbsenceLogic)

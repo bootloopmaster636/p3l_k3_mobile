@@ -1,11 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:logger/logger.dart';
 import 'package:p3l_k3_mobile/data/model/absence_model.dart';
 import 'package:p3l_k3_mobile/data/model/employee_model.dart';
 import 'package:p3l_k3_mobile/data/model/user_model.dart';
 import 'package:p3l_k3_mobile/logic/absence_logic.dart';
 import 'package:p3l_k3_mobile/logic/employee_logic.dart';
+import 'package:p3l_k3_mobile/utility.dart';
 
 @RoutePage()
 class AbsenceListScreen extends ConsumerWidget {
@@ -23,14 +27,35 @@ class AbsenceListScreen extends ConsumerWidget {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : SingleChildScrollView(
-              child: Column(
-                children: absenceList.value?.map((Absence element) {
-                      return AbsenceTile(absence: element);
-                    }).toList() ??
-                    <Widget>[],
+          : Padding(
+              padding: const EdgeInsets.all(16),
+              child: RefreshIndicator(
+                onRefresh: () {
+                  return ref.read(absenceLogicProvider.notifier).fetchAll();
+                },
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    children: absenceList.value?.map((Absence element) {
+                          return AbsenceTile(absence: element);
+                        }).toList() ??
+                        <Widget>[],
+                  ),
+                ),
               ),
             ),
+      floatingActionButton: FloatingActionButton.extended(
+        label: const Text('Add Absence'),
+        icon: const Icon(Icons.add),
+        onPressed: () {
+          showModalBottomSheet<Widget>(
+            context: context,
+            builder: (BuildContext context) {
+              return const AddAbsence();
+            },
+          );
+        },
+      ),
     );
   }
 }
@@ -41,19 +66,15 @@ class AbsenceTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<List<Employee>> employeeList =
-        ref.watch(employeeLogicProvider);
-    final User? employeeTarget = employeeList.value
-        ?.firstWhere((Employee element) => element.id == absence.employeeId)
-        .user;
     return Card(
       child: ListTile(
-        title: Text(employeeTarget?.fullName ?? 'Unknown'),
-        subtitle: Text(absence.absenceDate.toString()),
+        title: Text(absence.employees.user.fullName),
+        subtitle: Text(convertDateTimeToDMY(absence.absenceDate)),
         trailing: IconButton(
           icon: const Icon(Icons.delete_outline),
-          onPressed: () {
-            ref.read(absenceLogicProvider.notifier).delete(absence.id);
+          onPressed: () async {
+            await ref.read(absenceLogicProvider.notifier).delete(absence.id);
+            await ref.read(absenceLogicProvider.notifier).fetchAll(); // refresh
           },
         ),
       ),
@@ -61,29 +82,99 @@ class AbsenceTile extends ConsumerWidget {
   }
 }
 
-// class AddAbsence extends ConsumerWidget {
-//   const AddAbsence({super.key});
+class AddAbsence extends HookConsumerWidget {
+  const AddAbsence({super.key});
 
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     final AsyncValue<List<Employee>> employeeList =
-//         ref.watch(employeeLogicProvider);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<List<Employee>> employeeList =
+        ref.watch(employeeLogicProvider);
+    Logger().d(employeeList.value);
 
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Select Employee'),
-//       ),
-//       body: SingleChildScrollView(
-//         child: Column(
-//           children: employeeList.value?.map((Employee element) {
-//                 return ListTile(
-//                   title: Text(element.user.fullName),
-//                   onTap: () {},
-//                 );
-//               }).toList() ??
-//               <Widget>[],
-//         ),
-//       ),
-//     );
-//   }
-// }
+    final ValueNotifier<int> selectedEmployee = useState(1);
+    final ValueNotifier<DateTime> selectedDate = useState(DateTime.now());
+
+    return employeeList.isLoading
+        ? const LinearProgressIndicator()
+        : Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    'Add Absence',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const Gap(16),
+                  Text('Select employee:',
+                      style: Theme.of(context).textTheme.titleMedium),
+                  const Gap(8),
+                  DropdownMenu<int>(
+                    initialSelection: employeeList.value?.first.id ?? 1,
+                    dropdownMenuEntries: employeeList.value
+                            ?.map<DropdownMenuEntry<int>>(
+                              (e) => DropdownMenuEntry<int>(
+                                value: e.id,
+                                label: e.user.fullName,
+                              ),
+                            )
+                            .toList() ??
+                        [],
+                    onSelected: (int? value) {
+                      selectedEmployee.value = value ?? 1;
+                    },
+                  ),
+                  const Gap(24),
+                  Text(
+                    'Select the date where they absent',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  Text(
+                    'Currently selected: ${convertDateTimeToDMY(selectedDate.value)}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  const Gap(8),
+                  OutlinedButton(
+                    onPressed: () async {
+                      selectedDate.value = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(), //get today's date
+                            firstDate: DateTime(2000),
+                            lastDate:
+                                DateTime.now().add(const Duration(days: 365)),
+                          ) ??
+                          DateTime.now();
+                    },
+                    child: const Text('Select a date'),
+                  ),
+                  const Gap(24),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 48,
+                    child: FilledButton(
+                      onPressed: () async {
+                        await ref
+                            .read(absenceLogicProvider.notifier)
+                            .create(selectedEmployee.value, selectedDate.value)
+                            .then((void value) {
+                          ref
+                              .read(absenceLogicProvider.notifier)
+                              .fetchAll(); // refresh
+                        });
+                        if (context.mounted) {
+                          Navigator.of(context).pop();
+                        }
+                      },
+                      child: const Text('Save'),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+  }
+}

@@ -23,10 +23,10 @@ class AbsenceLogic extends _$AbsenceLogic {
     }
   }
 
-  Future<void> create(Absence absence) async {
+  Future<void> create(int employeeId, DateTime absentDate) async {
     try {
       state = const AsyncLoading<List<Absence>>();
-      await createAbsence(absence);
+      await createAbsence(employeeId, absentDate);
       state = AsyncData<List<Absence>>(await fetchAllAbsence());
     } catch (e) {
       rethrow;

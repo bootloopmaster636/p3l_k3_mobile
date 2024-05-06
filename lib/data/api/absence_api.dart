@@ -8,9 +8,9 @@ Future<List<Absence>> fetchAllAbsence() async {
 
   try {
     response = await dio.get('/absence');
-    return (response.data as List<Map<String, dynamic>>)
-        .map((Map<String, dynamic> data) {
-      return Absence.fromJson(data);
+    Logger().i(response.data['data']);
+    return (response.data['data'] as List<dynamic>).map((data) {
+      return Absence.fromJson(data as Map<String, dynamic>);
     }).toList();
   } on DioException catch (e) {
     if (e.response != null) {
@@ -25,11 +25,16 @@ Future<List<Absence>> fetchAllAbsence() async {
   }
 }
 
-Future<void> createAbsence(Absence absence) async {
+Future<void> createAbsence(int employeeId, DateTime absenceDate) async {
   final Response response;
 
   try {
-    response = await dio.post('/absence', data: absence.toJson());
+    final Map<String, Object> absence = <String, Object>{
+      'employees_id': employeeId,
+      'absence_date': absenceDate.toIso8601String(),
+    };
+
+    response = await dio.post('/absence', data: absence);
     Logger().i(response.data);
   } on DioException catch (e) {
     if (e.response != null) {
@@ -45,7 +50,7 @@ Future<void> createAbsence(Absence absence) async {
 }
 
 Future<void> deleteAbsence(int id) async {
-  final Response response;
+  final Response<Absence> response;
 
   try {
     response = await dio.delete('/absence/$id');

@@ -11,6 +11,7 @@ _$AbsenceImpl _$$AbsenceImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int,
       employeeId: json['employees_id'] as int,
       absenceDate: DateTime.parse(json['absence_date'] as String),
+      employees: Employee.fromJson(json['employees'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$AbsenceImplToJson(_$AbsenceImpl instance) =>
@@ -18,4 +19,5 @@ Map<String, dynamic> _$$AbsenceImplToJson(_$AbsenceImpl instance) =>
       'id': instance.id,
       'employees_id': instance.employeeId,
       'absence_date': instance.absenceDate.toIso8601String(),
+      'employees': instance.employees.toJson(),
     };

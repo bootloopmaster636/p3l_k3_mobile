@@ -25,6 +25,7 @@ mixin _$Absence {
   int get employeeId => throw _privateConstructorUsedError;
   @JsonKey(name: 'absence_date')
   DateTime get absenceDate => throw _privateConstructorUsedError;
+  Employee get employees => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,7 +40,10 @@ abstract class $AbsenceCopyWith<$Res> {
   $Res call(
       {int id,
       @JsonKey(name: 'employees_id') int employeeId,
-      @JsonKey(name: 'absence_date') DateTime absenceDate});
+      @JsonKey(name: 'absence_date') DateTime absenceDate,
+      Employee employees});
+
+  $EmployeeCopyWith<$Res> get employees;
 }
 
 /// @nodoc
@@ -58,6 +62,7 @@ class _$AbsenceCopyWithImpl<$Res, $Val extends Absence>
     Object? id = null,
     Object? employeeId = null,
     Object? absenceDate = null,
+    Object? employees = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -72,7 +77,19 @@ class _$AbsenceCopyWithImpl<$Res, $Val extends Absence>
           ? _value.absenceDate
           : absenceDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      employees: null == employees
+          ? _value.employees
+          : employees // ignore: cast_nullable_to_non_nullable
+              as Employee,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EmployeeCopyWith<$Res> get employees {
+    return $EmployeeCopyWith<$Res>(_value.employees, (value) {
+      return _then(_value.copyWith(employees: value) as $Val);
+    });
   }
 }
 
@@ -86,7 +103,11 @@ abstract class _$$AbsenceImplCopyWith<$Res> implements $AbsenceCopyWith<$Res> {
   $Res call(
       {int id,
       @JsonKey(name: 'employees_id') int employeeId,
-      @JsonKey(name: 'absence_date') DateTime absenceDate});
+      @JsonKey(name: 'absence_date') DateTime absenceDate,
+      Employee employees});
+
+  @override
+  $EmployeeCopyWith<$Res> get employees;
 }
 
 /// @nodoc
@@ -103,6 +124,7 @@ class __$$AbsenceImplCopyWithImpl<$Res>
     Object? id = null,
     Object? employeeId = null,
     Object? absenceDate = null,
+    Object? employees = null,
   }) {
     return _then(_$AbsenceImpl(
       id: null == id
@@ -117,6 +139,10 @@ class __$$AbsenceImplCopyWithImpl<$Res>
           ? _value.absenceDate
           : absenceDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      employees: null == employees
+          ? _value.employees
+          : employees // ignore: cast_nullable_to_non_nullable
+              as Employee,
     ));
   }
 }
@@ -127,7 +153,8 @@ class _$AbsenceImpl with DiagnosticableTreeMixin implements _Absence {
   const _$AbsenceImpl(
       {required this.id,
       @JsonKey(name: 'employees_id') required this.employeeId,
-      @JsonKey(name: 'absence_date') required this.absenceDate});
+      @JsonKey(name: 'absence_date') required this.absenceDate,
+      required this.employees});
 
   factory _$AbsenceImpl.fromJson(Map<String, dynamic> json) =>
       _$$AbsenceImplFromJson(json);
@@ -140,10 +167,12 @@ class _$AbsenceImpl with DiagnosticableTreeMixin implements _Absence {
   @override
   @JsonKey(name: 'absence_date')
   final DateTime absenceDate;
+  @override
+  final Employee employees;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Absence(id: $id, employeeId: $employeeId, absenceDate: $absenceDate)';
+    return 'Absence(id: $id, employeeId: $employeeId, absenceDate: $absenceDate, employees: $employees)';
   }
 
   @override
@@ -153,7 +182,8 @@ class _$AbsenceImpl with DiagnosticableTreeMixin implements _Absence {
       ..add(DiagnosticsProperty('type', 'Absence'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('employeeId', employeeId))
-      ..add(DiagnosticsProperty('absenceDate', absenceDate));
+      ..add(DiagnosticsProperty('absenceDate', absenceDate))
+      ..add(DiagnosticsProperty('employees', employees));
   }
 
   @override
@@ -165,12 +195,15 @@ class _$AbsenceImpl with DiagnosticableTreeMixin implements _Absence {
             (identical(other.employeeId, employeeId) ||
                 other.employeeId == employeeId) &&
             (identical(other.absenceDate, absenceDate) ||
-                other.absenceDate == absenceDate));
+                other.absenceDate == absenceDate) &&
+            (identical(other.employees, employees) ||
+                other.employees == employees));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, employeeId, absenceDate);
+  int get hashCode =>
+      Object.hash(runtimeType, id, employeeId, absenceDate, employees);
 
   @JsonKey(ignore: true)
   @override
@@ -188,10 +221,10 @@ class _$AbsenceImpl with DiagnosticableTreeMixin implements _Absence {
 
 abstract class _Absence implements Absence {
   const factory _Absence(
-          {required final int id,
-          @JsonKey(name: 'employees_id') required final int employeeId,
-          @JsonKey(name: 'absence_date') required final DateTime absenceDate}) =
-      _$AbsenceImpl;
+      {required final int id,
+      @JsonKey(name: 'employees_id') required final int employeeId,
+      @JsonKey(name: 'absence_date') required final DateTime absenceDate,
+      required final Employee employees}) = _$AbsenceImpl;
 
   factory _Absence.fromJson(Map<String, dynamic> json) = _$AbsenceImpl.fromJson;
 
@@ -203,6 +236,8 @@ abstract class _Absence implements Absence {
   @override
   @JsonKey(name: 'absence_date')
   DateTime get absenceDate;
+  @override
+  Employee get employees;
   @override
   @JsonKey(ignore: true)
   _$$AbsenceImplCopyWith<_$AbsenceImpl> get copyWith =>

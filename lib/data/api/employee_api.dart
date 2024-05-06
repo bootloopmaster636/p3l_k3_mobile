@@ -8,9 +8,8 @@ Future<List<Employee>> fetchAllEmployee() async {
 
   try {
     response = await dio.get('/employee');
-    return (response.data as List<Map<String, dynamic>>)
-        .map((Map<String, dynamic> data) {
-      return Employee.fromJson(data);
+    return (response.data['data'] as List<dynamic>).map((data) {
+      return Employee.fromJson(data as Map<String, dynamic>);
     }).toList();
   } on DioException catch (e) {
     // The request was made and the server responded with a status code
