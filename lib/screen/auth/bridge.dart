@@ -5,6 +5,7 @@ import 'package:p3l_k3_mobile/data/model/auth_model.dart';
 import 'package:p3l_k3_mobile/logic/auth_logic.dart';
 import 'package:p3l_k3_mobile/screen/auth/screen_login.dart';
 import 'package:p3l_k3_mobile/screen/customer/home/customer_home.dart';
+import 'package:p3l_k3_mobile/screen/employee/mo_home.dart';
 
 @RoutePage()
 class BridgeScreen extends ConsumerWidget {
@@ -16,9 +17,13 @@ class BridgeScreen extends ConsumerWidget {
 
     if (auth.value?.accessToken != '') {
       if (auth.value?.user.roleId == 4) {
+        //role id 4 is customer
         return const CustomerHomeScreen();
+      } else if (auth.value?.user.roleId == 3) {
+        //role id 3 is MO
+        return const MoScreen();
       } else {
-        return const Placeholder();
+        return const LoginScreen();
       }
     } else {
       return const LoginScreen();

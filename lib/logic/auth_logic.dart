@@ -8,9 +8,9 @@ part 'auth_logic.g.dart';
 
 @riverpod
 class AuthLogic extends _$AuthLogic {
-  // TODO(bootloopmaster636): change this to get data from persistence
   @override
   Future<Auth> build() {
+    // TODO(bootloopmaster636): change this to get data from persistence
     return Future<Auth>(
       () => Auth(
         user: generateEmptyUser(),
@@ -25,7 +25,6 @@ class AuthLogic extends _$AuthLogic {
     try {
       final Auth auth = await loginApi(email, password);
       state = AsyncData<Auth>(auth);
-      Logger().i(state);
     } catch (e) {
       state = AsyncError<Auth>(e, StackTrace.current);
       rethrow;

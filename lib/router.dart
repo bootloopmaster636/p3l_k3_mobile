@@ -9,6 +9,8 @@ import 'package:p3l_k3_mobile/screen/customer/settings/edit_address.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/edit_password.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/edit_profile.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/profile.dart';
+import 'package:p3l_k3_mobile/screen/employee/mo/absence_list.dart';
+import 'package:p3l_k3_mobile/screen/employee/mo_home.dart';
 
 part 'router.gr.dart';
 
@@ -63,6 +65,14 @@ class AppRouter extends _$AppRouter {
           transitionsBuilder: _slideLeftWithEase,
           durationInMilliseconds: 400,
           path: '/myAdress',
+        ),
+        AutoRoute(
+          page: MoRoute.page,
+          path: '/mo',
+        ),
+        AutoRoute(
+          page: AbsenceListRoute.page,
+          path: '/mo',
         ),
       ];
 

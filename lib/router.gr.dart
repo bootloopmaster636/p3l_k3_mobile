@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AbsenceListRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AbsenceListScreen(),
+      );
+    },
     BridgeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -51,6 +57,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LoginScreen(),
       );
     },
+    MoRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MoScreen(),
+      );
+    },
     ProductDetailRoute.name: (routeData) {
       final args = routeData.argsAs<ProductDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -74,6 +86,20 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [AbsenceListScreen]
+class AbsenceListRoute extends PageRouteInfo<void> {
+  const AbsenceListRoute({List<PageRouteInfo>? children})
+      : super(
+          AbsenceListRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AbsenceListRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -156,6 +182,20 @@ class LoginRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MoScreen]
+class MoRoute extends PageRouteInfo<void> {
+  const MoRoute({List<PageRouteInfo>? children})
+      : super(
+          MoRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MoRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

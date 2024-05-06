@@ -1,26 +1,23 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:p3l_k3_mobile/data/api/dio.dart';
-import 'package:p3l_k3_mobile/data/model/employee_model.dart';
+import 'package:p3l_k3_mobile/data/model/absence_model.dart';
 
-Future<List<Employee>> fetchAllEmployee() async {
+Future<List<Absence>> fetchAllAbsence() async {
   final Response response;
 
   try {
-    response = await dio.get('/employee');
+    response = await dio.get('/absence');
     return (response.data as List<Map<String, dynamic>>)
         .map((Map<String, dynamic> data) {
-      return Employee.fromJson(data);
+      return Absence.fromJson(data);
     }).toList();
   } on DioException catch (e) {
-    // The request was made and the server responded with a status code
-    // that falls out of the range of 2xx and is also not 304.
     if (e.response != null) {
       Logger().e(e.response?.data);
       Logger().e(e.response?.headers);
       Logger().e(e.response?.requestOptions);
     } else {
-      // Something happened in setting up or sending the request that triggered an Error
       Logger().e(e.requestOptions);
       Logger().e(e.message);
     }
@@ -28,12 +25,12 @@ Future<List<Employee>> fetchAllEmployee() async {
   }
 }
 
-Future<Employee> getEmployeeById(int id) async {
+Future<void> createAbsence(Absence absence) async {
   final Response response;
 
   try {
-    response = await dio.get('/employee/$id');
-    return Employee.fromJson(response.data as Map<String, dynamic>);
+    response = await dio.post('/absence', data: absence.toJson());
+    Logger().i(response.data);
   } on DioException catch (e) {
     if (e.response != null) {
       Logger().e(e.response?.data);
@@ -47,11 +44,11 @@ Future<Employee> getEmployeeById(int id) async {
   }
 }
 
-Future<void> createEmployee(Employee employee) async {
+Future<void> deleteAbsence(int id) async {
   final Response response;
 
   try {
-    response = await dio.post('/employee', data: employee.toJson());
+    response = await dio.delete('/absence/$id');
     Logger().i(response.data);
   } on DioException catch (e) {
     if (e.response != null) {
