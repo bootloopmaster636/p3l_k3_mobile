@@ -168,7 +168,9 @@ class LoginForm extends HookConsumerWidget {
             ),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              context.router.push(const ForgotPasswordRoute());
+            },
             child: const Text('Forgot password?'),
           ),
           const Divider(

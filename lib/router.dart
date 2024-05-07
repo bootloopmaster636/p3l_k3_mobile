@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:p3l_k3_mobile/screen/auth/bridge.dart';
+import 'package:p3l_k3_mobile/screen/auth/forgot_password.dart';
 import 'package:p3l_k3_mobile/screen/auth/screen_login.dart';
 import 'package:p3l_k3_mobile/screen/auth/screen_register.dart';
 import 'package:p3l_k3_mobile/screen/customer/home/customer_home.dart';
@@ -73,6 +74,10 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: AbsenceListRoute.page,
           path: '/mo',
+        ),
+        AutoRoute(
+          page: ForgotPasswordRoute.page,
+          path: '/forgotPassword',
         ),
       ];
 
