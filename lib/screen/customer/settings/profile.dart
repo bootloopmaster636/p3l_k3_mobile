@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/data/model/customer_model.dart';
 import 'package:p3l_k3_mobile/data/model/user_model.dart';
+import 'package:p3l_k3_mobile/logic/customer_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
 
 @RoutePage()
@@ -157,12 +158,7 @@ class Header extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Customer user = Customer(
-      id: 0,
-      nominalBalance: 0,
-      point: 0,
-      user: generateEmptyUser(),
-    );
+    final AsyncValue<Customer> user = ref.watch(customerLogicProvider);
 
     return Stack(
       alignment: Alignment.center,
@@ -200,7 +196,9 @@ class Header extends ConsumerWidget {
               child: CircleAvatar(
                 backgroundColor:
                     Theme.of(context).colorScheme.tertiaryContainer,
-                // foregroundImage: NetworkImage(user.fullName),
+                foregroundImage: NetworkImage(
+                  'https://api.dicebear.com/8.x/adventurer/png?seed=${user.value?.user.fullName}',
+                ),
               ).animate(delay: 400.ms).rotate(
                   begin: 1,
                   end: 0,
@@ -216,7 +214,7 @@ class Header extends ConsumerWidget {
                 .fadeIn(),
             const Gap(8),
             Text(
-              user.user.fullName,
+              user.value?.user.fullName ?? 'Unknown',
               style: Theme.of(context)
                   .textTheme
                   .headlineMedium
@@ -231,7 +229,7 @@ class Header extends ConsumerWidget {
                 .fadeIn(),
             const Gap(4),
             Text(
-              user.user.email,
+              user.value?.user.email ?? 'no@one.com',
               style: Theme.of(context).textTheme.titleMedium,
             )
                 .animate(delay: 1200.ms)
@@ -251,7 +249,7 @@ class Header extends ConsumerWidget {
                 ),
                 const Gap(8),
                 Text(
-                  '${user.point} point',
+                  '${user.value?.point} point',
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 const Gap(4),
@@ -275,7 +273,7 @@ class Header extends ConsumerWidget {
                 ),
                 const Gap(8),
                 Text(
-                  'Rp. ${user.nominalBalance}',
+                  'Rp. ${user.value?.nominalBalance}',
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 const Gap(4),

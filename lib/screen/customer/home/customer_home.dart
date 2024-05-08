@@ -8,6 +8,7 @@ import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/data/model/product_model.dart';
 import 'package:p3l_k3_mobile/data/model/user_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
+import 'package:p3l_k3_mobile/logic/customer_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
 import 'package:p3l_k3_mobile/screen/customer/home/settings_dialog.dart';
 import 'package:tinycolor2/tinycolor2.dart';
@@ -278,7 +279,7 @@ class Header extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final User user = generateEmptyUser();
+    final User user = ref.watch(customerLogicProvider).value!.user;
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
@@ -328,7 +329,8 @@ class Header extends ConsumerWidget {
                     child: CircleAvatar(
                       backgroundColor:
                           Theme.of(context).colorScheme.tertiaryContainer,
-                      // foregroundImage: NetworkImage(user.fullName),
+                      foregroundImage: NetworkImage(
+                          'https://api.dicebear.com/8.x/adventurer/png?seed=${user.fullName}'),
                       radius: 22,
                     ),
                   ),
@@ -336,7 +338,7 @@ class Header extends ConsumerWidget {
               ),
               const Gap(16),
               Text(
-                'Greetings, user!',
+                'Greetings, ${user.fullName}!',
                 textAlign: TextAlign.start,
                 style: Theme.of(context)
                     .textTheme

@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:p3l_k3_mobile/constants.dart';
 import 'package:p3l_k3_mobile/data/model/customer_model.dart';
-import 'package:p3l_k3_mobile/data/model/user_model.dart';
+import 'package:p3l_k3_mobile/logic/customer_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
 
 class SettingsDialog extends StatelessWidget {
@@ -42,30 +43,26 @@ class SettingsDialog extends StatelessWidget {
   }
 }
 
-class DialogContent extends StatelessWidget {
+class DialogContent extends ConsumerWidget {
   const DialogContent({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    final Customer user = Customer(
-      id: 0,
-      user: generateEmptyUser(),
-      nominalBalance: 0,
-      point: 0,
-      userId: 0,
-    );
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Profile(user: user),
-        const Gap(4),
-        const SettingsContent(),
-        const Gap(8),
-        const About(),
-      ],
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<Customer> user = ref.watch(customerLogicProvider);
+    return user.isLoading
+        ? const CircularProgressIndicator()
+        : Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Profile(user: user.value!),
+              const Gap(4),
+              const SettingsContent(),
+              const Gap(8),
+              const About(),
+            ],
+          );
   }
 }
 
@@ -157,7 +154,9 @@ class Profile extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor:
                     Theme.of(context).colorScheme.tertiaryContainer,
-                // foregroundImage: NetworkImage(user.profilePictURL),
+                foregroundImage: NetworkImage(
+                  'https://api.dicebear.com/8.x/adventurer/png?seed=${user.user.fullName}',
+                ),
               ),
             ),
             const Gap(16),
