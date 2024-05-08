@@ -100,7 +100,9 @@ class SettingsContent extends StatelessWidget {
               ),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                context.router.push(const OrderHistoryRoute());
+              },
               title: Text(
                 'Order History',
                 style: Theme.of(context).textTheme.bodyMedium,

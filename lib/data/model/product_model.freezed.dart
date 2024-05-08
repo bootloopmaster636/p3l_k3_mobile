@@ -22,7 +22,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
 mixin _$Product {
   int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'consignor_id')
-  int get consignorId => throw _privateConstructorUsedError;
+  int? get consignorId => throw _privateConstructorUsedError;
   @JsonKey(name: 'category_id')
   int get categoryId => throw _privateConstructorUsedError;
   @JsonKey(name: 'product_name')
@@ -37,7 +37,7 @@ mixin _$Product {
   String get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'product_picture')
   String get picture => throw _privateConstructorUsedError;
-  bool get active => throw _privateConstructorUsedError;
+  int get active => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $ProductCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      @JsonKey(name: 'consignor_id') int consignorId,
+      @JsonKey(name: 'consignor_id') int? consignorId,
       @JsonKey(name: 'category_id') int categoryId,
       @JsonKey(name: 'product_name') String name,
       @JsonKey(name: 'ready_stock') int readyStock,
@@ -60,7 +60,7 @@ abstract class $ProductCopyWith<$Res> {
       @JsonKey(name: 'product_price') int price,
       @JsonKey(name: 'product_status') String status,
       @JsonKey(name: 'product_picture') String picture,
-      bool active,
+      int active,
       String description});
 }
 
@@ -78,7 +78,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
   @override
   $Res call({
     Object? id = null,
-    Object? consignorId = null,
+    Object? consignorId = freezed,
     Object? categoryId = null,
     Object? name = null,
     Object? readyStock = null,
@@ -94,10 +94,10 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      consignorId: null == consignorId
+      consignorId: freezed == consignorId
           ? _value.consignorId
           : consignorId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       categoryId: null == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -129,7 +129,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
       active: null == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -147,7 +147,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      @JsonKey(name: 'consignor_id') int consignorId,
+      @JsonKey(name: 'consignor_id') int? consignorId,
       @JsonKey(name: 'category_id') int categoryId,
       @JsonKey(name: 'product_name') String name,
       @JsonKey(name: 'ready_stock') int readyStock,
@@ -155,7 +155,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       @JsonKey(name: 'product_price') int price,
       @JsonKey(name: 'product_status') String status,
       @JsonKey(name: 'product_picture') String picture,
-      bool active,
+      int active,
       String description});
 }
 
@@ -171,7 +171,7 @@ class __$$ProductImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? consignorId = null,
+    Object? consignorId = freezed,
     Object? categoryId = null,
     Object? name = null,
     Object? readyStock = null,
@@ -187,10 +187,10 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      consignorId: null == consignorId
+      consignorId: freezed == consignorId
           ? _value.consignorId
           : consignorId // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       categoryId: null == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -222,7 +222,7 @@ class __$$ProductImplCopyWithImpl<$Res>
       active: null == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       description: null == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -254,7 +254,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
   final int id;
   @override
   @JsonKey(name: 'consignor_id')
-  final int consignorId;
+  final int? consignorId;
   @override
   @JsonKey(name: 'category_id')
   final int categoryId;
@@ -277,7 +277,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
   @JsonKey(name: 'product_picture')
   final String picture;
   @override
-  final bool active;
+  final int active;
   @override
   final String description;
 
@@ -360,7 +360,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
 abstract class _Product implements Product {
   const factory _Product(
       {required final int id,
-      @JsonKey(name: 'consignor_id') required final int consignorId,
+      @JsonKey(name: 'consignor_id') required final int? consignorId,
       @JsonKey(name: 'category_id') required final int categoryId,
       @JsonKey(name: 'product_name') required final String name,
       @JsonKey(name: 'ready_stock') required final int readyStock,
@@ -368,7 +368,7 @@ abstract class _Product implements Product {
       @JsonKey(name: 'product_price') required final int price,
       @JsonKey(name: 'product_status') required final String status,
       @JsonKey(name: 'product_picture') required final String picture,
-      required final bool active,
+      required final int active,
       required final String description}) = _$ProductImpl;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
@@ -377,7 +377,7 @@ abstract class _Product implements Product {
   int get id;
   @override
   @JsonKey(name: 'consignor_id')
-  int get consignorId;
+  int? get consignorId;
   @override
   @JsonKey(name: 'category_id')
   int get categoryId;
@@ -400,7 +400,7 @@ abstract class _Product implements Product {
   @JsonKey(name: 'product_picture')
   String get picture;
   @override
-  bool get active;
+  int get active;
   @override
   String get description;
   @override

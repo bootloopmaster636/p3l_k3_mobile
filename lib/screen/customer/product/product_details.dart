@@ -27,7 +27,7 @@ class ProductDetailScreen extends HookWidget {
       readyStock: 10,
       picture: '',
       status: 'ready',
-      active: true,
+      active: 1,
       categoryId: 1,
       consignorId: 1,
     );

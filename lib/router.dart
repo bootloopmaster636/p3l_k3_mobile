@@ -9,6 +9,7 @@ import 'package:p3l_k3_mobile/screen/customer/product/product_details.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/edit_address.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/edit_password.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/edit_profile.dart';
+import 'package:p3l_k3_mobile/screen/customer/settings/order_history.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/profile.dart';
 import 'package:p3l_k3_mobile/screen/employee/mo/absence_list.dart';
 import 'package:p3l_k3_mobile/screen/employee/mo_home.dart';
@@ -78,6 +79,10 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: ForgotPasswordRoute.page,
           path: '/forgotPassword',
+        ),
+        AutoRoute(
+          page: OrderHistoryRoute.page,
+          path: '/orderHistory',
         ),
       ];
 
