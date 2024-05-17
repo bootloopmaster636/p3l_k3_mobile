@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:p3l_k3_mobile/logic/auth_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 import 'package:toastification/toastification.dart';
@@ -19,14 +20,28 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ToastificationWrapper(
-      child: MaterialApp.router(
-        theme: ThemeData(
-          colorSchemeSeed: TinyColor.fromString('F96F22').toColor(),
-          fontFamily: GoogleFonts.poppins().fontFamily,
+    return Init(
+      child: ToastificationWrapper(
+        child: MaterialApp.router(
+          theme: ThemeData(
+            colorSchemeSeed: TinyColor.fromString('F96F22').toColor(),
+            fontFamily: GoogleFonts.poppins().fontFamily,
+          ),
+          routerConfig: _appRouter.config(),
         ),
-        routerConfig: _appRouter.config(),
       ),
     );
+  }
+}
+
+class Init extends ConsumerWidget {
+  const Init({required this.child, super.key});
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Eager initialization of provider -> https://riverpod.dev/docs/essentials/eager_initialization
+    ref.watch(authLogicProvider);
+    return child;
   }
 }

@@ -284,9 +284,7 @@ class Header extends ConsumerWidget {
       alignment: Alignment.center,
       children: <Widget>[
         Image.asset(
-          Theme.of(context).brightness == Brightness.light
-              ? 'assets/pictures/cakes-light.png'
-              : 'assets/pictures/cakes-dark.png',
+          'assets/pictures/cakes-light.png',
           fit: BoxFit.cover,
           height: double.infinity,
         ),
