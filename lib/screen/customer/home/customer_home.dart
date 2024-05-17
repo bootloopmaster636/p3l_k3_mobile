@@ -5,12 +5,14 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:p3l_k3_mobile/data/model/customer_model.dart';
 import 'package:p3l_k3_mobile/data/model/product_model.dart';
 import 'package:p3l_k3_mobile/data/model/user_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 import 'package:p3l_k3_mobile/logic/customer_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
 import 'package:p3l_k3_mobile/screen/customer/home/settings_dialog.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
 @RoutePage()
@@ -53,8 +55,7 @@ class CustomerHomeScreen extends HookWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.only(
-                  top: 10, left: 16, right: 16, bottom: 6),
+              padding: const EdgeInsets.only(top: 10, left: 16, right: 16, bottom: 6),
               child: Row(
                 children: <Widget>[
                   Text(
@@ -168,21 +169,11 @@ class ProductCard extends HookWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: TinyColor.fromColor(Colors.orange)
-              .desaturate(40)
-              .lighten(46)
-              .toColor(),
-          border: Border.all(
-              color: Colors.black12,
-              width: 1,
-              strokeAlign: BorderSide.strokeAlignCenter),
+          color: TinyColor.fromColor(Colors.orange).desaturate(40).lighten(46).toColor(),
+          border: Border.all(color: Colors.black12, width: 1, strokeAlign: BorderSide.strokeAlignCenter),
           borderRadius: BorderRadius.circular(12),
           boxShadow: const <BoxShadow>[
-            BoxShadow(
-                blurRadius: 4,
-                spreadRadius: 1,
-                color: Colors.black12,
-                offset: Offset(0, 2)),
+            BoxShadow(blurRadius: 4, spreadRadius: 1, color: Colors.black12, offset: Offset(0, 2)),
           ],
         ),
         clipBehavior: Clip.antiAlias,
@@ -216,10 +207,7 @@ class ProductCard extends HookWidget {
                   children: <Widget>[
                     Text(
                       product.name,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     Text(
                       'Rp. ${product.price}',
@@ -242,8 +230,7 @@ class ProductCard extends HookWidget {
                       child: OutlinedButton(
                           onPressed: () {},
                           style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4))),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -279,83 +266,84 @@ class Header extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final User user = ref.watch(customerLogicProvider).value!.user;
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        Image.asset(
-          'assets/pictures/cakes-light.png',
-          fit: BoxFit.cover,
-          height: double.infinity,
-        ),
-        Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: <Color>[
-                Colors.yellow.withOpacity(0.2),
-                Colors.orange.withOpacity(0.2),
-                Colors.deepOrange.withOpacity(0.2),
+    final AsyncValue<Customer> user = ref.watch(customerLogicProvider);
+
+    return Skeletonizer(
+      enabled: user.isLoading,
+      ignoreContainers: true,
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Image.asset(
+            'assets/pictures/cakes-light.png',
+            fit: BoxFit.cover,
+            height: double.infinity,
+          ),
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[
+                  Colors.yellow.withOpacity(0.2),
+                  Colors.orange.withOpacity(0.2),
+                  Colors.deepOrange.withOpacity(0.2),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20).copyWith(top: 48),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    const LogoAtmaKitchen(
+                      height: 48,
+                    ),
+                    const Spacer(),
+                    InkWell(
+                      onTap: () {
+                        showDialog<Widget>(
+                          context: context,
+                          barrierColor: Colors.black26,
+                          builder: (BuildContext context) {
+                            return const SettingsDialog();
+                          },
+                        );
+                      },
+                      child: CircleAvatar(
+                        backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                        foregroundImage: NetworkImage(
+                            'https://api.dicebear.com/8.x/adventurer/png?seed=${user.value?.user.fullName}'),
+                        radius: 22,
+                      ),
+                    ),
+                  ],
+                ),
+                const Gap(16),
+                Text(
+                  'Greetings, ${user.value?.user.fullName}!',
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'What sweet thing did you want to eat today?',
+                  textAlign: TextAlign.start,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const Gap(16),
+                const Expanded(
+                  child: Announcements(),
+                ),
               ],
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(20).copyWith(top: 48),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  const LogoAtmaKitchen(
-                    height: 48,
-                  ),
-                  const Spacer(),
-                  InkWell(
-                    onTap: () {
-                      showDialog<Widget>(
-                        context: context,
-                        barrierColor: Colors.black26,
-                        builder: (BuildContext context) {
-                          return const SettingsDialog();
-                        },
-                      );
-                    },
-                    child: CircleAvatar(
-                      backgroundColor:
-                          Theme.of(context).colorScheme.tertiaryContainer,
-                      foregroundImage: NetworkImage(
-                          'https://api.dicebear.com/8.x/adventurer/png?seed=${user.fullName}'),
-                      radius: 22,
-                    ),
-                  ),
-                ],
-              ),
-              const Gap(16),
-              Text(
-                'Greetings, ${user.fullName}!',
-                textAlign: TextAlign.start,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                'What sweet thing did you want to eat today?',
-                textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              const Gap(16),
-              const Expanded(
-                child: Announcements(),
-              ),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
