@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:p3l_k3_mobile/logic/auth_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
 import 'package:tinycolor2/tinycolor2.dart';
@@ -10,6 +11,11 @@ import 'package:toastification/toastification.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  OneSignal.initialize('2fe3a6db-c004-424c-9b92-099391f7f88b');
+
+  OneSignal.Notifications.requestPermission(true);
+
   runApp(ProviderScope(child: MainApp()));
 }
 
