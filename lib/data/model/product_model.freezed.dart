@@ -39,6 +39,8 @@ mixin _$Product {
   String get picture => throw _privateConstructorUsedError;
   int get active => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  @JsonKey(name: 'categories')
+  ProductCategory get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -61,7 +63,10 @@ abstract class $ProductCopyWith<$Res> {
       @JsonKey(name: 'product_status') String status,
       @JsonKey(name: 'product_picture') String picture,
       int active,
-      String description});
+      String description,
+      @JsonKey(name: 'categories') ProductCategory category});
+
+  $ProductCategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -88,6 +93,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? picture = null,
     Object? active = null,
     Object? description = null,
+    Object? category = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -134,7 +140,19 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as ProductCategory,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProductCategoryCopyWith<$Res> get category {
+    return $ProductCategoryCopyWith<$Res>(_value.category, (value) {
+      return _then(_value.copyWith(category: value) as $Val);
+    });
   }
 }
 
@@ -156,7 +174,11 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       @JsonKey(name: 'product_status') String status,
       @JsonKey(name: 'product_picture') String picture,
       int active,
-      String description});
+      String description,
+      @JsonKey(name: 'categories') ProductCategory category});
+
+  @override
+  $ProductCategoryCopyWith<$Res> get category;
 }
 
 /// @nodoc
@@ -181,6 +203,7 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? picture = null,
     Object? active = null,
     Object? description = null,
+    Object? category = null,
   }) {
     return _then(_$ProductImpl(
       id: null == id
@@ -227,6 +250,10 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as ProductCategory,
     ));
   }
 }
@@ -245,7 +272,8 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
       @JsonKey(name: 'product_status') required this.status,
       @JsonKey(name: 'product_picture') required this.picture,
       required this.active,
-      required this.description});
+      required this.description,
+      @JsonKey(name: 'categories') required this.category});
 
   factory _$ProductImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProductImplFromJson(json);
@@ -280,10 +308,13 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
   final int active;
   @override
   final String description;
+  @override
+  @JsonKey(name: 'categories')
+  final ProductCategory category;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Product(id: $id, consignorId: $consignorId, categoryId: $categoryId, name: $name, readyStock: $readyStock, dailyStock: $dailyStock, price: $price, status: $status, picture: $picture, active: $active, description: $description)';
+    return 'Product(id: $id, consignorId: $consignorId, categoryId: $categoryId, name: $name, readyStock: $readyStock, dailyStock: $dailyStock, price: $price, status: $status, picture: $picture, active: $active, description: $description, category: $category)';
   }
 
   @override
@@ -301,7 +332,8 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
       ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('picture', picture))
       ..add(DiagnosticsProperty('active', active))
-      ..add(DiagnosticsProperty('description', description));
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('category', category));
   }
 
   @override
@@ -324,7 +356,9 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
             (identical(other.picture, picture) || other.picture == picture) &&
             (identical(other.active, active) || other.active == active) &&
             (identical(other.description, description) ||
-                other.description == description));
+                other.description == description) &&
+            (identical(other.category, category) ||
+                other.category == category));
   }
 
   @JsonKey(ignore: true)
@@ -341,7 +375,8 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
       status,
       picture,
       active,
-      description);
+      description,
+      category);
 
   @JsonKey(ignore: true)
   @override
@@ -369,7 +404,9 @@ abstract class _Product implements Product {
       @JsonKey(name: 'product_status') required final String status,
       @JsonKey(name: 'product_picture') required final String picture,
       required final int active,
-      required final String description}) = _$ProductImpl;
+      required final String description,
+      @JsonKey(name: 'categories')
+      required final ProductCategory category}) = _$ProductImpl;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
 
@@ -403,6 +440,9 @@ abstract class _Product implements Product {
   int get active;
   @override
   String get description;
+  @override
+  @JsonKey(name: 'categories')
+  ProductCategory get category;
   @override
   @JsonKey(ignore: true)
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>

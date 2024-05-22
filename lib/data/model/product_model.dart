@@ -1,7 +1,6 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:p3l_k3_mobile/data/model/user_model.dart';
+import 'package:p3l_k3_mobile/data/model/category_model.dart';
 
 part 'product_model.freezed.dart';
 part 'product_model.g.dart';
@@ -20,8 +19,29 @@ class Product with _$Product {
     @JsonKey(name: 'product_picture') required String picture,
     required int active,
     required String description,
+    @JsonKey(name: 'categories') required ProductCategory category,
   }) = _Product;
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);
+}
+
+Product getNullProduct() {
+  return const Product(
+    id: 0,
+    consignorId: 0,
+    categoryId: 0,
+    name: '',
+    readyStock: 0,
+    dailyStock: 0,
+    price: 0,
+    status: '',
+    picture: '',
+    active: 0,
+    description: '',
+    category: ProductCategory(
+      id: 0,
+      name: '',
+    ),
+  );
 }

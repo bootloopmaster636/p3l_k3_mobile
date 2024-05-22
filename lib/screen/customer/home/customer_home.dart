@@ -1,28 +1,31 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:p3l_k3_mobile/constants.dart';
 import 'package:p3l_k3_mobile/data/model/customer_model.dart';
 import 'package:p3l_k3_mobile/data/model/product_model.dart';
-import 'package:p3l_k3_mobile/data/model/user_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 import 'package:p3l_k3_mobile/logic/customer_logic.dart';
+import 'package:p3l_k3_mobile/logic/product_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
 import 'package:p3l_k3_mobile/screen/customer/home/settings_dialog.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
 @RoutePage()
-class CustomerHomeScreen extends HookWidget {
+class CustomerHomeScreen extends HookConsumerWidget {
   const CustomerHomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final ScrollController scrollCtl = useScrollController();
-    final List<Product> products = [];
+    final AsyncValue<List<Product>> products = ref.watch(productLogicProvider);
 
     return Scaffold(
       floatingActionButton: ListenableBuilder(
@@ -43,62 +46,61 @@ class CustomerHomeScreen extends HookWidget {
           child: const Icon(Icons.keyboard_arrow_up_outlined),
         ),
       ),
-      body: CustomScrollView(
-        controller: scrollCtl,
-        physics: const BouncingScrollPhysics(),
-        slivers: <Widget>[
-          const SliverAppBar(
-            expandedHeight: 380,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Header(),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10, left: 16, right: 16, bottom: 6),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    'Our Products',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  const Spacer(),
-                  const FilterButton(),
-                ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await ref.read(productLogicProvider.notifier).refresh();
+        },
+        triggerMode: RefreshIndicatorTriggerMode.anywhere,
+        edgeOffset: 440,
+        child: CustomScrollView(
+          controller: scrollCtl,
+          physics: const BouncingScrollPhysics(),
+          slivers: <Widget>[
+            const SliverAppBar(
+              expandedHeight: 380,
+              flexibleSpace: FlexibleSpaceBar(
+                background: Header(),
               ),
             ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.all(8).copyWith(top: 0),
-            sliver: SliverGrid(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                childAspectRatio: 0.7,
-              ),
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return ProductCard(
-                    product: products[index],
-                  )
-                      .animate(
-                        adapter: ScrollAdapter(
-                          scrollCtl,
-                          begin: 360,
-                          end: 0,
-                        ),
-                      )
-                      .scale(begin: const Offset(0.96, 0.96));
-                },
-                childCount: products.length,
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10, left: 16, right: 16, bottom: 6),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      'Our Products',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    const Spacer(),
+                    const FilterButton(),
+                  ],
+                ),
               ),
             ),
-          ),
-          const SliverGap(32),
-        ],
+            SliverPadding(
+              padding: const EdgeInsets.all(8).copyWith(top: 0),
+              sliver: SliverGrid(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
+                  childAspectRatio: 0.7,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return ProductCard(
+                      product: products.value?[index] ?? getNullProduct(),
+                    );
+                  },
+                  childCount: products.value?.length ?? 0,
+                ),
+              ),
+            ),
+            const SliverGap(32),
+          ],
+        ),
       ),
     );
   }
@@ -193,8 +195,10 @@ class ProductCard extends HookWidget {
                 height: 150,
                 width: double.infinity,
                 clipBehavior: Clip.antiAlias,
-                child: Image.network(
-                  product.picture,
+                child: CachedNetworkImage(
+                  imageUrl: '$storageUrl/product/${product.picture}',
+                  progressIndicatorBuilder: (BuildContext context, String url, DownloadProgress downloadProgress) =>
+                      Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
                   fit: BoxFit.cover,
                 ),
               ),

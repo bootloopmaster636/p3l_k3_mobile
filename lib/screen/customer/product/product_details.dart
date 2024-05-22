@@ -1,14 +1,17 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:p3l_k3_mobile/constants.dart';
 import 'package:p3l_k3_mobile/data/model/product_model.dart';
+import 'package:p3l_k3_mobile/logic/product_logic.dart';
 import 'package:zoom_pinch_overlay/zoom_pinch_overlay.dart';
 
 @RoutePage()
-class ProductDetailScreen extends HookWidget {
+class ProductDetailScreen extends HookConsumerWidget {
   const ProductDetailScreen({
     required this.productID,
     super.key,
@@ -16,20 +19,12 @@ class ProductDetailScreen extends HookWidget {
   final int productID;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final ScrollController scrollCtl = useScrollController();
-    const Product product = Product(
-      id: 0,
-      name: 'Product name',
-      description: 'Product description',
-      price: 0,
-      dailyStock: 0,
-      readyStock: 10,
-      picture: '',
-      status: 'ready',
-      active: 1,
-      categoryId: 1,
-      consignorId: 1,
+    final AsyncValue<List<Product>> productList = ref.watch(productLogicProvider);
+    final Product product = productList.maybeWhen(
+      data: (List<Product> data) => getProductById(productID, data),
+      orElse: getNullProduct,
     );
 
     return Scaffold(
@@ -42,8 +37,10 @@ class ProductDetailScreen extends HookWidget {
             stretch: true,
             flexibleSpace: FlexibleSpaceBar(
               background: ZoomOverlay(
-                child: Image.network(
-                  product.picture,
+                child: CachedNetworkImage(
+                  imageUrl: '$storageUrl/product/${product.picture}',
+                  progressIndicatorBuilder: (BuildContext context, String url, DownloadProgress downloadProgress) =>
+                      Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
                   fit: BoxFit.cover,
                 )
                     .animate()
@@ -131,6 +128,8 @@ class ProductInfo extends StatelessWidget {
             ProductAdditionalInfo(product: product)
                 .animate()
                 .fadeIn(delay: 1000.ms),
+            const Gap(8),
+            const SizedBox(height: 128),
           ],
         ),
       ),
