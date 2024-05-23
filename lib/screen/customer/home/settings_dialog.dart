@@ -7,8 +7,10 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:p3l_k3_mobile/constants.dart';
 import 'package:p3l_k3_mobile/data/model/customer_model.dart';
+import 'package:p3l_k3_mobile/logic/auth_logic.dart';
 import 'package:p3l_k3_mobile/logic/customer_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
+import 'package:toastification/toastification.dart';
 
 class SettingsDialog extends StatelessWidget {
   const SettingsDialog({super.key});
@@ -61,11 +63,11 @@ class DialogContent extends ConsumerWidget {
   }
 }
 
-class SettingsContent extends StatelessWidget {
+class SettingsContent extends ConsumerWidget {
   const SettingsContent({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       child: Padding(
@@ -108,7 +110,24 @@ class SettingsContent extends StatelessWidget {
               ),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                ref.read(authLogicProvider.notifier).logout();
+                toastification.show(
+                  context: context,
+                  type: ToastificationType.success,
+                  style: ToastificationStyle.flat,
+                  title: const Text('Logout success'),
+                  description: const Text(
+                    'You have been logged out.',
+                  ),
+                  alignment: Alignment.bottomCenter,
+                  autoCloseDuration: const Duration(seconds: 5),
+                  icon: const Icon(Icons.info_outline),
+                  boxShadow: lowModeShadow,
+                  dragToClose: true,
+                );
+              },
               title: Text(
                 'Log out',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.error),
