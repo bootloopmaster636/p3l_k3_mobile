@@ -87,7 +87,10 @@ class HampersInfo extends ConsumerWidget {
                 ),
             Text(
               hampers.name,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium
+                  ?.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
             ).animate().fadeIn(delay: 500.ms, duration: 300.ms).slideY(
                   begin: 2,
                   duration: 600.ms,

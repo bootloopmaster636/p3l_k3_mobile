@@ -103,7 +103,10 @@ class ProductInfo extends StatelessWidget {
                 ),
             Text(
               product.name,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium
+                  ?.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
             ).animate().fadeIn(delay: 400.ms, duration: 300.ms).slideY(
                   begin: 2,
                   duration: 600.ms,
