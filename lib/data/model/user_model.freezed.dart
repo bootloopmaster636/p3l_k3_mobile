@@ -27,8 +27,8 @@ mixin _$User {
   String get email =>
       throw _privateConstructorUsedError; // @Default('') String? password,
   String get phoneNumber => throw _privateConstructorUsedError;
-  String get gender => throw _privateConstructorUsedError;
-  DateTime get dateOfBirth => throw _privateConstructorUsedError;
+  String? get gender => throw _privateConstructorUsedError;
+  DateTime? get dateOfBirth => throw _privateConstructorUsedError;
   int get active => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,8 +47,8 @@ abstract class $UserCopyWith<$Res> {
       String fullName,
       String email,
       String phoneNumber,
-      String gender,
-      DateTime dateOfBirth,
+      String? gender,
+      DateTime? dateOfBirth,
       int active});
 }
 
@@ -70,8 +70,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? fullName = null,
     Object? email = null,
     Object? phoneNumber = null,
-    Object? gender = null,
-    Object? dateOfBirth = null,
+    Object? gender = freezed,
+    Object? dateOfBirth = freezed,
     Object? active = null,
   }) {
     return _then(_value.copyWith(
@@ -95,14 +95,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      gender: null == gender
+      gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String,
-      dateOfBirth: null == dateOfBirth
+              as String?,
+      dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       active: null == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
@@ -124,8 +124,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String fullName,
       String email,
       String phoneNumber,
-      String gender,
-      DateTime dateOfBirth,
+      String? gender,
+      DateTime? dateOfBirth,
       int active});
 }
 
@@ -144,8 +144,8 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? fullName = null,
     Object? email = null,
     Object? phoneNumber = null,
-    Object? gender = null,
-    Object? dateOfBirth = null,
+    Object? gender = freezed,
+    Object? dateOfBirth = freezed,
     Object? active = null,
   }) {
     return _then(_$UserImpl(
@@ -169,14 +169,14 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      gender: null == gender
+      gender: freezed == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String,
-      dateOfBirth: null == dateOfBirth
+              as String?,
+      dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       active: null == active
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
@@ -214,9 +214,9 @@ class _$UserImpl with DiagnosticableTreeMixin implements _User {
   @override
   final String phoneNumber;
   @override
-  final String gender;
+  final String? gender;
   @override
-  final DateTime dateOfBirth;
+  final DateTime? dateOfBirth;
   @override
   final int active;
 
@@ -284,8 +284,8 @@ abstract class _User implements User {
       required final String fullName,
       required final String email,
       required final String phoneNumber,
-      required final String gender,
-      required final DateTime dateOfBirth,
+      required final String? gender,
+      required final DateTime? dateOfBirth,
       required final int active}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
@@ -302,9 +302,9 @@ abstract class _User implements User {
   @override // @Default('') String? password,
   String get phoneNumber;
   @override
-  String get gender;
+  String? get gender;
   @override
-  DateTime get dateOfBirth;
+  DateTime? get dateOfBirth;
   @override
   int get active;
   @override

@@ -13,8 +13,8 @@ class User with _$User {
     required String email,
     // @Default('') String? password,
     required String phoneNumber,
-    required String gender,
-    required DateTime dateOfBirth,
+    required String? gender,
+    required DateTime? dateOfBirth,
     required int active,
   }) = _User;
 

@@ -12,19 +12,30 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       fullName: json['fullName'] as String,
       email: json['email'] as String,
       phoneNumber: json['phoneNumber'] as String,
-      gender: json['gender'] as String,
-      dateOfBirth: DateTime.parse(json['dateOfBirth'] as String),
+      gender: json['gender'] as String?,
+      dateOfBirth: json['dateOfBirth'] == null
+          ? null
+          : DateTime.parse(json['dateOfBirth'] as String),
       active: json['active'] as int,
     );
 
-Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'role_id': instance.roleId,
-      'fullName': instance.fullName,
-      'email': instance.email,
-      'phoneNumber': instance.phoneNumber,
-      'gender': instance.gender,
-      'dateOfBirth': instance.dateOfBirth.toIso8601String(),
-      'active': instance.active,
-    };
+Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'role_id': instance.roleId,
+    'fullName': instance.fullName,
+    'email': instance.email,
+    'phoneNumber': instance.phoneNumber,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('gender', instance.gender);
+  writeNotNull('dateOfBirth', instance.dateOfBirth?.toIso8601String());
+  val['active'] = instance.active;
+  return val;
+}
