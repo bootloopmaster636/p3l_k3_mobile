@@ -15,7 +15,6 @@ Future<List<Hampers>> fetchAllHampers(String token) async {
         },
       ),
     );
-    Logger().d('check');
     final List<dynamic> allHampersRaw = (response.data['data']['hampers'] as List<dynamic>);
     final List<Hampers> allHampers =
         allHampersRaw.map((dynamic e) => Hampers.fromJson(e as Map<String, dynamic>)).toList();

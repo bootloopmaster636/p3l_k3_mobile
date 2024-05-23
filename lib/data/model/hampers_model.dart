@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:p3l_k3_mobile/data/model/hampers_detail_model.dart';
 
@@ -18,4 +17,16 @@ class Hampers with _$Hampers {
   }) = _Hampers;
 
   factory Hampers.fromJson(Map<String, dynamic> json) => _$HampersFromJson(json);
+}
+
+Hampers makeNullHampers() {
+  return const Hampers(
+    id: 0,
+    name: '',
+    price: 0,
+    quantity: 0,
+    picture: '',
+    active: 0,
+    hampersDetail: [],
+  );
 }

@@ -13,7 +13,7 @@ class HampersDetail with _$HampersDetail {
     @JsonKey(name: 'product_id') required int? productId,
     @JsonKey(name: 'ingredient_id') @Default(0) int ingredientId,
     required Product? product,
-    required Ingredient? ingredient,
+    required Ingredient? ingredients,
   }) = _HampersDetail;
 
   factory HampersDetail.fromJson(Map<String, dynamic> json) => _$HampersDetailFromJson(json);

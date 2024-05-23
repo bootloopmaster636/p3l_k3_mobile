@@ -22,3 +22,7 @@ class HampersLogic extends _$HampersLogic {
     state = AsyncValue.data(hampers);
   }
 }
+
+Hampers getHampersById(List<Hampers> hampers, int id) {
+  return hampers.firstWhere((Hampers hampers) => hampers.id == id);
+}

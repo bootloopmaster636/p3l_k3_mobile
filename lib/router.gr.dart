@@ -57,6 +57,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ForgotPasswordScreen(),
       );
     },
+    HampersDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<HampersDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: HampersDetailScreen(
+          hampersID: args.hampersID,
+          key: args.key,
+        ),
+      );
+    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -196,6 +206,44 @@ class ForgotPasswordRoute extends PageRouteInfo<void> {
   static const String name = 'ForgotPasswordRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [HampersDetailScreen]
+class HampersDetailRoute extends PageRouteInfo<HampersDetailRouteArgs> {
+  HampersDetailRoute({
+    required int hampersID,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          HampersDetailRoute.name,
+          args: HampersDetailRouteArgs(
+            hampersID: hampersID,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'HampersDetailRoute';
+
+  static const PageInfo<HampersDetailRouteArgs> page =
+      PageInfo<HampersDetailRouteArgs>(name);
+}
+
+class HampersDetailRouteArgs {
+  const HampersDetailRouteArgs({
+    required this.hampersID,
+    this.key,
+  });
+
+  final int hampersID;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'HampersDetailRouteArgs{hampersID: $hampersID, key: $key}';
+  }
 }
 
 /// generated route for

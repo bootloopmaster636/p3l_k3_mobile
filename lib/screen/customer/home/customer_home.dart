@@ -70,15 +70,22 @@ class CustomerHomeScreen extends HookConsumerWidget {
               ),
             ),
             SliverToBoxAdapter(
-              child: SizedBox(
-                width: 200,
-                height: 300,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: hampers.value?.length ?? 0,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Placeholder();
-                  },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: SizedBox(
+                  height: 120,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: hampers.value?.length ?? 0,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: HampersCard(
+                          hampers: hampers.value?[index] ?? makeNullHampers(),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
@@ -158,7 +165,7 @@ class ScrollToTopButton extends StatelessWidget {
         onPressed: () {
           scrollCtl.animateTo(
             scrollCtl.position.minScrollExtent,
-            duration: const Duration(milliseconds: 800),
+            duration: const Duration(seconds: 1),
             curve: Curves.easeOutQuint,
           );
         },
@@ -332,11 +339,55 @@ class ProductCard extends HookWidget {
 }
 
 class HampersCard extends StatelessWidget {
-  const HampersCard({super.key});
+  const HampersCard({required this.hampers, super.key});
+
+  final Hampers hampers;
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return GestureDetector(
+      onTap: () {
+        context.router.push(HampersDetailRoute(hampersID: hampers.id));
+      },
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: CachedNetworkImage(
+                  imageUrl: '$storageUrl/hampers/${hampers.picture}',
+                  progressIndicatorBuilder: (BuildContext context, String url, DownloadProgress downloadProgress) =>
+                      Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
+                  fit: BoxFit.cover,
+                  memCacheHeight: 300,
+                  memCacheWidth: 300,
+                ),
+              ),
+              const Gap(16),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    hampers.name,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Rp. ${hampers.price}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 

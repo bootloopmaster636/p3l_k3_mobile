@@ -5,6 +5,7 @@ import 'package:p3l_k3_mobile/screen/auth/forgot_password.dart';
 import 'package:p3l_k3_mobile/screen/auth/screen_login.dart';
 import 'package:p3l_k3_mobile/screen/auth/screen_register.dart';
 import 'package:p3l_k3_mobile/screen/customer/home/customer_home.dart';
+import 'package:p3l_k3_mobile/screen/customer/product/hampers_details.dart';
 import 'package:p3l_k3_mobile/screen/customer/product/product_details.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/edit_address.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/edit_password.dart';
@@ -43,6 +44,12 @@ class AppRouter extends _$AppRouter {
           transitionsBuilder: TransitionsBuilders.fadeIn,
           durationInMilliseconds: 300,
           path: '/product',
+        ),
+        CustomRoute(
+          page: HampersDetailRoute.page,
+          transitionsBuilder: TransitionsBuilders.fadeIn,
+          durationInMilliseconds: 300,
+          path: '/hampers',
         ),
         CustomRoute(
           page: ProfileRoute.page,
@@ -86,8 +93,12 @@ class AppRouter extends _$AppRouter {
         ),
       ];
 
-  Widget _slideLeftWithEase(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child,) {
+  Widget _slideLeftWithEase(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
     return SlideTransition(
       position: Tween<Offset>(
         begin: const Offset(1, 0),

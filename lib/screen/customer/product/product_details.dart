@@ -16,6 +16,7 @@ class ProductDetailScreen extends HookConsumerWidget {
     required this.productID,
     super.key,
   });
+
   final int productID;
 
   @override
@@ -66,13 +67,13 @@ class ProductDetailScreen extends HookConsumerWidget {
           ProductInfo(product: product),
         ],
       ),
-      bottomSheet: AddToCartButton(
-        product: product,
-      ).animate().fadeIn(delay: 1000.ms).slideY(
-            begin: 2,
-            duration: 500.ms,
-            curve: Curves.easeOutExpo,
-          ),
+      // bottomSheet: AddToCartButton(
+      //   product: product,
+      // ).animate().fadeIn(delay: 1000.ms).slideY(
+      //       begin: 2,
+      //       duration: 500.ms,
+      //       curve: Curves.easeOutExpo,
+      //     ),
     );
   }
 }
@@ -93,12 +94,16 @@ class ProductInfo extends StatelessWidget {
         delegate: SliverChildListDelegate(
           <Widget>[
             Text(
+              product.category?.name ?? 'Other',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            ).animate().fadeIn(delay: 400.ms, duration: 300.ms).slideY(
+                  begin: 2,
+                  duration: 600.ms,
+                  curve: Curves.easeOutExpo,
+                ),
+            Text(
               product.name,
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
             ).animate().fadeIn(delay: 400.ms, duration: 300.ms).slideY(
                   begin: 2,
                   duration: 600.ms,
@@ -106,7 +111,6 @@ class ProductInfo extends StatelessWidget {
                 ),
             Text(
               'Rp. ${product.price}',
-              textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleLarge,
             ).animate().fadeIn(delay: 500.ms, duration: 300.ms).slideY(
                   begin: 2,
@@ -114,20 +118,16 @@ class ProductInfo extends StatelessWidget {
                   curve: Curves.easeOutExpo,
                 ),
             const Gap(8),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  product.description,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium,
+            Text(
+              product.description,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ).animate().fadeIn(delay: 600.ms, duration: 300.ms).slideY(
+                  begin: 2,
+                  duration: 600.ms,
+                  curve: Curves.easeOutExpo,
                 ),
-              ),
-            ).animate().fadeIn(delay: 800.ms),
-            const Gap(4),
-            ProductAdditionalInfo(product: product)
-                .animate()
-                .fadeIn(delay: 1000.ms),
+            const Gap(16),
+            ProductAdditionalInfo(product: product).animate().fadeIn(delay: 1000.ms),
             const Gap(8),
             const SizedBox(height: 128),
           ],
@@ -139,6 +139,7 @@ class ProductInfo extends StatelessWidget {
 
 class ProductAdditionalInfo extends StatelessWidget {
   const ProductAdditionalInfo({required this.product, super.key});
+
   final Product product;
 
   @override
@@ -166,10 +167,7 @@ class ProductAdditionalInfo extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             'Stock',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(fontWeight: FontWeight.bold),
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
                             '${product.readyStock} available',
@@ -183,10 +181,7 @@ class ProductAdditionalInfo extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Product category',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(fontWeight: FontWeight.bold),
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         Text(
                           'soon(tm)',
@@ -205,15 +200,10 @@ class ProductAdditionalInfo extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             'Availability',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(fontWeight: FontWeight.bold),
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            product.status == ProductStockType.onDemand
-                                ? 'Ready in store'
-                                : 'Should pre-order',
+                            product.status == ProductStockType.onDemand ? 'Ready in store' : 'Should pre-order',
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
@@ -236,6 +226,7 @@ class AddToCartButton extends StatelessWidget {
     required this.product,
     super.key,
   });
+
   final Product product;
 
   @override

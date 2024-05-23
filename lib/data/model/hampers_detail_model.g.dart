@@ -15,9 +15,9 @@ _$HampersDetailImpl _$$HampersDetailImplFromJson(Map<String, dynamic> json) =>
       product: json['product'] == null
           ? null
           : Product.fromJson(json['product'] as Map<String, dynamic>),
-      ingredient: json['ingredient'] == null
+      ingredients: json['ingredients'] == null
           ? null
-          : Ingredient.fromJson(json['ingredient'] as Map<String, dynamic>),
+          : Ingredient.fromJson(json['ingredients'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$HampersDetailImplToJson(_$HampersDetailImpl instance) {
@@ -35,6 +35,6 @@ Map<String, dynamic> _$$HampersDetailImplToJson(_$HampersDetailImpl instance) {
   writeNotNull('product_id', instance.productId);
   val['ingredient_id'] = instance.ingredientId;
   writeNotNull('product', instance.product?.toJson());
-  writeNotNull('ingredient', instance.ingredient?.toJson());
+  writeNotNull('ingredients', instance.ingredients?.toJson());
   return val;
 }

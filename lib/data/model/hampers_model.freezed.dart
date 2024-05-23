@@ -177,7 +177,7 @@ class __$$HampersImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$HampersImpl with DiagnosticableTreeMixin implements _Hampers {
+class _$HampersImpl implements _Hampers {
   const _$HampersImpl(
       {required this.id,
       @JsonKey(name: 'hampers_name') required this.name,
@@ -217,22 +217,8 @@ class _$HampersImpl with DiagnosticableTreeMixin implements _Hampers {
   }
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'Hampers(id: $id, name: $name, price: $price, quantity: $quantity, picture: $picture, active: $active, hampersDetail: $hampersDetail)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Hampers'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('price', price))
-      ..add(DiagnosticsProperty('quantity', quantity))
-      ..add(DiagnosticsProperty('picture', picture))
-      ..add(DiagnosticsProperty('active', active))
-      ..add(DiagnosticsProperty('hampersDetail', hampersDetail));
   }
 
   @override
