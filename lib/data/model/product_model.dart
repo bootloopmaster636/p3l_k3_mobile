@@ -19,11 +19,10 @@ class Product with _$Product {
     @JsonKey(name: 'product_picture') required String picture,
     required int active,
     required String description,
-    @JsonKey(name: 'categories') required ProductCategory category,
+    @JsonKey(name: 'categories') required ProductCategory? category,
   }) = _Product;
 
-  factory Product.fromJson(Map<String, dynamic> json) =>
-      _$ProductFromJson(json);
+  factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);
 }
 
 Product getNullProduct() {

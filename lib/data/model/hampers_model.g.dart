@@ -12,7 +12,7 @@ _$HampersImpl _$$HampersImplFromJson(Map<String, dynamic> json) =>
       name: json['hampers_name'] as String,
       price: json['hampers_price'] as int,
       quantity: json['quantity'] as int,
-      picture: json['picture'] as String,
+      picture: json['hampers_picture'] as String,
       active: json['active'] as int,
       hampersDetail: (json['hampers_detail'] as List<dynamic>)
           .map((e) => HampersDetail.fromJson(e as Map<String, dynamic>))
@@ -25,7 +25,7 @@ Map<String, dynamic> _$$HampersImplToJson(_$HampersImpl instance) =>
       'hampers_name': instance.name,
       'hampers_price': instance.price,
       'quantity': instance.quantity,
-      'picture': instance.picture,
+      'hampers_picture': instance.picture,
       'active': instance.active,
       'hampers_detail': instance.hampersDetail.map((e) => e.toJson()).toList(),
     };

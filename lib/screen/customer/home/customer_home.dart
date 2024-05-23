@@ -8,9 +8,11 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:p3l_k3_mobile/constants.dart';
 import 'package:p3l_k3_mobile/data/model/customer_model.dart';
+import 'package:p3l_k3_mobile/data/model/hampers_model.dart';
 import 'package:p3l_k3_mobile/data/model/product_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 import 'package:p3l_k3_mobile/logic/customer_logic.dart';
+import 'package:p3l_k3_mobile/logic/hampers_logic.dart';
 import 'package:p3l_k3_mobile/logic/product_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
 import 'package:p3l_k3_mobile/screen/customer/home/settings_dialog.dart';
@@ -25,6 +27,7 @@ class CustomerHomeScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final ScrollController scrollCtl = useScrollController();
     final AsyncValue<List<Product>> products = ref.watch(productLogicProvider);
+    final AsyncValue<List<Hampers>> hampers = ref.watch(hampersLogicProvider);
 
     return Scaffold(
       floatingActionButton: ScrollToTopButton(scrollCtl: scrollCtl),
@@ -44,6 +47,8 @@ class CustomerHomeScreen extends HookConsumerWidget {
                 background: Header(),
               ),
             ),
+
+            // Hampers section
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 6),
@@ -53,8 +58,8 @@ class CustomerHomeScreen extends HookConsumerWidget {
                     Text(
                       'Hampers',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
                     Text(
                       'Give something special for your special someone :)',
@@ -64,6 +69,21 @@ class CustomerHomeScreen extends HookConsumerWidget {
                 ),
               ),
             ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                width: 200,
+                height: 300,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: hampers.value?.length ?? 0,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Placeholder();
+                  },
+                ),
+              ),
+            ),
+
+            // Product section
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -119,7 +139,8 @@ class CustomerHomeScreen extends HookConsumerWidget {
 
 class ScrollToTopButton extends StatelessWidget {
   const ScrollToTopButton({
-    required this.scrollCtl, super.key,
+    required this.scrollCtl,
+    super.key,
   });
 
   final ScrollController scrollCtl;
@@ -275,22 +296,24 @@ class ProductCard extends HookWidget {
                     SizedBox(
                       height: 32,
                       child: OutlinedButton(
-                          onPressed: () {},
-                          style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              const Icon(
-                                Icons.add,
-                                size: 16,
-                              ),
-                              Text(
-                                'Add to cart',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ],
-                          ),),
+                        onPressed: () {},
+                        style: OutlinedButton.styleFrom(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            const Icon(
+                              Icons.add,
+                              size: 16,
+                            ),
+                            Text(
+                              'Add to cart',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -305,6 +328,15 @@ class ProductCard extends HookWidget {
             curve: Curves.easeInOutCubic,
           ),
     );
+  }
+}
+
+class HampersCard extends StatelessWidget {
+  const HampersCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
 
@@ -365,7 +397,8 @@ class Header extends ConsumerWidget {
                       child: CircleAvatar(
                         backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
                         foregroundImage: NetworkImage(
-                            'https://api.dicebear.com/8.x/adventurer/png?seed=${user.value?.user.fullName}',),
+                          'https://api.dicebear.com/8.x/adventurer/png?seed=${user.value?.user.fullName}',
+                        ),
                         radius: 22,
                       ),
                     ),

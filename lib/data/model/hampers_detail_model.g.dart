@@ -10,14 +10,31 @@ _$HampersDetailImpl _$$HampersDetailImplFromJson(Map<String, dynamic> json) =>
     _$HampersDetailImpl(
       id: json['id'] as int,
       hampersId: json['hampers_id'] as int,
-      productId: json['product_id'] as int,
-      product: Product.fromJson(json['product'] as Map<String, dynamic>),
+      productId: json['product_id'] as int?,
+      ingredientId: json['ingredient_id'] as int? ?? 0,
+      product: json['product'] == null
+          ? null
+          : Product.fromJson(json['product'] as Map<String, dynamic>),
+      ingredient: json['ingredient'] == null
+          ? null
+          : Ingredient.fromJson(json['ingredient'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$HampersDetailImplToJson(_$HampersDetailImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'hampers_id': instance.hampersId,
-      'product_id': instance.productId,
-      'product': instance.product.toJson(),
-    };
+Map<String, dynamic> _$$HampersDetailImplToJson(_$HampersDetailImpl instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'hampers_id': instance.hampersId,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('product_id', instance.productId);
+  val['ingredient_id'] = instance.ingredientId;
+  writeNotNull('product', instance.product?.toJson());
+  writeNotNull('ingredient', instance.ingredient?.toJson());
+  return val;
+}

@@ -26,6 +26,7 @@ mixin _$Hampers {
   @JsonKey(name: 'hampers_price')
   int get price => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hampers_picture')
   String get picture => throw _privateConstructorUsedError;
   int get active => throw _privateConstructorUsedError;
   @JsonKey(name: 'hampers_detail')
@@ -46,7 +47,7 @@ abstract class $HampersCopyWith<$Res> {
       @JsonKey(name: 'hampers_name') String name,
       @JsonKey(name: 'hampers_price') int price,
       int quantity,
-      String picture,
+      @JsonKey(name: 'hampers_picture') String picture,
       int active,
       @JsonKey(name: 'hampers_detail') List<HampersDetail> hampersDetail});
 }
@@ -117,7 +118,7 @@ abstract class _$$HampersImplCopyWith<$Res> implements $HampersCopyWith<$Res> {
       @JsonKey(name: 'hampers_name') String name,
       @JsonKey(name: 'hampers_price') int price,
       int quantity,
-      String picture,
+      @JsonKey(name: 'hampers_picture') String picture,
       int active,
       @JsonKey(name: 'hampers_detail') List<HampersDetail> hampersDetail});
 }
@@ -182,7 +183,7 @@ class _$HampersImpl with DiagnosticableTreeMixin implements _Hampers {
       @JsonKey(name: 'hampers_name') required this.name,
       @JsonKey(name: 'hampers_price') required this.price,
       required this.quantity,
-      required this.picture,
+      @JsonKey(name: 'hampers_picture') required this.picture,
       required this.active,
       @JsonKey(name: 'hampers_detail')
       required final List<HampersDetail> hampersDetail})
@@ -202,6 +203,7 @@ class _$HampersImpl with DiagnosticableTreeMixin implements _Hampers {
   @override
   final int quantity;
   @override
+  @JsonKey(name: 'hampers_picture')
   final String picture;
   @override
   final int active;
@@ -274,7 +276,7 @@ abstract class _Hampers implements Hampers {
       @JsonKey(name: 'hampers_name') required final String name,
       @JsonKey(name: 'hampers_price') required final int price,
       required final int quantity,
-      required final String picture,
+      @JsonKey(name: 'hampers_picture') required final String picture,
       required final int active,
       @JsonKey(name: 'hampers_detail')
       required final List<HampersDetail> hampersDetail}) = _$HampersImpl;
@@ -292,6 +294,7 @@ abstract class _Hampers implements Hampers {
   @override
   int get quantity;
   @override
+  @JsonKey(name: 'hampers_picture')
   String get picture;
   @override
   int get active;

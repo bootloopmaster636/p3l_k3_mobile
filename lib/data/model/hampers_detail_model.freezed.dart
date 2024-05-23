@@ -24,8 +24,11 @@ mixin _$HampersDetail {
   @JsonKey(name: 'hampers_id')
   int get hampersId => throw _privateConstructorUsedError;
   @JsonKey(name: 'product_id')
-  int get productId => throw _privateConstructorUsedError;
-  Product get product => throw _privateConstructorUsedError;
+  int? get productId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ingredient_id')
+  int get ingredientId => throw _privateConstructorUsedError;
+  Product? get product => throw _privateConstructorUsedError;
+  Ingredient? get ingredient => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,10 +45,13 @@ abstract class $HampersDetailCopyWith<$Res> {
   $Res call(
       {int id,
       @JsonKey(name: 'hampers_id') int hampersId,
-      @JsonKey(name: 'product_id') int productId,
-      Product product});
+      @JsonKey(name: 'product_id') int? productId,
+      @JsonKey(name: 'ingredient_id') int ingredientId,
+      Product? product,
+      Ingredient? ingredient});
 
-  $ProductCopyWith<$Res> get product;
+  $ProductCopyWith<$Res>? get product;
+  $IngredientCopyWith<$Res>? get ingredient;
 }
 
 /// @nodoc
@@ -63,8 +69,10 @@ class _$HampersDetailCopyWithImpl<$Res, $Val extends HampersDetail>
   $Res call({
     Object? id = null,
     Object? hampersId = null,
-    Object? productId = null,
-    Object? product = null,
+    Object? productId = freezed,
+    Object? ingredientId = null,
+    Object? product = freezed,
+    Object? ingredient = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -75,22 +83,46 @@ class _$HampersDetailCopyWithImpl<$Res, $Val extends HampersDetail>
           ? _value.hampersId
           : hampersId // ignore: cast_nullable_to_non_nullable
               as int,
-      productId: null == productId
+      productId: freezed == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      ingredientId: null == ingredientId
+          ? _value.ingredientId
+          : ingredientId // ignore: cast_nullable_to_non_nullable
               as int,
-      product: null == product
+      product: freezed == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
-              as Product,
+              as Product?,
+      ingredient: freezed == ingredient
+          ? _value.ingredient
+          : ingredient // ignore: cast_nullable_to_non_nullable
+              as Ingredient?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ProductCopyWith<$Res> get product {
-    return $ProductCopyWith<$Res>(_value.product, (value) {
+  $ProductCopyWith<$Res>? get product {
+    if (_value.product == null) {
+      return null;
+    }
+
+    return $ProductCopyWith<$Res>(_value.product!, (value) {
       return _then(_value.copyWith(product: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $IngredientCopyWith<$Res>? get ingredient {
+    if (_value.ingredient == null) {
+      return null;
+    }
+
+    return $IngredientCopyWith<$Res>(_value.ingredient!, (value) {
+      return _then(_value.copyWith(ingredient: value) as $Val);
     });
   }
 }
@@ -106,11 +138,15 @@ abstract class _$$HampersDetailImplCopyWith<$Res>
   $Res call(
       {int id,
       @JsonKey(name: 'hampers_id') int hampersId,
-      @JsonKey(name: 'product_id') int productId,
-      Product product});
+      @JsonKey(name: 'product_id') int? productId,
+      @JsonKey(name: 'ingredient_id') int ingredientId,
+      Product? product,
+      Ingredient? ingredient});
 
   @override
-  $ProductCopyWith<$Res> get product;
+  $ProductCopyWith<$Res>? get product;
+  @override
+  $IngredientCopyWith<$Res>? get ingredient;
 }
 
 /// @nodoc
@@ -126,8 +162,10 @@ class __$$HampersDetailImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? hampersId = null,
-    Object? productId = null,
-    Object? product = null,
+    Object? productId = freezed,
+    Object? ingredientId = null,
+    Object? product = freezed,
+    Object? ingredient = freezed,
   }) {
     return _then(_$HampersDetailImpl(
       id: null == id
@@ -138,28 +176,36 @@ class __$$HampersDetailImplCopyWithImpl<$Res>
           ? _value.hampersId
           : hampersId // ignore: cast_nullable_to_non_nullable
               as int,
-      productId: null == productId
+      productId: freezed == productId
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      ingredientId: null == ingredientId
+          ? _value.ingredientId
+          : ingredientId // ignore: cast_nullable_to_non_nullable
               as int,
-      product: null == product
+      product: freezed == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
-              as Product,
+              as Product?,
+      ingredient: freezed == ingredient
+          ? _value.ingredient
+          : ingredient // ignore: cast_nullable_to_non_nullable
+              as Ingredient?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$HampersDetailImpl
-    with DiagnosticableTreeMixin
-    implements _HampersDetail {
+class _$HampersDetailImpl implements _HampersDetail {
   const _$HampersDetailImpl(
       {required this.id,
       @JsonKey(name: 'hampers_id') required this.hampersId,
       @JsonKey(name: 'product_id') required this.productId,
-      required this.product});
+      @JsonKey(name: 'ingredient_id') this.ingredientId = 0,
+      required this.product,
+      required this.ingredient});
 
   factory _$HampersDetailImpl.fromJson(Map<String, dynamic> json) =>
       _$$HampersDetailImplFromJson(json);
@@ -171,24 +217,18 @@ class _$HampersDetailImpl
   final int hampersId;
   @override
   @JsonKey(name: 'product_id')
-  final int productId;
+  final int? productId;
   @override
-  final Product product;
+  @JsonKey(name: 'ingredient_id')
+  final int ingredientId;
+  @override
+  final Product? product;
+  @override
+  final Ingredient? ingredient;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HampersDetail(id: $id, hampersId: $hampersId, productId: $productId, product: $product)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'HampersDetail'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('hampersId', hampersId))
-      ..add(DiagnosticsProperty('productId', productId))
-      ..add(DiagnosticsProperty('product', product));
+  String toString() {
+    return 'HampersDetail(id: $id, hampersId: $hampersId, productId: $productId, ingredientId: $ingredientId, product: $product, ingredient: $ingredient)';
   }
 
   @override
@@ -201,13 +241,17 @@ class _$HampersDetailImpl
                 other.hampersId == hampersId) &&
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
-            (identical(other.product, product) || other.product == product));
+            (identical(other.ingredientId, ingredientId) ||
+                other.ingredientId == ingredientId) &&
+            (identical(other.product, product) || other.product == product) &&
+            (identical(other.ingredient, ingredient) ||
+                other.ingredient == ingredient));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, hampersId, productId, product);
+  int get hashCode => Object.hash(
+      runtimeType, id, hampersId, productId, ingredientId, product, ingredient);
 
   @JsonKey(ignore: true)
   @override
@@ -227,8 +271,10 @@ abstract class _HampersDetail implements HampersDetail {
   const factory _HampersDetail(
       {required final int id,
       @JsonKey(name: 'hampers_id') required final int hampersId,
-      @JsonKey(name: 'product_id') required final int productId,
-      required final Product product}) = _$HampersDetailImpl;
+      @JsonKey(name: 'product_id') required final int? productId,
+      @JsonKey(name: 'ingredient_id') final int ingredientId,
+      required final Product? product,
+      required final Ingredient? ingredient}) = _$HampersDetailImpl;
 
   factory _HampersDetail.fromJson(Map<String, dynamic> json) =
       _$HampersDetailImpl.fromJson;
@@ -240,9 +286,14 @@ abstract class _HampersDetail implements HampersDetail {
   int get hampersId;
   @override
   @JsonKey(name: 'product_id')
-  int get productId;
+  int? get productId;
   @override
-  Product get product;
+  @JsonKey(name: 'ingredient_id')
+  int get ingredientId;
+  @override
+  Product? get product;
+  @override
+  Ingredient? get ingredient;
   @override
   @JsonKey(ignore: true)
   _$$HampersDetailImplCopyWith<_$HampersDetailImpl> get copyWith =>

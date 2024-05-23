@@ -12,11 +12,10 @@ class Hampers with _$Hampers {
     @JsonKey(name: 'hampers_name') required String name,
     @JsonKey(name: 'hampers_price') required int price,
     required int quantity,
-    required String picture,
+    @JsonKey(name: 'hampers_picture') required String picture,
     required int active,
     @JsonKey(name: 'hampers_detail') required List<HampersDetail> hampersDetail,
   }) = _Hampers;
 
-  factory Hampers.fromJson(Map<String, dynamic> json) =>
-      _$HampersFromJson(json);
+  factory Hampers.fromJson(Map<String, dynamic> json) => _$HampersFromJson(json);
 }

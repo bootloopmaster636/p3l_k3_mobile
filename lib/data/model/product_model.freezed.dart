@@ -40,7 +40,7 @@ mixin _$Product {
   int get active => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'categories')
-  ProductCategory get category => throw _privateConstructorUsedError;
+  ProductCategory? get category => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -64,9 +64,9 @@ abstract class $ProductCopyWith<$Res> {
       @JsonKey(name: 'product_picture') String picture,
       int active,
       String description,
-      @JsonKey(name: 'categories') ProductCategory category});
+      @JsonKey(name: 'categories') ProductCategory? category});
 
-  $ProductCategoryCopyWith<$Res> get category;
+  $ProductCategoryCopyWith<$Res>? get category;
 }
 
 /// @nodoc
@@ -93,7 +93,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? picture = null,
     Object? active = null,
     Object? description = null,
-    Object? category = null,
+    Object? category = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -140,17 +140,21 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      category: null == category
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as ProductCategory,
+              as ProductCategory?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ProductCategoryCopyWith<$Res> get category {
-    return $ProductCategoryCopyWith<$Res>(_value.category, (value) {
+  $ProductCategoryCopyWith<$Res>? get category {
+    if (_value.category == null) {
+      return null;
+    }
+
+    return $ProductCategoryCopyWith<$Res>(_value.category!, (value) {
       return _then(_value.copyWith(category: value) as $Val);
     });
   }
@@ -175,10 +179,10 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       @JsonKey(name: 'product_picture') String picture,
       int active,
       String description,
-      @JsonKey(name: 'categories') ProductCategory category});
+      @JsonKey(name: 'categories') ProductCategory? category});
 
   @override
-  $ProductCategoryCopyWith<$Res> get category;
+  $ProductCategoryCopyWith<$Res>? get category;
 }
 
 /// @nodoc
@@ -203,7 +207,7 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? picture = null,
     Object? active = null,
     Object? description = null,
-    Object? category = null,
+    Object? category = freezed,
   }) {
     return _then(_$ProductImpl(
       id: null == id
@@ -250,10 +254,10 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      category: null == category
+      category: freezed == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as ProductCategory,
+              as ProductCategory?,
     ));
   }
 }
@@ -310,7 +314,7 @@ class _$ProductImpl with DiagnosticableTreeMixin implements _Product {
   final String description;
   @override
   @JsonKey(name: 'categories')
-  final ProductCategory category;
+  final ProductCategory? category;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -406,7 +410,7 @@ abstract class _Product implements Product {
       required final int active,
       required final String description,
       @JsonKey(name: 'categories')
-      required final ProductCategory category}) = _$ProductImpl;
+      required final ProductCategory? category}) = _$ProductImpl;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
 
@@ -442,7 +446,7 @@ abstract class _Product implements Product {
   String get description;
   @override
   @JsonKey(name: 'categories')
-  ProductCategory get category;
+  ProductCategory? get category;
   @override
   @JsonKey(ignore: true)
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>

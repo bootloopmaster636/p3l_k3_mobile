@@ -19,8 +19,10 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       picture: json['product_picture'] as String,
       active: json['active'] as int,
       description: json['description'] as String,
-      category:
-          ProductCategory.fromJson(json['categories'] as Map<String, dynamic>),
+      category: json['categories'] == null
+          ? null
+          : ProductCategory.fromJson(
+              json['categories'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) {
@@ -44,6 +46,6 @@ Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) {
   val['product_picture'] = instance.picture;
   val['active'] = instance.active;
   val['description'] = instance.description;
-  val['categories'] = instance.category.toJson();
+  writeNotNull('categories', instance.category?.toJson());
   return val;
 }
