@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:logger/logger.dart';
-import 'package:p3l_k3_mobile/data/api/forgotPasswordApi.dart';
+import 'package:p3l_k3_mobile/data/api/forgot_password_api.dart';
 import 'package:p3l_k3_mobile/router.dart';
 import 'package:toastification/toastification.dart';
 
@@ -15,38 +15,41 @@ class ForgotPasswordScreen extends HookWidget {
   Widget build(BuildContext context) {
     final TextEditingController emailCtl = useTextEditingController();
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Forgot Password'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text('Please enter your email address'),
-                const Text(
-                    'The OTP code will be sent to your email if its correct',),
-                TextField(
-                  controller: emailCtl,
-                  decoration: const InputDecoration(
-                    hintText: 'Email',
-                  ),
+      appBar: AppBar(
+        title: const Text('Forgot Password'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text('Please enter your email address'),
+              const Text(
+                'The OTP code will be sent to your email if its correct',
+              ),
+              TextField(
+                controller: emailCtl,
+                decoration: const InputDecoration(
+                  hintText: 'Email',
                 ),
-                FilledButton(
-                  onPressed: () {
-                    VerifyEmail(emailCtl.text);
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => const EnterOTPScreen(),),
-                    );
-                  },
-                  child: const Text('Send e-mail'),
-                ),
-              ],
-            ),
+              ),
+              FilledButton(
+                onPressed: () {
+                  VerifyEmail(emailCtl.text);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const EnterOTPScreen(),
+                    ),
+                  );
+                },
+                child: const Text('Send e-mail'),
+              ),
+            ],
           ),
-        ),);
+        ),
+      ),
+    );
   }
 }
 
@@ -101,13 +104,13 @@ class EnterOTPScreen extends HookWidget {
 
 class EnterNewPasswordScreen extends HookWidget {
   const EnterNewPasswordScreen({required this.token, super.key});
+
   final String token;
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController newPasswordCtl = useTextEditingController();
-    final TextEditingController newPasswordConfirmCtl =
-        useTextEditingController();
+    final TextEditingController newPasswordConfirmCtl = useTextEditingController();
 
     return Scaffold(
       body: Padding(
@@ -168,8 +171,7 @@ class EnterNewPasswordScreen extends HookWidget {
                     dragToClose: true,
                   );
                 }
-                await EnterNewPassword(newPasswordCtl.text, token)
-                    .then((value) {
+                await EnterNewPassword(newPasswordCtl.text, token).then((value) {
                   toastification.show(
                     context: context,
                     type: ToastificationType.success,
