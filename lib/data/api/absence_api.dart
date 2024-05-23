@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:p3l_k3_mobile/data/api/dio.dart';
 import 'package:p3l_k3_mobile/data/model/absence_model.dart';
-import 'package:p3l_k3_mobile/logic/auth_logic.dart';
 
 Future<List<Absence>> fetchAllAbsence(String token) async {
   final Response response;
@@ -13,7 +12,7 @@ Future<List<Absence>> fetchAllAbsence(String token) async {
           headers: <String, String>{
             'Authorization': 'Bearer $token',
           },
-        ));
+        ),);
     return (response.data['data'] as List<dynamic>).map((data) {
       return Absence.fromJson(data as Map<String, dynamic>);
     }).toList();

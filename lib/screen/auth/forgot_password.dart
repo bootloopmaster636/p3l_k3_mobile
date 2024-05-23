@@ -23,10 +23,10 @@ class ForgotPasswordScreen extends HookWidget {
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: <Widget>[
                 const Text('Please enter your email address'),
                 const Text(
-                    'The OTP code will be sent to your email if its correct'),
+                    'The OTP code will be sent to your email if its correct',),
                 TextField(
                   controller: emailCtl,
                   decoration: const InputDecoration(
@@ -38,7 +38,7 @@ class ForgotPasswordScreen extends HookWidget {
                     VerifyEmail(emailCtl.text);
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (BuildContext context) => EnterOTPScreen()),
+                          builder: (BuildContext context) => const EnterOTPScreen(),),
                     );
                   },
                   child: const Text('Send e-mail'),
@@ -46,7 +46,7 @@ class ForgotPasswordScreen extends HookWidget {
               ],
             ),
           ),
-        ));
+        ),);
   }
 }
 
@@ -62,7 +62,7 @@ class EnterOTPScreen extends HookWidget {
         padding: const EdgeInsets.all(32),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             Text(
               'Enter the OTP code that has been send to your email',
               style: Theme.of(context).textTheme.headlineSmall,
@@ -79,7 +79,7 @@ class EnterOTPScreen extends HookWidget {
             const Gap(16),
             FilledButton(
               onPressed: () async {
-                await VerifyOTP(otpCtl.text).then((value) {
+                await VerifyOTP(otpCtl.text).then((String value) {
                   Logger().i(value);
                   Navigator.of(context).push(
                     MaterialPageRoute(
@@ -114,7 +114,7 @@ class EnterNewPasswordScreen extends HookWidget {
         padding: const EdgeInsets.all(32),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
             Text(
               'Enter the OTP code that has been send to your email',
               style: Theme.of(context).textTheme.headlineSmall,

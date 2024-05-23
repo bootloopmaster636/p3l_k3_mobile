@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logger/logger.dart';
 import 'package:p3l_k3_mobile/data/model/absence_model.dart';
 import 'package:p3l_k3_mobile/data/model/employee_model.dart';
-import 'package:p3l_k3_mobile/data/model/user_model.dart';
 import 'package:p3l_k3_mobile/logic/absence_logic.dart';
 import 'package:p3l_k3_mobile/logic/employee_logic.dart';
 import 'package:p3l_k3_mobile/utility.dart';
@@ -80,7 +79,7 @@ class AbsenceTile extends ConsumerWidget {
                 return AlertDialog(
                   title: const Text('Delete Absence'),
                   content: const Text(
-                      'Are you sure you want to delete this absence?'),
+                      'Are you sure you want to delete this absence?',),
                   actions: <Widget>[
                     TextButton(
                       onPressed: () {
@@ -131,19 +130,19 @@ class AddAbsence extends HookConsumerWidget {
                   ),
                   const Gap(16),
                   Text('Select employee:',
-                      style: Theme.of(context).textTheme.titleMedium),
+                      style: Theme.of(context).textTheme.titleMedium,),
                   const Gap(8),
                   DropdownMenu<int>(
                     initialSelection: employeeList.value?.first.id ?? 1,
                     dropdownMenuEntries: employeeList.value
                             ?.map<DropdownMenuEntry<int>>(
-                              (e) => DropdownMenuEntry<int>(
+                              (Employee e) => DropdownMenuEntry<int>(
                                 value: e.id,
                                 label: e.user.fullName,
                               ),
                             )
                             .toList() ??
-                        [],
+                        <DropdownMenuEntry<int>>[],
                     onSelected: (int? value) {
                       selectedEmployee.value = value ?? 1;
                     },
@@ -203,7 +202,7 @@ class AddAbsence extends HookConsumerWidget {
                       },
                       child: const Text('Save'),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -211,7 +210,7 @@ class AddAbsence extends HookConsumerWidget {
   }
 }
 
-void deleteAbsence(Absence absence, BuildContext context, WidgetRef ref) async {
+Future<void> deleteAbsence(Absence absence, BuildContext context, WidgetRef ref) async {
   try {
     await ref.read(absenceLogicProvider.notifier).delete(absence.id).then(
       (void value) {

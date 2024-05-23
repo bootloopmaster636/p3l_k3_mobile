@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/data/model/customer_model.dart';
-import 'package:p3l_k3_mobile/data/model/user_model.dart';
 import 'package:p3l_k3_mobile/logic/customer_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
 
@@ -146,7 +145,7 @@ class ProfileSettingsContent extends StatelessWidget {
         )
             .animate(delay: 600.ms)
             .slideY(
-                begin: 1, end: 0, duration: 800.ms, curve: Curves.easeOutQuint)
+                begin: 1, end: 0, duration: 800.ms, curve: Curves.easeOutQuint,)
             .fadeIn(duration: 800.ms),
       ),
     );
@@ -203,14 +202,14 @@ class Header extends ConsumerWidget {
                   begin: 1,
                   end: 0,
                   duration: 600.ms,
-                  curve: Curves.easeOutBack),
+                  curve: Curves.easeOutBack,),
             )
                 .animate(delay: 400.ms)
                 .slideY(
                     begin: 2,
                     end: 0,
                     duration: 600.ms,
-                    curve: Curves.easeOutBack)
+                    curve: Curves.easeOutBack,)
                 .fadeIn(),
             const Gap(8),
             Text(
@@ -225,7 +224,7 @@ class Header extends ConsumerWidget {
                     begin: -1,
                     end: 0,
                     duration: 500.ms,
-                    curve: Curves.easeOutExpo)
+                    curve: Curves.easeOutExpo,)
                 .fadeIn(),
             const Gap(4),
             Text(
@@ -237,7 +236,7 @@ class Header extends ConsumerWidget {
                     begin: -1,
                     end: 0,
                     duration: 500.ms,
-                    curve: Curves.easeOutExpo)
+                    curve: Curves.easeOutExpo,)
                 .fadeIn(),
             const Gap(16),
             Row(
@@ -297,7 +296,7 @@ class Header extends ConsumerWidget {
                     begin: -1,
                     end: 0,
                     duration: 500.ms,
-                    curve: Curves.easeOutExpo)
+                    curve: Curves.easeOutExpo,)
                 .fadeIn(),
           ],
         ),

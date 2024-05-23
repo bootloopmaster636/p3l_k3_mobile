@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:p3l_k3_mobile/logic/auth_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
-import 'package:p3l_k3_mobile/screen/employee/mo/absence_list.dart';
 
 @RoutePage()
 class MoScreen extends ConsumerWidget {
@@ -15,7 +14,7 @@ class MoScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard'),
-        actions: [
+        actions: <Widget>[
           IconButton(
             onPressed: () {
               ref.read(authLogicProvider.notifier).logout();

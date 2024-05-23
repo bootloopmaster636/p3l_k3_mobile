@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:p3l_k3_mobile/data/api/dio.dart';
-import 'package:p3l_k3_mobile/data/model/user_model.dart';
 
 Future<void> VerifyEmail(String email) async {
   final Response response;
@@ -13,7 +12,7 @@ Future<void> VerifyEmail(String email) async {
       data: json.encode(<String, String>{'email': email}),
     );
     return;
-  } on DioException catch (e) {
+  } on DioException {
     rethrow;
   }
 }
@@ -27,7 +26,7 @@ Future<String> VerifyOTP(String otp) async {
       data: json.encode(<String, String>{'verification_code': otp}),
     );
     return response.data['access_token'] as String;
-  } on DioException catch (e) {
+  } on DioException {
     rethrow;
   }
 }
@@ -46,7 +45,7 @@ Future<void> EnterNewPassword(String newPassword, String token) async {
       ),
     );
     return;
-  } on DioException catch (e) {
+  } on DioException {
     rethrow;
   }
 }

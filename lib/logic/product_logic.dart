@@ -1,4 +1,3 @@
-import 'package:p3l_k3_mobile/data/api/customer_api.dart';
 import 'package:p3l_k3_mobile/data/api/product_api.dart';
 import 'package:p3l_k3_mobile/data/model/product_model.dart';
 import 'package:p3l_k3_mobile/logic/auth_logic.dart';

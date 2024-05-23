@@ -10,7 +10,7 @@ import 'package:toastification/toastification.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  SystemChrome.setPreferredOrientations(<DeviceOrientation>[DeviceOrientation.portraitUp]);
 
   OneSignal.initialize('2fe3a6db-c004-424c-9b92-099391f7f88b');
 

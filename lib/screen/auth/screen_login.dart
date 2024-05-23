@@ -5,7 +5,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:logger/logger.dart';
 import 'package:lottie/lottie.dart';
 import 'package:p3l_k3_mobile/data/model/auth_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
@@ -39,10 +38,10 @@ class LoginScreen extends ConsumerWidget {
           )
               .animate(
                 autoPlay: true,
-                onPlay: (controller) => controller.repeat(),
+                onPlay: (AnimationController controller) => controller.repeat(),
               )
               .shake(
-                  offset: const Offset(20, 10), hz: 0.2, duration: 8.seconds),
+                  offset: const Offset(20, 10), hz: 0.2, duration: 8.seconds,),
           Positioned(
             right: -250,
             bottom: -250,
@@ -61,10 +60,10 @@ class LoginScreen extends ConsumerWidget {
           )
               .animate(
                 autoPlay: true,
-                onPlay: (controller) => controller.repeat(),
+                onPlay: (AnimationController controller) => controller.repeat(),
               )
               .shake(
-                  offset: const Offset(-20, -10), hz: 0.2, duration: 8.seconds),
+                  offset: const Offset(-20, -10), hz: 0.2, duration: 8.seconds,),
           const Padding(
             padding: EdgeInsets.all(8),
             child: LoginPageContent(),
@@ -131,7 +130,7 @@ class LoginForm extends HookConsumerWidget {
               suffixIcon: IconButton(
                 icon: Icon(isPasswordVisible.value == true
                     ? Icons.visibility_off_outlined
-                    : Icons.visibility_outlined),
+                    : Icons.visibility_outlined,),
                 onPressed: () {
                   isPasswordVisible.value = !isPasswordVisible.value;
                 },

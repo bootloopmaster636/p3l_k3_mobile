@@ -10,9 +10,8 @@ class Employee with _$Employee {
   const factory Employee({
     required int id,
     @JsonKey(name: 'users') required User user,
-    @Default(0)
+    @JsonKey(name: 'work_start_date') required DateTime workStartDate, @Default(0)
     int userId, // might not be useful but whatever...just comment it if it makes trouble
-    @JsonKey(name: 'work_start_date') required DateTime workStartDate,
   }) = _Employee;
 
   factory Employee.fromJson(Map<String, dynamic> json) =>

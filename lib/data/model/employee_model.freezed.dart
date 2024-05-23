@@ -23,10 +23,9 @@ mixin _$Employee {
   int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'users')
   User get user => throw _privateConstructorUsedError;
-  int get userId =>
-      throw _privateConstructorUsedError; // might not be useful but whatever...just comment it if it makes trouble
   @JsonKey(name: 'work_start_date')
   DateTime get workStartDate => throw _privateConstructorUsedError;
+  int get userId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,8 +41,8 @@ abstract class $EmployeeCopyWith<$Res> {
   $Res call(
       {int id,
       @JsonKey(name: 'users') User user,
-      int userId,
-      @JsonKey(name: 'work_start_date') DateTime workStartDate});
+      @JsonKey(name: 'work_start_date') DateTime workStartDate,
+      int userId});
 
   $UserCopyWith<$Res> get user;
 }
@@ -63,8 +62,8 @@ class _$EmployeeCopyWithImpl<$Res, $Val extends Employee>
   $Res call({
     Object? id = null,
     Object? user = null,
-    Object? userId = null,
     Object? workStartDate = null,
+    Object? userId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -75,14 +74,14 @@ class _$EmployeeCopyWithImpl<$Res, $Val extends Employee>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int,
       workStartDate: null == workStartDate
           ? _value.workStartDate
           : workStartDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 
@@ -106,8 +105,8 @@ abstract class _$$EmployeeImplCopyWith<$Res>
   $Res call(
       {int id,
       @JsonKey(name: 'users') User user,
-      int userId,
-      @JsonKey(name: 'work_start_date') DateTime workStartDate});
+      @JsonKey(name: 'work_start_date') DateTime workStartDate,
+      int userId});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -126,8 +125,8 @@ class __$$EmployeeImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? user = null,
-    Object? userId = null,
     Object? workStartDate = null,
+    Object? userId = null,
   }) {
     return _then(_$EmployeeImpl(
       id: null == id
@@ -138,14 +137,14 @@ class __$$EmployeeImplCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as int,
       workStartDate: null == workStartDate
           ? _value.workStartDate
           : workStartDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -156,8 +155,8 @@ class _$EmployeeImpl with DiagnosticableTreeMixin implements _Employee {
   const _$EmployeeImpl(
       {required this.id,
       @JsonKey(name: 'users') required this.user,
-      this.userId = 0,
-      @JsonKey(name: 'work_start_date') required this.workStartDate});
+      @JsonKey(name: 'work_start_date') required this.workStartDate,
+      this.userId = 0});
 
   factory _$EmployeeImpl.fromJson(Map<String, dynamic> json) =>
       _$$EmployeeImplFromJson(json);
@@ -168,16 +167,15 @@ class _$EmployeeImpl with DiagnosticableTreeMixin implements _Employee {
   @JsonKey(name: 'users')
   final User user;
   @override
-  @JsonKey()
-  final int userId;
-// might not be useful but whatever...just comment it if it makes trouble
-  @override
   @JsonKey(name: 'work_start_date')
   final DateTime workStartDate;
+  @override
+  @JsonKey()
+  final int userId;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Employee(id: $id, user: $user, userId: $userId, workStartDate: $workStartDate)';
+    return 'Employee(id: $id, user: $user, workStartDate: $workStartDate, userId: $userId)';
   }
 
   @override
@@ -187,8 +185,8 @@ class _$EmployeeImpl with DiagnosticableTreeMixin implements _Employee {
       ..add(DiagnosticsProperty('type', 'Employee'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('user', user))
-      ..add(DiagnosticsProperty('userId', userId))
-      ..add(DiagnosticsProperty('workStartDate', workStartDate));
+      ..add(DiagnosticsProperty('workStartDate', workStartDate))
+      ..add(DiagnosticsProperty('userId', userId));
   }
 
   @override
@@ -198,14 +196,14 @@ class _$EmployeeImpl with DiagnosticableTreeMixin implements _Employee {
             other is _$EmployeeImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.workStartDate, workStartDate) ||
-                other.workStartDate == workStartDate));
+                other.workStartDate == workStartDate) &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, user, userId, workStartDate);
+  int get hashCode => Object.hash(runtimeType, id, user, workStartDate, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -225,9 +223,8 @@ abstract class _Employee implements Employee {
   const factory _Employee(
       {required final int id,
       @JsonKey(name: 'users') required final User user,
-      final int userId,
-      @JsonKey(name: 'work_start_date')
-      required final DateTime workStartDate}) = _$EmployeeImpl;
+      @JsonKey(name: 'work_start_date') required final DateTime workStartDate,
+      final int userId}) = _$EmployeeImpl;
 
   factory _Employee.fromJson(Map<String, dynamic> json) =
       _$EmployeeImpl.fromJson;
@@ -238,10 +235,10 @@ abstract class _Employee implements Employee {
   @JsonKey(name: 'users')
   User get user;
   @override
-  int get userId;
-  @override // might not be useful but whatever...just comment it if it makes trouble
   @JsonKey(name: 'work_start_date')
   DateTime get workStartDate;
+  @override
+  int get userId;
   @override
   @JsonKey(ignore: true)
   _$$EmployeeImplCopyWith<_$EmployeeImpl> get copyWith =>

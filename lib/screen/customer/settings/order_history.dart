@@ -91,6 +91,6 @@ class OrderList extends StatelessWidget {
         subtitle: Text('Quantity: ${cart.quantity}'),
         trailing: Text('Rp ${cart.product?.price ?? 0 * cart.quantity}'),
       );
-    }).toList());
+    }).toList(),);
   }
 }

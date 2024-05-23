@@ -1,4 +1,3 @@
-import 'package:logger/logger.dart';
 import 'package:p3l_k3_mobile/data/api/absence_api.dart';
 import 'package:p3l_k3_mobile/data/model/absence_model.dart';
 import 'package:p3l_k3_mobile/logic/auth_logic.dart';

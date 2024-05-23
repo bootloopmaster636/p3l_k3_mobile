@@ -20,18 +20,18 @@ Cart _$CartFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Cart {
-  int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'transaction_id')
   int get transactionId => throw _privateConstructorUsedError;
   @JsonKey(name: 'product_id')
   int? get productId => throw _privateConstructorUsedError;
-  Product? get product => throw _privateConstructorUsedError;
   @JsonKey(name: 'hampers_id')
   int? get hampersId => throw _privateConstructorUsedError; // Hampers? hampers;
   int get quantity => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_price')
   int get totalPrice => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  Product? get product => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,14 +44,14 @@ abstract class $CartCopyWith<$Res> {
       _$CartCopyWithImpl<$Res, Cart>;
   @useResult
   $Res call(
-      {int? id,
-      @JsonKey(name: 'transaction_id') int transactionId,
+      {@JsonKey(name: 'transaction_id') int transactionId,
       @JsonKey(name: 'product_id') int? productId,
-      Product? product,
       @JsonKey(name: 'hampers_id') int? hampersId,
       int quantity,
       int price,
-      @JsonKey(name: 'total_price') int totalPrice});
+      @JsonKey(name: 'total_price') int totalPrice,
+      int? id,
+      Product? product});
 
   $ProductCopyWith<$Res>? get product;
 }
@@ -69,20 +69,16 @@ class _$CartCopyWithImpl<$Res, $Val extends Cart>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? transactionId = null,
     Object? productId = freezed,
-    Object? product = freezed,
     Object? hampersId = freezed,
     Object? quantity = null,
     Object? price = null,
     Object? totalPrice = null,
+    Object? id = freezed,
+    Object? product = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       transactionId: null == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
@@ -91,10 +87,6 @@ class _$CartCopyWithImpl<$Res, $Val extends Cart>
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
               as int?,
-      product: freezed == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as Product?,
       hampersId: freezed == hampersId
           ? _value.hampersId
           : hampersId // ignore: cast_nullable_to_non_nullable
@@ -111,6 +103,14 @@ class _$CartCopyWithImpl<$Res, $Val extends Cart>
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as int,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      product: freezed == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as Product?,
     ) as $Val);
   }
 
@@ -135,14 +135,14 @@ abstract class _$$CartImplCopyWith<$Res> implements $CartCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? id,
-      @JsonKey(name: 'transaction_id') int transactionId,
+      {@JsonKey(name: 'transaction_id') int transactionId,
       @JsonKey(name: 'product_id') int? productId,
-      Product? product,
       @JsonKey(name: 'hampers_id') int? hampersId,
       int quantity,
       int price,
-      @JsonKey(name: 'total_price') int totalPrice});
+      @JsonKey(name: 'total_price') int totalPrice,
+      int? id,
+      Product? product});
 
   @override
   $ProductCopyWith<$Res>? get product;
@@ -158,20 +158,16 @@ class __$$CartImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? transactionId = null,
     Object? productId = freezed,
-    Object? product = freezed,
     Object? hampersId = freezed,
     Object? quantity = null,
     Object? price = null,
     Object? totalPrice = null,
+    Object? id = freezed,
+    Object? product = freezed,
   }) {
     return _then(_$CartImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       transactionId: null == transactionId
           ? _value.transactionId
           : transactionId // ignore: cast_nullable_to_non_nullable
@@ -180,10 +176,6 @@ class __$$CartImplCopyWithImpl<$Res>
           ? _value.productId
           : productId // ignore: cast_nullable_to_non_nullable
               as int?,
-      product: freezed == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as Product?,
       hampersId: freezed == hampersId
           ? _value.hampersId
           : hampersId // ignore: cast_nullable_to_non_nullable
@@ -200,6 +192,14 @@ class __$$CartImplCopyWithImpl<$Res>
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as int,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      product: freezed == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as Product?,
     ));
   }
 }
@@ -208,28 +208,24 @@ class __$$CartImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CartImpl implements _Cart {
   const _$CartImpl(
-      {this.id,
-      @JsonKey(name: 'transaction_id') required this.transactionId,
+      {@JsonKey(name: 'transaction_id') required this.transactionId,
       @JsonKey(name: 'product_id') required this.productId,
-      this.product,
       @JsonKey(name: 'hampers_id') required this.hampersId,
       required this.quantity,
       required this.price,
-      @JsonKey(name: 'total_price') required this.totalPrice});
+      @JsonKey(name: 'total_price') required this.totalPrice,
+      this.id,
+      this.product});
 
   factory _$CartImpl.fromJson(Map<String, dynamic> json) =>
       _$$CartImplFromJson(json);
 
-  @override
-  final int? id;
   @override
   @JsonKey(name: 'transaction_id')
   final int transactionId;
   @override
   @JsonKey(name: 'product_id')
   final int? productId;
-  @override
-  final Product? product;
   @override
   @JsonKey(name: 'hampers_id')
   final int? hampersId;
@@ -241,10 +237,14 @@ class _$CartImpl implements _Cart {
   @override
   @JsonKey(name: 'total_price')
   final int totalPrice;
+  @override
+  final int? id;
+  @override
+  final Product? product;
 
   @override
   String toString() {
-    return 'Cart(id: $id, transactionId: $transactionId, productId: $productId, product: $product, hampersId: $hampersId, quantity: $quantity, price: $price, totalPrice: $totalPrice)';
+    return 'Cart(transactionId: $transactionId, productId: $productId, hampersId: $hampersId, quantity: $quantity, price: $price, totalPrice: $totalPrice, id: $id, product: $product)';
   }
 
   @override
@@ -252,25 +252,25 @@ class _$CartImpl implements _Cart {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CartImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.transactionId, transactionId) ||
                 other.transactionId == transactionId) &&
             (identical(other.productId, productId) ||
                 other.productId == productId) &&
-            (identical(other.product, product) || other.product == product) &&
             (identical(other.hampersId, hampersId) ||
                 other.hampersId == hampersId) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.totalPrice, totalPrice) ||
-                other.totalPrice == totalPrice));
+                other.totalPrice == totalPrice) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.product, product) || other.product == product));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, transactionId, productId,
-      product, hampersId, quantity, price, totalPrice);
+  int get hashCode => Object.hash(runtimeType, transactionId, productId,
+      hampersId, quantity, price, totalPrice, id, product);
 
   @JsonKey(ignore: true)
   @override
@@ -288,28 +288,23 @@ class _$CartImpl implements _Cart {
 
 abstract class _Cart implements Cart {
   const factory _Cart(
-          {final int? id,
-          @JsonKey(name: 'transaction_id') required final int transactionId,
-          @JsonKey(name: 'product_id') required final int? productId,
-          final Product? product,
-          @JsonKey(name: 'hampers_id') required final int? hampersId,
-          required final int quantity,
-          required final int price,
-          @JsonKey(name: 'total_price') required final int totalPrice}) =
-      _$CartImpl;
+      {@JsonKey(name: 'transaction_id') required final int transactionId,
+      @JsonKey(name: 'product_id') required final int? productId,
+      @JsonKey(name: 'hampers_id') required final int? hampersId,
+      required final int quantity,
+      required final int price,
+      @JsonKey(name: 'total_price') required final int totalPrice,
+      final int? id,
+      final Product? product}) = _$CartImpl;
 
   factory _Cart.fromJson(Map<String, dynamic> json) = _$CartImpl.fromJson;
 
-  @override
-  int? get id;
   @override
   @JsonKey(name: 'transaction_id')
   int get transactionId;
   @override
   @JsonKey(name: 'product_id')
   int? get productId;
-  @override
-  Product? get product;
   @override
   @JsonKey(name: 'hampers_id')
   int? get hampersId;
@@ -320,6 +315,10 @@ abstract class _Cart implements Cart {
   @override
   @JsonKey(name: 'total_price')
   int get totalPrice;
+  @override
+  int? get id;
+  @override
+  Product? get product;
   @override
   @JsonKey(ignore: true)
   _$$CartImplCopyWith<_$CartImpl> get copyWith =>

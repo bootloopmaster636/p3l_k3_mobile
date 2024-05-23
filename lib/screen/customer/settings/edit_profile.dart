@@ -10,11 +10,11 @@ class EditProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit your profile'),
-        actions: [
+        title: const Text('Edit your profile'),
+        actions: <Widget>[
           TextButton(
             onPressed: () {},
-            child: Text('Save changes'),
+            child: const Text('Save changes'),
           ),
           const Gap(8),
         ],
@@ -24,30 +24,30 @@ class EditProfileScreen extends StatelessWidget {
         child: Form(
           child: SingleChildScrollView(
             child: Column(
-              children: [
+              children: <TextFormField>[
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Username',
                   ),
                 ),
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'E-mail',
                   ),
                 ),
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Phone number',
                   ),
                 ),
               ]
-                  .map((e) => Padding(
+                  .map((TextFormField e) => Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4),
                         child: e,
-                      ))
+                      ),)
                   .toList(),
             ),
           ),

@@ -7,15 +7,9 @@ part 'cart_model.g.dart';
 @freezed
 class Cart with _$Cart {
   const factory Cart({
-    int? id,
-    @JsonKey(name: 'transaction_id') required int transactionId,
-    @JsonKey(name: 'product_id') required int? productId,
+    @JsonKey(name: 'transaction_id') required int transactionId, @JsonKey(name: 'product_id') required int? productId, @JsonKey(name: 'hampers_id') required int? hampersId, // Hampers? hampers;
+    required int quantity, required int price, @JsonKey(name: 'total_price') required int totalPrice, int? id,
     Product? product,
-    @JsonKey(name: 'hampers_id') required int? hampersId,
-    // Hampers? hampers;
-    required int quantity,
-    required int price,
-    @JsonKey(name: 'total_price') required int totalPrice,
   }) = _Cart;
 
   factory Cart.fromJson(Map<String, dynamic> json) => _$CartFromJson(json);

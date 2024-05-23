@@ -13,7 +13,7 @@ class EditAddressScreen extends StatelessWidget {
     final User user = generateEmptyUser();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Your addresses'),
+        title: const Text('Your addresses'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -24,12 +24,12 @@ class EditAddressScreen extends StatelessWidget {
               useSafeArea: true,
               builder: (BuildContext context) {
                 return const AddAdressForm();
-              });
+              },);
         },
         child: const Icon(Icons.add),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         child: SingleChildScrollView(
             // child: Column(
             //   children: address.map((e) {
@@ -56,17 +56,17 @@ class AddAdressForm extends ConsumerWidget {
       padding: const EdgeInsets.all(16),
       child: SingleChildScrollView(
         child: Column(
-          children: [
+          children: <Widget>[
             Form(
               child: Column(
-                children: [
+                children: <Widget>[
                   Text(
                     'Add Adress',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const Gap(16),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       label: Text('Name'),
                       hintText: 'Add a name to this address name (ex.: Home)',
@@ -74,14 +74,14 @@ class AddAdressForm extends ConsumerWidget {
                   ),
                   const Gap(8),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       label: Text('Full address'),
                     ),
                   ),
                   const Gap(8),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       label: Text('City'),
                     ),
@@ -95,7 +95,7 @@ class AddAdressForm extends ConsumerWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

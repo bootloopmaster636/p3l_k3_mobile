@@ -105,7 +105,7 @@ class ProductInfo extends StatelessWidget {
                   curve: Curves.easeOutExpo,
                 ),
             Text(
-              'Rp. ${product.price.toInt()}',
+              'Rp. ${product.price}',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleLarge,
             ).animate().fadeIn(delay: 500.ms, duration: 300.ms).slideY(

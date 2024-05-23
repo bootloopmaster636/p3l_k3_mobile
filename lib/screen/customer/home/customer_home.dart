@@ -4,7 +4,6 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:p3l_k3_mobile/constants.dart';
@@ -120,8 +119,7 @@ class CustomerHomeScreen extends HookConsumerWidget {
 
 class ScrollToTopButton extends StatelessWidget {
   const ScrollToTopButton({
-    super.key,
-    required this.scrollCtl,
+    required this.scrollCtl, super.key,
   });
 
   final ScrollController scrollCtl;
@@ -198,7 +196,7 @@ class ProductCard extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isTapped = useState(false);
+    final ValueNotifier<bool> isTapped = useState(false);
     return GestureDetector(
       onTap: () {
         context.router.push(ProductDetailRoute(productID: product.id));
@@ -215,7 +213,7 @@ class ProductCard extends HookWidget {
       child: Container(
         decoration: BoxDecoration(
           color: TinyColor.fromColor(Colors.orange).desaturate(40).lighten(46).toColor(),
-          border: Border.all(color: Colors.black12, width: 1, strokeAlign: BorderSide.strokeAlignCenter),
+          border: Border.all(color: Colors.black12, strokeAlign: BorderSide.strokeAlignCenter),
           borderRadius: BorderRadius.circular(12),
           boxShadow: const <BoxShadow>[
             BoxShadow(blurRadius: 4, spreadRadius: 1, color: Colors.black12, offset: Offset(0, 2)),
@@ -279,10 +277,10 @@ class ProductCard extends HookWidget {
                       child: OutlinedButton(
                           onPressed: () {},
                           style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: <Widget>[
                               const Icon(
                                 Icons.add,
                                 size: 16,
@@ -292,8 +290,8 @@ class ProductCard extends HookWidget {
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
                             ],
-                          )),
-                    )
+                          ),),
+                    ),
                   ],
                 ),
               ),
@@ -367,7 +365,7 @@ class Header extends ConsumerWidget {
                       child: CircleAvatar(
                         backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
                         foregroundImage: NetworkImage(
-                            'https://api.dicebear.com/8.x/adventurer/png?seed=${user.value?.user.fullName}'),
+                            'https://api.dicebear.com/8.x/adventurer/png?seed=${user.value?.user.fullName}',),
                         radius: 22,
                       ),
                     ),
