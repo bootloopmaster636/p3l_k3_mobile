@@ -36,6 +36,8 @@ class CustomerHomeScreen extends HookConsumerWidget {
       body: RefreshIndicator(
         onRefresh: () async {
           await ref.read(productLogicProvider.notifier).refresh();
+          await ref.read(hampersLogicProvider.notifier).refresh();
+          await ref.read(generalInfoLogicProvider.notifier).refresh();
         },
         triggerMode: RefreshIndicatorTriggerMode.anywhere,
         edgeOffset: 440,
