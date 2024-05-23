@@ -169,7 +169,7 @@ class ProductAdditionalInfo extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            'Stock',
+                            'Ready Stock',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
@@ -183,11 +183,11 @@ class ProductAdditionalInfo extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          'Product category',
+                          'Daily Stock',
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          'soon(tm)',
+                          '${product.dailyStock} available',
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                       ],
@@ -206,13 +206,28 @@ class ProductAdditionalInfo extends StatelessWidget {
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            product.status == ProductStockType.onDemand ? 'Ready in store' : 'Should pre-order',
+                            product.status,
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Category',
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            product.category?.name ?? 'Unknown',
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ],
