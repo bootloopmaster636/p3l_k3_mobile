@@ -8,10 +8,12 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:p3l_k3_mobile/constants.dart';
 import 'package:p3l_k3_mobile/data/model/customer_model.dart';
+import 'package:p3l_k3_mobile/data/model/general_info_model.dart';
 import 'package:p3l_k3_mobile/data/model/hampers_model.dart';
 import 'package:p3l_k3_mobile/data/model/product_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
 import 'package:p3l_k3_mobile/logic/customer_logic.dart';
+import 'package:p3l_k3_mobile/logic/general_info_logic.dart';
 import 'package:p3l_k3_mobile/logic/hampers_logic.dart';
 import 'package:p3l_k3_mobile/logic/product_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
@@ -479,34 +481,47 @@ class Header extends ConsumerWidget {
   }
 }
 
-class Announcements extends StatelessWidget {
+class Announcements extends ConsumerWidget {
   const Announcements({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Swiper(
-      itemCount: 4,
-      viewportFraction: 0.8,
-      scale: 0.9,
-      fade: 0.6,
-      autoplay: true,
-      autoplayDelay: 6000,
-      duration: 800,
-      pagination: const SwiperPagination(),
-      outer: true,
-      itemBuilder: (BuildContext context, int index) => Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(
-            color: Theme.of(context).colorScheme.primary,
-            width: 2,
-          ),
-        ),
-        child: Center(child: Text(index.toString())),
-      ),
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<List<GeneralInfo>> generalInfo = ref.watch(generalInfoLogicProvider);
+
+    return generalInfo.isLoading
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : Swiper(
+            itemCount: generalInfo.value?.length ?? 0,
+            viewportFraction: 0.8,
+            scale: 0.9,
+            fade: 0.6,
+            autoplay: true,
+            autoplayDelay: 6000,
+            duration: 800,
+            pagination: const SwiperPagination(),
+            outer: true,
+            itemBuilder: (BuildContext context, int index) => Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 2,
+                ),
+              ),
+              child: CachedNetworkImage(
+                imageUrl: '$storageUrl/generalInfo/${generalInfo.value?[index].picture}',
+                progressIndicatorBuilder: (BuildContext context, String url, DownloadProgress downloadProgress) =>
+                    Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
+                fit: BoxFit.fill,
+                memCacheHeight: 600,
+                memCacheWidth: 600,
+              ),
+            ),
+          );
   }
 }
