@@ -28,24 +28,7 @@ class CustomerHomeScreen extends HookConsumerWidget {
     final AsyncValue<List<Product>> products = ref.watch(productLogicProvider);
 
     return Scaffold(
-      floatingActionButton: ListenableBuilder(
-        // for back to top button
-        listenable: scrollCtl,
-        builder: (BuildContext context, Widget? widget) => Visibility(
-          visible: scrollCtl.offset > 100,
-          child: widget ?? const SizedBox(),
-        ),
-        child: FloatingActionButton.small(
-          onPressed: () {
-            scrollCtl.animateTo(
-              scrollCtl.position.minScrollExtent,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeOutQuint,
-            );
-          },
-          child: const Icon(Icons.keyboard_arrow_up_outlined),
-        ),
-      ),
+      floatingActionButton: ScrollToTopButton(scrollCtl: scrollCtl),
       body: RefreshIndicator(
         onRefresh: () async {
           await ref.read(productLogicProvider.notifier).refresh();
@@ -64,14 +47,43 @@ class CustomerHomeScreen extends HookConsumerWidget {
             ),
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.only(top: 10, left: 16, right: 16, bottom: 6),
-                child: Row(
+                padding: const EdgeInsets.only(top: 16, left: 16, right: 16, bottom: 6),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'Our Products',
+                      'Hampers',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Give something special for your special someone :)',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Our Products',
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                        Text(
+                          'Craving something sweet? We got you covered!',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                      ],
                     ),
                     const Spacer(),
                     const FilterButton(),
@@ -101,6 +113,37 @@ class CustomerHomeScreen extends HookConsumerWidget {
             const SliverGap(32),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ScrollToTopButton extends StatelessWidget {
+  const ScrollToTopButton({
+    super.key,
+    required this.scrollCtl,
+  });
+
+  final ScrollController scrollCtl;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListenableBuilder(
+      // for back to top button
+      listenable: scrollCtl,
+      builder: (BuildContext context, Widget? widget) => Visibility(
+        visible: scrollCtl.offset > 100,
+        child: widget ?? const SizedBox(),
+      ),
+      child: FloatingActionButton.small(
+        onPressed: () {
+          scrollCtl.animateTo(
+            scrollCtl.position.minScrollExtent,
+            duration: const Duration(milliseconds: 800),
+            curve: Curves.easeOutQuint,
+          );
+        },
+        child: const Icon(Icons.keyboard_arrow_up_outlined),
       ),
     );
   }
@@ -200,6 +243,8 @@ class ProductCard extends HookWidget {
                   progressIndicatorBuilder: (BuildContext context, String url, DownloadProgress downloadProgress) =>
                       Center(child: CircularProgressIndicator(value: downloadProgress.progress)),
                   fit: BoxFit.cover,
+                  memCacheHeight: 300,
+                  memCacheWidth: 300,
                 ),
               ),
             ),
