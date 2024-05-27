@@ -171,7 +171,7 @@ class ScrollToTopButton extends StatelessWidget {
         onPressed: () {
           scrollCtl.animateTo(
             scrollCtl.position.minScrollExtent,
-            duration: const Duration(seconds: 1),
+            duration: const Duration(milliseconds: 800),
             curve: Curves.easeOutQuint,
           );
         },

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -8,6 +9,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:p3l_k3_mobile/constants.dart';
 import 'package:p3l_k3_mobile/data/model/product_model.dart';
 import 'package:p3l_k3_mobile/logic/product_logic.dart';
+import 'package:p3l_k3_mobile/utility.dart';
 import 'package:zoom_pinch_overlay/zoom_pinch_overlay.dart';
 
 @RoutePage()
@@ -88,6 +90,10 @@ class ProductInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Future<Color?> dominantColor =
+        getImagePaletteDarkVibrant(CachedNetworkImageProvider('$storageUrl/product/${product.picture}'));
+    final ExpandableController expandableController = ExpandableController();
+
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       sliver: SliverList(
@@ -101,17 +107,22 @@ class ProductInfo extends StatelessWidget {
                   duration: 600.ms,
                   curve: Curves.easeOutExpo,
                 ),
-            Text(
-              product.name,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium
-                  ?.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
-            ).animate().fadeIn(delay: 400.ms, duration: 300.ms).slideY(
-                  begin: 2,
-                  duration: 600.ms,
-                  curve: Curves.easeOutExpo,
-                ),
+            FutureBuilder<Color?>(
+              future: dominantColor,
+              builder: (BuildContext context, AsyncSnapshot<Color?> snapshot) {
+                return Text(
+                  product.name,
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: snapshot.data ?? Theme.of(context).colorScheme.primary,
+                      ),
+                ).animate().fadeIn(delay: 400.ms, duration: 300.ms).slideY(
+                      begin: 2,
+                      duration: 600.ms,
+                      curve: Curves.easeOutExpo,
+                    );
+              },
+            ),
             Text(
               'Rp. ${product.price}',
               style: Theme.of(context).textTheme.titleLarge,
@@ -121,16 +132,38 @@ class ProductInfo extends StatelessWidget {
                   curve: Curves.easeOutExpo,
                 ),
             const Gap(8),
-            Text(
-              product.description,
-              style: Theme.of(context).textTheme.bodyMedium,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                ExpandablePanel(
+                  collapsed: Text(
+                    product.description,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  expanded: Text(
+                    product.description,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  controller: expandableController,
+                ),
+                IconButton(
+                  onPressed: expandableController.toggle,
+                  icon: const Icon(Icons.more_horiz_outlined),
+                ),
+              ],
             ).animate().fadeIn(delay: 600.ms, duration: 300.ms).slideY(
                   begin: 2,
                   duration: 600.ms,
                   curve: Curves.easeOutExpo,
                 ),
             const Gap(16),
-            ProductAdditionalInfo(product: product).animate().fadeIn(delay: 1000.ms),
+            ProductAdditionalInfo(product: product).animate().fadeIn(delay: 800.ms).slideY(
+                  begin: 2,
+                  duration: 600.ms,
+                  curve: Curves.easeOutExpo,
+                ),
             const Gap(8),
             const SizedBox(height: 128),
           ],
@@ -148,6 +181,7 @@ class ProductAdditionalInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.grey[200],
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

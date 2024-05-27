@@ -17,6 +17,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverAppBar(
             expandedHeight: 400,
@@ -112,10 +113,7 @@ class ProfileSettingsContent extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 'Things you might looking for',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
             const Gap(8),
@@ -141,11 +139,19 @@ class ProfileSettingsContent extends StatelessWidget {
                 size: 24,
               ),
             ),
+            const Gap(8),
+            const SizedBox(
+              height: 120,
+            ),
           ],
         )
             .animate(delay: 600.ms)
             .slideY(
-                begin: 1, end: 0, duration: 800.ms, curve: Curves.easeOutQuint,)
+              begin: 1,
+              end: 0,
+              duration: 800.ms,
+              curve: Curves.easeOutQuint,
+            )
             .fadeIn(duration: 800.ms),
       ),
     );
@@ -193,38 +199,37 @@ class Header extends ConsumerWidget {
               width: 128,
               height: 128,
               child: CircleAvatar(
-                backgroundColor:
-                    Theme.of(context).colorScheme.tertiaryContainer,
+                backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
                 foregroundImage: NetworkImage(
                   'https://api.dicebear.com/8.x/adventurer/png?seed=${user.value?.user.fullName}',
                 ),
               ).animate(delay: 400.ms).rotate(
-                  begin: 1,
-                  end: 0,
-                  duration: 600.ms,
-                  curve: Curves.easeOutBack,),
+                    begin: 1,
+                    end: 0,
+                    duration: 600.ms,
+                    curve: Curves.easeOutBack,
+                  ),
             )
                 .animate(delay: 400.ms)
                 .slideY(
-                    begin: 2,
-                    end: 0,
-                    duration: 600.ms,
-                    curve: Curves.easeOutBack,)
+                  begin: 2,
+                  end: 0,
+                  duration: 600.ms,
+                  curve: Curves.easeOutBack,
+                )
                 .fadeIn(),
             const Gap(8),
             Text(
               user.value?.user.fullName ?? 'Unknown',
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
             )
                 .animate(delay: 1000.ms)
                 .slideY(
-                    begin: -1,
-                    end: 0,
-                    duration: 500.ms,
-                    curve: Curves.easeOutExpo,)
+                  begin: -1,
+                  end: 0,
+                  duration: 500.ms,
+                  curve: Curves.easeOutExpo,
+                )
                 .fadeIn(),
             const Gap(4),
             Text(
@@ -233,10 +238,11 @@ class Header extends ConsumerWidget {
             )
                 .animate(delay: 1200.ms)
                 .slideY(
-                    begin: -1,
-                    end: 0,
-                    duration: 500.ms,
-                    curve: Curves.easeOutExpo,)
+                  begin: -1,
+                  end: 0,
+                  duration: 500.ms,
+                  curve: Curves.easeOutExpo,
+                )
                 .fadeIn(),
             const Gap(16),
             Row(
@@ -257,8 +263,7 @@ class Header extends ConsumerWidget {
                   appearAnimationDuration: Duration(milliseconds: 100),
                   disappearAnimationDuration: Duration(milliseconds: 100),
                   modalConfiguration: ModalConfiguration(opacity: 0.2),
-                  content: Text(
-                      'This is the bonus coins you get from ordering, each coin worth Rp. 100.\n\n'
+                  content: Text('This is the bonus coins you get from ordering, each coin worth Rp. 100.\n\n'
                       'You can use it for discount at your next order.'),
                   child: Icon(
                     Icons.help_outline_outlined,
@@ -281,8 +286,7 @@ class Header extends ConsumerWidget {
                   appearAnimationDuration: Duration(milliseconds: 100),
                   disappearAnimationDuration: Duration(milliseconds: 100),
                   modalConfiguration: ModalConfiguration(opacity: 0.2),
-                  content: Text(
-                      'Money will be refunded to this account when you paid but the order is cancelled.\n\n'
+                  content: Text('Money will be refunded to this account when you paid but the order is cancelled.\n\n'
                       'You can transfer it to your bank account using "Transfer Balance" menu below.'),
                   child: Icon(
                     Icons.help_outline_outlined,
@@ -293,10 +297,11 @@ class Header extends ConsumerWidget {
             )
                 .animate(delay: 1400.ms)
                 .slideY(
-                    begin: -1,
-                    end: 0,
-                    duration: 500.ms,
-                    curve: Curves.easeOutExpo,)
+                  begin: -1,
+                  end: 0,
+                  duration: 500.ms,
+                  curve: Curves.easeOutExpo,
+                )
                 .fadeIn(),
           ],
         ),

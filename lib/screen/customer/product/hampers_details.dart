@@ -10,6 +10,8 @@ import 'package:p3l_k3_mobile/data/model/hampers_model.dart';
 import 'package:p3l_k3_mobile/logic/hampers_logic.dart';
 import 'package:zoom_pinch_overlay/zoom_pinch_overlay.dart';
 
+import '../../../utility.dart';
+
 @RoutePage()
 class HampersDetailScreen extends ConsumerWidget {
   const HampersDetailScreen({required this.hampersID, super.key});
@@ -26,6 +28,7 @@ class HampersDetailScreen extends ConsumerWidget {
 
     return Scaffold(
       body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverAppBar(
             expandedHeight: 400,
@@ -72,6 +75,9 @@ class HampersInfo extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final Future<Color?> dominantColor =
+        getImagePaletteDarkVibrant(CachedNetworkImageProvider('$storageUrl/hampers/${hampers.picture}'));
+
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       sliver: SliverList(
@@ -85,17 +91,20 @@ class HampersInfo extends ConsumerWidget {
                   duration: 600.ms,
                   curve: Curves.easeOutExpo,
                 ),
-            Text(
-              hampers.name,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium
-                  ?.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
-            ).animate().fadeIn(delay: 500.ms, duration: 300.ms).slideY(
-                  begin: 2,
-                  duration: 600.ms,
-                  curve: Curves.easeOutExpo,
-                ),
+            FutureBuilder<Color?>(
+              future: dominantColor,
+              builder: (BuildContext context, AsyncSnapshot<Color?> snapshot) {
+                return Text(
+                  hampers.name,
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.bold, color: snapshot.data ?? Theme.of(context).colorScheme.primary),
+                ).animate().fadeIn(delay: 500.ms, duration: 300.ms).slideY(
+                      begin: 2,
+                      duration: 600.ms,
+                      curve: Curves.easeOutExpo,
+                    );
+              },
+            ),
             Text(
               'Rp. ${hampers.price}',
               style: Theme.of(context).textTheme.titleLarge,
@@ -121,6 +130,10 @@ class HampersInfo extends ConsumerWidget {
                   duration: 600.ms,
                   curve: Curves.easeOutExpo,
                 ),
+            const Gap(8),
+            const SizedBox(
+              height: 160,
+            ),
           ],
         ),
       ),
@@ -146,6 +159,7 @@ class InsideHampersBox extends StatelessWidget {
             return SizedBox(
               height: 120,
               child: Card(
+                color: Colors.grey[200],
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: Row(
