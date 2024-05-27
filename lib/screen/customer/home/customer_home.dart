@@ -305,29 +305,6 @@ class ProductCard extends HookWidget {
                         ),
                       ),
                     ),
-                    const Gap(8),
-                    SizedBox(
-                      height: 32,
-                      child: OutlinedButton(
-                        onPressed: () {},
-                        style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            const Icon(
-                              Icons.add,
-                              size: 16,
-                            ),
-                            Text(
-                              'Add to cart',
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
