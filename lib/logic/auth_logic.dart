@@ -14,7 +14,8 @@ class AuthLogic extends _$AuthLogic {
   Future<Auth> build() async {
     state = const AsyncLoading<Auth>();
     final String? token = await getToken();
-    final User user = token == null || token.isEmpty ? generateEmptyUser() : await getUserData(token);
+    final User user =
+        token == null || token == 'guest' || token.isEmpty ? generateEmptyUser() : await getUserData(token);
 
     return Auth(accessToken: token ?? '', user: user);
   }
@@ -43,6 +44,18 @@ class AuthLogic extends _$AuthLogic {
     });
 
     state = AsyncData<Auth>(Auth(accessToken: '', user: generateEmptyUser()));
+  }
+
+  void loginAsGuest() {
+    state = const AsyncLoading<Auth>();
+
+    setToken('guest').then((_) {
+      Logger().i('Token set as guest');
+    }).catchError((Object e) {
+      Logger().e(e.toString());
+    });
+
+    state = AsyncData<Auth>(Auth(accessToken: 'guest', user: generateEmptyUser()));
   }
 
   Future<void> register() async {

@@ -7,11 +7,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:p3l_k3_mobile/constants.dart';
+import 'package:p3l_k3_mobile/data/model/auth_model.dart';
 import 'package:p3l_k3_mobile/data/model/customer_model.dart';
 import 'package:p3l_k3_mobile/data/model/general_info_model.dart';
 import 'package:p3l_k3_mobile/data/model/hampers_model.dart';
 import 'package:p3l_k3_mobile/data/model/product_model.dart';
 import 'package:p3l_k3_mobile/general_components.dart';
+import 'package:p3l_k3_mobile/logic/auth_logic.dart';
 import 'package:p3l_k3_mobile/logic/customer_logic.dart';
 import 'package:p3l_k3_mobile/logic/general_info_logic.dart';
 import 'package:p3l_k3_mobile/logic/hampers_logic.dart';
@@ -401,6 +403,7 @@ class Header extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<Customer> user = ref.watch(customerLogicProvider);
+    final AsyncValue<Auth> auth = ref.watch(authLogicProvider);
 
     return Skeletonizer(
       enabled: user.isLoading,
@@ -439,24 +442,34 @@ class Header extends ConsumerWidget {
                       height: 48,
                     ),
                     const Spacer(),
-                    InkWell(
-                      onTap: () {
-                        showDialog<Widget>(
-                          context: context,
-                          barrierColor: Colors.black26,
-                          builder: (BuildContext context) {
-                            return const SettingsDialog();
-                          },
-                        );
-                      },
-                      child: CircleAvatar(
-                        backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
-                        foregroundImage: NetworkImage(
-                          'https://api.dicebear.com/8.x/adventurer/png?seed=${user.value?.user.fullName}',
+
+                    // profile picture/more info/ login(guest)
+                    if (auth.value?.accessToken != 'guest')
+                      InkWell(
+                        onTap: () {
+                          showDialog<Widget>(
+                            context: context,
+                            barrierColor: Colors.black26,
+                            builder: (BuildContext context) {
+                              return const SettingsDialog();
+                            },
+                          );
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                          foregroundImage: NetworkImage(
+                            'https://api.dicebear.com/8.x/adventurer/png?seed=${user.value?.user.fullName}',
+                          ),
+                          radius: 22,
                         ),
-                        radius: 22,
+                      )
+                    else
+                      FilledButton(
+                        onPressed: () {
+                          ref.read(authLogicProvider.notifier).logout();
+                        },
+                        child: const Text('Log in'),
                       ),
-                    ),
                   ],
                 ),
                 const Gap(16),

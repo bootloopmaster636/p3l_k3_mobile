@@ -41,7 +41,10 @@ class LoginScreen extends ConsumerWidget {
                 onPlay: (AnimationController controller) => controller.repeat(),
               )
               .shake(
-                  offset: const Offset(20, 10), hz: 0.2, duration: 8.seconds,),
+                offset: const Offset(20, 10),
+                hz: 0.2,
+                duration: 8.seconds,
+              ),
           Positioned(
             right: -250,
             bottom: -250,
@@ -63,7 +66,10 @@ class LoginScreen extends ConsumerWidget {
                 onPlay: (AnimationController controller) => controller.repeat(),
               )
               .shake(
-                  offset: const Offset(-20, -10), hz: 0.2, duration: 8.seconds,),
+                offset: const Offset(-20, -10),
+                hz: 0.2,
+                duration: 8.seconds,
+              ),
           const Padding(
             padding: EdgeInsets.all(8),
             child: LoginPageContent(),
@@ -128,9 +134,9 @@ class LoginForm extends HookConsumerWidget {
             decoration: InputDecoration(
               hintText: 'Password',
               suffixIcon: IconButton(
-                icon: Icon(isPasswordVisible.value == true
-                    ? Icons.visibility_off_outlined
-                    : Icons.visibility_outlined,),
+                icon: Icon(
+                  isPasswordVisible.value == true ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                ),
                 onPressed: () {
                   isPasswordVisible.value = !isPasswordVisible.value;
                 },
@@ -146,16 +152,13 @@ class LoginForm extends HookConsumerWidget {
               onPressed: authData.isLoading == false
                   ? () async {
                       try {
-                        await ref
-                            .read(authLogicProvider.notifier)
-                            .login(emailCtl.text, passwordCtl.text);
+                        await ref.read(authLogicProvider.notifier).login(emailCtl.text, passwordCtl.text);
                       } on DioException catch (e) {
                         if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                e.response?.data.toString() ??
-                                    'Unknown error occured',
+                                e.response?.data.toString() ?? 'Unknown error occured',
                               ),
                             ),
                           );
@@ -194,7 +197,9 @@ class LoginForm extends HookConsumerWidget {
               const Text('or'),
               const Gap(8),
               OutlinedButton(
-                onPressed: () {},
+                onPressed: () {
+                  ref.read(authLogicProvider.notifier).loginAsGuest();
+                },
                 child: const Text('Continue as guest'),
               ),
             ],

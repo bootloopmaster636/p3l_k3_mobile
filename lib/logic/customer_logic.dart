@@ -9,7 +9,11 @@ part 'customer_logic.g.dart';
 class CustomerLogic extends _$CustomerLogic {
   @override
   Future<Customer> build() async {
-    final String token = ref.read(authLogicProvider).value?.accessToken ?? '';
-    return getCustomerData(token);
+    if (ref.read(authLogicProvider).value?.accessToken != 'guest') {
+      final String token = ref.read(authLogicProvider).value?.accessToken ?? '';
+      return getCustomerData(token);
+    } else {
+      return makeGuestCustomer();
+    }
   }
 }

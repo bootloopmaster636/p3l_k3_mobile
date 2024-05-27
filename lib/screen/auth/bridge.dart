@@ -16,7 +16,7 @@ class BridgeScreen extends ConsumerWidget {
     final AsyncValue<Auth> auth = ref.watch(authLogicProvider);
 
     if (auth.value?.accessToken != '') {
-      if (auth.value?.user.roleId == 4) {
+      if (auth.value?.user.roleId == 4 || auth.value?.accessToken == 'guest') {
         //role id 4 is customer
         return const CustomerHomeScreen();
       } else if (auth.value?.user.roleId == 3) {
