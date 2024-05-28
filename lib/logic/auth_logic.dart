@@ -1,4 +1,5 @@
 import 'package:logger/logger.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:p3l_k3_mobile/data/api/auth_api.dart';
 import 'package:p3l_k3_mobile/data/api/user_api.dart';
 import 'package:p3l_k3_mobile/data/local/token.dart';
@@ -27,6 +28,7 @@ class AuthLogic extends _$AuthLogic {
       state = const AsyncLoading<Auth>();
       final Auth auth = await loginApi(email, password);
       await setToken(auth.accessToken);
+      await OneSignal.User.addTagWithKey('user_id', auth.user.id.toString());
       state = AsyncData<Auth>(auth);
     } catch (e) {
       state = AsyncError<Auth>(e, StackTrace.current);
