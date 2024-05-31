@@ -125,8 +125,9 @@ class LoginForm extends HookConsumerWidget {
         children: <Widget>[
           TextFormField(
             decoration: const InputDecoration(
-              hintText: 'Username',
+              hintText: 'E-mail',
             ),
+            keyboardType: TextInputType.emailAddress,
             controller: emailCtl,
           ),
           const Gap(8),
@@ -143,6 +144,7 @@ class LoginForm extends HookConsumerWidget {
               ),
             ),
             obscureText: !isPasswordVisible.value,
+            keyboardType: TextInputType.visiblePassword,
             controller: passwordCtl,
           ),
           const Gap(16),
@@ -184,25 +186,28 @@ class LoginForm extends HookConsumerWidget {
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           const Gap(4),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              OutlinedButton(
-                onPressed: () {
-                  context.router.pushNamed('/register');
-                },
-                child: const Text('Register'),
-              ),
-              const Gap(8),
-              const Text('or'),
-              const Gap(8),
-              OutlinedButton(
-                onPressed: () {
-                  ref.read(authLogicProvider.notifier).loginAsGuest();
-                },
-                child: const Text('Continue as guest'),
-              ),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                OutlinedButton(
+                  onPressed: () {
+                    context.router.pushNamed('/register');
+                  },
+                  child: const Text('Register'),
+                ),
+                const Gap(8),
+                const Text('or'),
+                const Gap(8),
+                OutlinedButton(
+                  onPressed: () {
+                    ref.read(authLogicProvider.notifier).loginAsGuest();
+                  },
+                  child: const Text('Continue as guest'),
+                ),
+              ],
+            ),
           ),
         ],
       ),
