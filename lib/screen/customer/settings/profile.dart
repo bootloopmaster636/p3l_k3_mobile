@@ -201,7 +201,7 @@ class Header extends ConsumerWidget {
               child: CircleAvatar(
                 backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
                 foregroundImage: NetworkImage(
-                  'https://api.dicebear.com/8.x/adventurer/png?seed=${user.value?.user.fullName}',
+                  'https://api.dicebear.com/8.x/adventurer/png?seed=${user.value?.user?.fullName ?? 'Unknown'}',
                 ),
               ).animate(delay: 400.ms).rotate(
                     begin: 1,
@@ -220,7 +220,7 @@ class Header extends ConsumerWidget {
                 .fadeIn(),
             const Gap(8),
             Text(
-              user.value?.user.fullName ?? 'Unknown',
+              user.value?.user?.fullName ?? 'Unknown',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
             )
                 .animate(delay: 1000.ms)
@@ -233,7 +233,7 @@ class Header extends ConsumerWidget {
                 .fadeIn(),
             const Gap(4),
             Text(
-              user.value?.user.email ?? 'no@one.com',
+              user.value?.user?.email ?? 'no@one.com',
               style: Theme.of(context).textTheme.titleMedium,
             )
                 .animate(delay: 1200.ms)

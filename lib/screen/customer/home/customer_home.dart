@@ -435,7 +435,7 @@ class Header extends ConsumerWidget {
                         child: CircleAvatar(
                           backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
                           foregroundImage: NetworkImage(
-                            'https://api.dicebear.com/8.x/adventurer/png?seed=${user.value?.user.fullName}',
+                            'https://api.dicebear.com/8.x/adventurer/png?seed=${user.value?.user?.fullName ?? 'Stranger'}',
                           ),
                           radius: 22,
                         ),
@@ -451,7 +451,7 @@ class Header extends ConsumerWidget {
                 ),
                 const Gap(16),
                 Text(
-                  'Greetings, ${user.value?.user.fullName}!',
+                  'Greetings, ${user.value?.user?.fullName ?? 'Stranger'}!',
                   textAlign: TextAlign.start,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                 ),

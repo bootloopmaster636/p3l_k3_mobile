@@ -11,7 +11,7 @@ class Customer with _$Customer {
     required int id,
     required int point,
     @JsonKey(name: 'nominal_balance') required int nominalBalance,
-    @JsonKey(name: 'users') required User user,
+    @JsonKey(name: 'users') required User? user,
     @Default(0) int userId, // might not be useful.. just comment it if it makes trouble
   }) = _Customer;
 

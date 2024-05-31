@@ -1,28 +1,32 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'cart_model.dart';
+part of 'transaction_detail_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CartImpl _$$CartImplFromJson(Map<String, dynamic> json) => _$CartImpl(
+_$TransactionDetailImpl _$$TransactionDetailImplFromJson(
+        Map<String, dynamic> json) =>
+    _$TransactionDetailImpl(
+      id: json['id'] as int?,
       transactionId: json['transaction_id'] as int,
       productId: json['product_id'] as int?,
       hampersId: json['hampers_id'] as int?,
       quantity: json['quantity'] as int,
       price: json['price'] as int,
       totalPrice: json['total_price'] as int,
-      id: json['id'] as int?,
       product: json['product'] == null
           ? null
           : Product.fromJson(json['product'] as Map<String, dynamic>),
+      hampers: json['hampers'] == null
+          ? null
+          : Hampers.fromJson(json['hampers'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$CartImplToJson(_$CartImpl instance) {
-  final val = <String, dynamic>{
-    'transaction_id': instance.transactionId,
-  };
+Map<String, dynamic> _$$TransactionDetailImplToJson(
+    _$TransactionDetailImpl instance) {
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -30,12 +34,14 @@ Map<String, dynamic> _$$CartImplToJson(_$CartImpl instance) {
     }
   }
 
+  writeNotNull('id', instance.id);
+  val['transaction_id'] = instance.transactionId;
   writeNotNull('product_id', instance.productId);
   writeNotNull('hampers_id', instance.hampersId);
   val['quantity'] = instance.quantity;
   val['price'] = instance.price;
   val['total_price'] = instance.totalPrice;
-  writeNotNull('id', instance.id);
   writeNotNull('product', instance.product?.toJson());
+  writeNotNull('hampers', instance.hampers?.toJson());
   return val;
 }

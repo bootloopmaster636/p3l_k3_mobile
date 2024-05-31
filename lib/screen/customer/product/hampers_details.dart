@@ -124,7 +124,7 @@ class HampersInfo extends ConsumerWidget {
                 ),
             const Gap(8),
             InsideHampersBox(
-              hampersDetail: hampers.hampersDetail,
+              hampersDetail: hampers?.hampersDetail ?? [],
             ).animate(delay: 800.ms).fadeIn(duration: 300.ms).slideY(
                   begin: 2,
                   duration: 600.ms,

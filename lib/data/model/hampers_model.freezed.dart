@@ -30,7 +30,7 @@ mixin _$Hampers {
   String get picture => throw _privateConstructorUsedError;
   int get active => throw _privateConstructorUsedError;
   @JsonKey(name: 'hampers_detail')
-  List<HampersDetail> get hampersDetail => throw _privateConstructorUsedError;
+  List<HampersDetail>? get hampersDetail => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +49,7 @@ abstract class $HampersCopyWith<$Res> {
       int quantity,
       @JsonKey(name: 'hampers_picture') String picture,
       int active,
-      @JsonKey(name: 'hampers_detail') List<HampersDetail> hampersDetail});
+      @JsonKey(name: 'hampers_detail') List<HampersDetail>? hampersDetail});
 }
 
 /// @nodoc
@@ -71,7 +71,7 @@ class _$HampersCopyWithImpl<$Res, $Val extends Hampers>
     Object? quantity = null,
     Object? picture = null,
     Object? active = null,
-    Object? hampersDetail = null,
+    Object? hampersDetail = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -98,10 +98,10 @@ class _$HampersCopyWithImpl<$Res, $Val extends Hampers>
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as int,
-      hampersDetail: null == hampersDetail
+      hampersDetail: freezed == hampersDetail
           ? _value.hampersDetail
           : hampersDetail // ignore: cast_nullable_to_non_nullable
-              as List<HampersDetail>,
+              as List<HampersDetail>?,
     ) as $Val);
   }
 }
@@ -120,7 +120,7 @@ abstract class _$$HampersImplCopyWith<$Res> implements $HampersCopyWith<$Res> {
       int quantity,
       @JsonKey(name: 'hampers_picture') String picture,
       int active,
-      @JsonKey(name: 'hampers_detail') List<HampersDetail> hampersDetail});
+      @JsonKey(name: 'hampers_detail') List<HampersDetail>? hampersDetail});
 }
 
 /// @nodoc
@@ -140,7 +140,7 @@ class __$$HampersImplCopyWithImpl<$Res>
     Object? quantity = null,
     Object? picture = null,
     Object? active = null,
-    Object? hampersDetail = null,
+    Object? hampersDetail = freezed,
   }) {
     return _then(_$HampersImpl(
       id: null == id
@@ -167,10 +167,10 @@ class __$$HampersImplCopyWithImpl<$Res>
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as int,
-      hampersDetail: null == hampersDetail
+      hampersDetail: freezed == hampersDetail
           ? _value._hampersDetail
           : hampersDetail // ignore: cast_nullable_to_non_nullable
-              as List<HampersDetail>,
+              as List<HampersDetail>?,
     ));
   }
 }
@@ -186,7 +186,7 @@ class _$HampersImpl implements _Hampers {
       @JsonKey(name: 'hampers_picture') required this.picture,
       required this.active,
       @JsonKey(name: 'hampers_detail')
-      required final List<HampersDetail> hampersDetail})
+      required final List<HampersDetail>? hampersDetail})
       : _hampersDetail = hampersDetail;
 
   factory _$HampersImpl.fromJson(Map<String, dynamic> json) =>
@@ -207,13 +207,15 @@ class _$HampersImpl implements _Hampers {
   final String picture;
   @override
   final int active;
-  final List<HampersDetail> _hampersDetail;
+  final List<HampersDetail>? _hampersDetail;
   @override
   @JsonKey(name: 'hampers_detail')
-  List<HampersDetail> get hampersDetail {
+  List<HampersDetail>? get hampersDetail {
+    final value = _hampersDetail;
+    if (value == null) return null;
     if (_hampersDetail is EqualUnmodifiableListView) return _hampersDetail;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_hampersDetail);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -265,7 +267,7 @@ abstract class _Hampers implements Hampers {
       @JsonKey(name: 'hampers_picture') required final String picture,
       required final int active,
       @JsonKey(name: 'hampers_detail')
-      required final List<HampersDetail> hampersDetail}) = _$HampersImpl;
+      required final List<HampersDetail>? hampersDetail}) = _$HampersImpl;
 
   factory _Hampers.fromJson(Map<String, dynamic> json) = _$HampersImpl.fromJson;
 
@@ -286,7 +288,7 @@ abstract class _Hampers implements Hampers {
   int get active;
   @override
   @JsonKey(name: 'hampers_detail')
-  List<HampersDetail> get hampersDetail;
+  List<HampersDetail>? get hampersDetail;
   @override
   @JsonKey(ignore: true)
   _$$HampersImplCopyWith<_$HampersImpl> get copyWith =>

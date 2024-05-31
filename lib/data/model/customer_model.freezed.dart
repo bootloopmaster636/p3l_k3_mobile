@@ -25,7 +25,7 @@ mixin _$Customer {
   @JsonKey(name: 'nominal_balance')
   int get nominalBalance => throw _privateConstructorUsedError;
   @JsonKey(name: 'users')
-  User get user => throw _privateConstructorUsedError;
+  User? get user => throw _privateConstructorUsedError;
   int get userId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,10 +43,10 @@ abstract class $CustomerCopyWith<$Res> {
       {int id,
       int point,
       @JsonKey(name: 'nominal_balance') int nominalBalance,
-      @JsonKey(name: 'users') User user,
+      @JsonKey(name: 'users') User? user,
       int userId});
 
-  $UserCopyWith<$Res> get user;
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -65,7 +65,7 @@ class _$CustomerCopyWithImpl<$Res, $Val extends Customer>
     Object? id = null,
     Object? point = null,
     Object? nominalBalance = null,
-    Object? user = null,
+    Object? user = freezed,
     Object? userId = null,
   }) {
     return _then(_value.copyWith(
@@ -81,10 +81,10 @@ class _$CustomerCopyWithImpl<$Res, $Val extends Customer>
           ? _value.nominalBalance
           : nominalBalance // ignore: cast_nullable_to_non_nullable
               as int,
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as User?,
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -94,8 +94,12 @@ class _$CustomerCopyWithImpl<$Res, $Val extends Customer>
 
   @override
   @pragma('vm:prefer-inline')
-  $UserCopyWith<$Res> get user {
-    return $UserCopyWith<$Res>(_value.user, (value) {
+  $UserCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.user!, (value) {
       return _then(_value.copyWith(user: value) as $Val);
     });
   }
@@ -113,11 +117,11 @@ abstract class _$$CustomerImplCopyWith<$Res>
       {int id,
       int point,
       @JsonKey(name: 'nominal_balance') int nominalBalance,
-      @JsonKey(name: 'users') User user,
+      @JsonKey(name: 'users') User? user,
       int userId});
 
   @override
-  $UserCopyWith<$Res> get user;
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -134,7 +138,7 @@ class __$$CustomerImplCopyWithImpl<$Res>
     Object? id = null,
     Object? point = null,
     Object? nominalBalance = null,
-    Object? user = null,
+    Object? user = freezed,
     Object? userId = null,
   }) {
     return _then(_$CustomerImpl(
@@ -150,10 +154,10 @@ class __$$CustomerImplCopyWithImpl<$Res>
           ? _value.nominalBalance
           : nominalBalance // ignore: cast_nullable_to_non_nullable
               as int,
-      user: null == user
+      user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as User?,
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -184,7 +188,7 @@ class _$CustomerImpl with DiagnosticableTreeMixin implements _Customer {
   final int nominalBalance;
   @override
   @JsonKey(name: 'users')
-  final User user;
+  final User? user;
   @override
   @JsonKey()
   final int userId;
@@ -243,7 +247,7 @@ abstract class _Customer implements Customer {
       {required final int id,
       required final int point,
       @JsonKey(name: 'nominal_balance') required final int nominalBalance,
-      @JsonKey(name: 'users') required final User user,
+      @JsonKey(name: 'users') required final User? user,
       final int userId}) = _$CustomerImpl;
 
   factory _Customer.fromJson(Map<String, dynamic> json) =
@@ -258,7 +262,7 @@ abstract class _Customer implements Customer {
   int get nominalBalance;
   @override
   @JsonKey(name: 'users')
-  User get user;
+  User? get user;
   @override
   int get userId;
   @override

@@ -6,7 +6,7 @@ part of 'customer_logic.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$customerLogicHash() => r'526d74f9df5c7d31b710a4fa9b0b7c24626aa9e4';
+String _$customerLogicHash() => r'77dcc79624d2e0680ba91962b5ff83deb180e8e2';
 
 /// See also [CustomerLogic].
 @ProviderFor(CustomerLogic)

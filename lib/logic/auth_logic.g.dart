@@ -6,7 +6,7 @@ part of 'auth_logic.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$authLogicHash() => r'a9f11c393d2129ff1f066c9a76c760462183022e';
+String _$authLogicHash() => r'83e22d897c2058e19bb36b1dddd7f64a54b02831';
 
 /// See also [AuthLogic].
 @ProviderFor(AuthLogic)

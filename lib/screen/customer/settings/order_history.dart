@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:p3l_k3_mobile/data/model/cart_model.dart';
+import 'package:p3l_k3_mobile/data/model/transaction_detail_model.dart';
 import 'package:p3l_k3_mobile/data/model/transaction_model.dart';
 import 'package:p3l_k3_mobile/logic/transaction_logic.dart';
 import 'package:p3l_k3_mobile/utility.dart';
@@ -29,18 +29,20 @@ class OrderHistoryContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<List<Transaction>> transactions =
-        ref.watch(transactionLogicProvider);
+    final AsyncValue<List<Transaction>> transactions = ref.watch(transactionLogicProvider);
 
     return transactions.isLoading
         ? const CircularProgressIndicator()
         : Padding(
             padding: const EdgeInsets.all(16),
-            child: Column(
-              children: transactions.value?.map((Transaction transaction) {
-                    return OrderHistoryItem(transaction: transaction);
-                  }).toList() ??
-                  <Widget>[],
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: transactions.value?.map((Transaction transaction) {
+                      return OrderHistoryItem(transaction: transaction);
+                    }).toList() ??
+                    <Widget>[],
+              ),
             ),
           );
   }
@@ -48,6 +50,7 @@ class OrderHistoryContent extends ConsumerWidget {
 
 class OrderHistoryItem extends StatelessWidget {
   const OrderHistoryItem({required this.transaction, super.key});
+
   final Transaction transaction;
 
   @override
@@ -59,18 +62,15 @@ class OrderHistoryItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Text(
-              'Ordered on ${convertDateTimeToDMY(transaction.orderDate)}',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
+              'Ordered on ${convertDateTimeToDMY(transaction.orderDate ?? DateTime(0))}',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
             Text(
               'Transaction ID: ${transaction.id}',
               style: Theme.of(context).textTheme.titleSmall,
             ),
             const Gap(16),
-            OrderList(carts: transaction.carts ?? <Cart>[]),
+            OrderList(transactionDetails: transaction.transactionDetails ?? <TransactionDetail>[]),
           ],
         ),
       ),
@@ -79,18 +79,26 @@ class OrderHistoryItem extends StatelessWidget {
 }
 
 class OrderList extends StatelessWidget {
-  const OrderList({required this.carts, super.key});
-  final List<Cart> carts;
+  const OrderList({required this.transactionDetails, super.key});
+
+  final List<TransactionDetail?> transactionDetails;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: carts.map((Cart cart) {
-      return ListTile(
-        title: Text(cart.product?.name ?? 'Unknown product'),
-        subtitle: Text('Quantity: ${cart.quantity}'),
-        trailing: Text('Rp ${cart.product?.price ?? 0 * cart.quantity}'),
-      );
-    }).toList(),);
+      children: transactionDetails!.map((TransactionDetail? transactionDetail) {
+        return (transactionDetail?.product != null)
+            ? ListTile(
+                title: Text(transactionDetail?.product?.name ?? 'Unknown product'),
+                subtitle: Text('Quantity: ${transactionDetail?.quantity}'),
+                trailing: Text('Rp ${transactionDetail?.product?.price ?? 0 * transactionDetail!.quantity}'),
+              )
+            : ListTile(
+                title: Text(transactionDetail?.hampers?.name ?? 'Unknown hampers'),
+                subtitle: Text('Quantity: ${transactionDetail?.quantity}'),
+                trailing: Text('Rp ${transactionDetail?.hampers?.price ?? 0 * transactionDetail!.quantity}'),
+              );
+      }).toList(),
+    );
   }
 }

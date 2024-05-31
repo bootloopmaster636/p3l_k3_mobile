@@ -167,7 +167,7 @@ class Profile extends StatelessWidget {
               child: CircleAvatar(
                 backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
                 foregroundImage: NetworkImage(
-                  'https://api.dicebear.com/8.x/adventurer/png?seed=${user.user.fullName}',
+                  'https://api.dicebear.com/8.x/adventurer/png?seed=${user.user?.fullName ?? 'Stranger'}',
                 ),
               ),
             ),
@@ -176,7 +176,7 @@ class Profile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  user.user.fullName,
+                  user.user?.fullName ?? 'Stranger',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 const Gap(4),
