@@ -77,22 +77,22 @@ class SettingsContent extends ConsumerWidget {
             ListTile(
               onTap: () {},
               title: Text(
-                'My cart (website)',
+                'Transfer Balance',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               leading: const Icon(
-                Icons.shopping_cart_outlined,
+                Icons.payments_outlined,
                 size: 20,
               ),
             ),
             ListTile(
               onTap: () {},
               title: Text(
-                'Transfer Balance',
+                'Order on Delivery',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               leading: const Icon(
-                Icons.payments_outlined,
+                FontAwesomeIcons.truckPickup,
                 size: 20,
               ),
             ),

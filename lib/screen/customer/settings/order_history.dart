@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:p3l_k3_mobile/data/model/transaction_detail_model.dart';
 import 'package:p3l_k3_mobile/data/model/transaction_model.dart';
@@ -35,13 +34,18 @@ class OrderHistoryContent extends ConsumerWidget {
         ? const CircularProgressIndicator()
         : Padding(
             padding: const EdgeInsets.all(16),
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                children: transactions.value?.map((Transaction transaction) {
-                      return OrderHistoryItem(transaction: transaction);
-                    }).toList() ??
-                    <Widget>[],
+            child: RefreshIndicator(
+              onRefresh: () async {
+                await ref.read(transactionLogicProvider.notifier).fetchAll();
+              },
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: transactions.value?.map((Transaction transaction) {
+                        return OrderHistoryItem(transaction: transaction);
+                      }).toList() ??
+                      <Widget>[],
+                ),
               ),
             ),
           );
@@ -59,7 +63,7 @@ class OrderHistoryItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
               'Ordered on ${convertDateTimeToDMY(transaction.orderDate ?? DateTime(0))}',
@@ -69,7 +73,9 @@ class OrderHistoryItem extends StatelessWidget {
               'Transaction ID: ${transaction.id}',
               style: Theme.of(context).textTheme.titleSmall,
             ),
-            const Gap(16),
+            Chip(
+              label: Text(transaction.status),
+            ),
             OrderList(transactionDetails: transaction.transactionDetails ?? <TransactionDetail>[]),
           ],
         ),
@@ -86,7 +92,7 @@ class OrderList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: transactionDetails!.map((TransactionDetail? transactionDetail) {
+      children: transactionDetails.map((TransactionDetail? transactionDetail) {
         return (transactionDetail?.product != null)
             ? ListTile(
                 title: Text(transactionDetail?.product?.name ?? 'Unknown product'),

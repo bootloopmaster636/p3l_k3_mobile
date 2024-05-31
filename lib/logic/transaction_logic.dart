@@ -27,7 +27,7 @@ class TransactionLogic extends _$TransactionLogic {
 
   Future<void> fetchAll() async {
     final String token = ref.read(authLogicProvider).value?.accessToken ?? '';
-    final int customerId = ref.read(authLogicProvider).value?.user.id ?? 0;
+    final int customerId = ref.read(customerLogicProvider).value?.id ?? 0;
 
     try {
       state = const AsyncLoading<List<Transaction>>();
