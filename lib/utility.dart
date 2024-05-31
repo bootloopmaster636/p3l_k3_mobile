@@ -20,6 +20,7 @@ Future<Color?> getImagePaletteDarkVibrant(ImageProvider imageProvider) async {
 }
 
 Future<PaletteColor?> getImagePaletteDominantColor(ImageProvider imageProvider) async {
-  final PaletteGenerator paletteGenerator = await PaletteGenerator.fromImageProvider(imageProvider);
+  final PaletteGenerator paletteGenerator =
+      await PaletteGenerator.fromImageProvider(ResizeImage(imageProvider, height: 10, width: 10));
   return paletteGenerator.dominantColor;
 }
