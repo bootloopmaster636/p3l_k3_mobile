@@ -86,14 +86,16 @@ class SettingsContent extends ConsumerWidget {
               ),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                context.router.push(const OrderOnDeliveryRoute());
+              },
               title: Text(
-                'Order on Delivery',
+                'Order in Delivery',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               leading: const Icon(
-                FontAwesomeIcons.truckPickup,
-                size: 20,
+                FontAwesomeIcons.truckFast,
+                size: 16,
               ),
             ),
             ListTile(

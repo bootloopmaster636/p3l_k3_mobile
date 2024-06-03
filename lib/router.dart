@@ -11,6 +11,7 @@ import 'package:p3l_k3_mobile/screen/customer/settings/edit_address.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/edit_password.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/edit_profile.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/order_history.dart';
+import 'package:p3l_k3_mobile/screen/customer/settings/order_on_delivery.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/profile.dart';
 import 'package:p3l_k3_mobile/screen/employee/mo/absence_list.dart';
 import 'package:p3l_k3_mobile/screen/employee/mo_home.dart';
@@ -44,6 +45,12 @@ class AppRouter extends _$AppRouter {
           transitionsBuilder: TransitionsBuilders.fadeIn,
           durationInMilliseconds: 300,
           path: '/product',
+        ),
+        CustomRoute(
+          page: OrderOnDeliveryRoute.page,
+          transitionsBuilder: _slideLeftWithEase,
+          durationInMilliseconds: 300,
+          path: '/orderOnDelivery',
         ),
         CustomRoute(
           page: HampersDetailRoute.page,

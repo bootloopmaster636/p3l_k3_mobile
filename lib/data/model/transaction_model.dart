@@ -3,6 +3,8 @@ import 'package:p3l_k3_mobile/data/model/customer_model.dart';
 import 'package:p3l_k3_mobile/data/model/employee_model.dart';
 import 'package:p3l_k3_mobile/data/model/transaction_detail_model.dart';
 
+import 'delivery_model.dart';
+
 part 'transaction_model.freezed.dart';
 
 part 'transaction_model.g.dart';
@@ -28,6 +30,7 @@ class Transaction with _$Transaction {
     required int tip,
     Employee? employee,
     Customer? customer,
+    Delivery? delivery,
     int? id,
     @JsonKey(name: 'transaction_details') List<TransactionDetail?>? transactionDetails,
   }) = _Transaction;

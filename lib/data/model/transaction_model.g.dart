@@ -36,6 +36,9 @@ _$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
       customer: json['customer'] == null
           ? null
           : Customer.fromJson(json['customer'] as Map<String, dynamic>),
+      delivery: json['delivery'] == null
+          ? null
+          : Delivery.fromJson(json['delivery'] as Map<String, dynamic>),
       id: json['id'] as int?,
       transactionDetails: (json['transaction_details'] as List<dynamic>?)
           ?.map((e) => e == null
@@ -71,6 +74,7 @@ Map<String, dynamic> _$$TransactionImplToJson(_$TransactionImpl instance) {
   val['tip'] = instance.tip;
   writeNotNull('employee', instance.employee?.toJson());
   writeNotNull('customer', instance.customer?.toJson());
+  writeNotNull('delivery', instance.delivery?.toJson());
   writeNotNull('id', instance.id);
   writeNotNull('transaction_details',
       instance.transactionDetails?.map((e) => e?.toJson()).toList());

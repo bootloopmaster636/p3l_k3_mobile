@@ -6,7 +6,7 @@ part of 'transaction_logic.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$transactionLogicHash() => r'eea19035a2ae46b5ba9d81b15c051c78d6fbc212';
+String _$transactionLogicHash() => r'b5fd29bae281234a9c04b724d5440901d16f60e3';
 
 /// See also [TransactionLogic].
 @ProviderFor(TransactionLogic)

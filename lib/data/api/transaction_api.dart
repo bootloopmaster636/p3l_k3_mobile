@@ -44,3 +44,26 @@ Future<List<TransactionDetail>> getCartContents(String token, int transactionId)
     rethrow;
   }
 }
+
+Future<Null> finishOrder(String token, int transactionId) async {
+  final Response response;
+  final data = <String, dynamic>{
+    'id': transactionId,
+    'status': 'finished',
+  };
+
+  try {
+    response = await dio.post(
+      '/changeTransactionStatus',
+      data: data,
+      options: Options(
+        headers: <String, String>{
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+  } on DioException catch (e) {
+    Logger().e(e.response);
+    rethrow;
+  }
+}

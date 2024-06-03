@@ -85,6 +85,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const OrderHistoryScreen(),
       );
     },
+    OrderOnDeliveryRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const OrderOnDeliveryScreen(),
+      );
+    },
     ProductDetailRoute.name: (routeData) {
       final args = routeData.argsAs<ProductDetailRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -284,6 +290,20 @@ class OrderHistoryRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'OrderHistoryRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [OrderOnDeliveryScreen]
+class OrderOnDeliveryRoute extends PageRouteInfo<void> {
+  const OrderOnDeliveryRoute({List<PageRouteInfo>? children})
+      : super(
+          OrderOnDeliveryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'OrderOnDeliveryRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

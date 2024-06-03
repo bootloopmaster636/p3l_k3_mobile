@@ -52,6 +52,7 @@ mixin _$Transaction {
   int get tip => throw _privateConstructorUsedError;
   Employee? get employee => throw _privateConstructorUsedError;
   Customer? get customer => throw _privateConstructorUsedError;
+  Delivery? get delivery => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'transaction_details')
   List<TransactionDetail?>? get transactionDetails =>
@@ -88,12 +89,14 @@ abstract class $TransactionCopyWith<$Res> {
       int tip,
       Employee? employee,
       Customer? customer,
+      Delivery? delivery,
       int? id,
       @JsonKey(name: 'transaction_details')
       List<TransactionDetail?>? transactionDetails});
 
   $EmployeeCopyWith<$Res>? get employee;
   $CustomerCopyWith<$Res>? get customer;
+  $DeliveryCopyWith<$Res>? get delivery;
 }
 
 /// @nodoc
@@ -127,6 +130,7 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
     Object? tip = null,
     Object? employee = freezed,
     Object? customer = freezed,
+    Object? delivery = freezed,
     Object? id = freezed,
     Object? transactionDetails = freezed,
   }) {
@@ -203,6 +207,10 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
           ? _value.customer
           : customer // ignore: cast_nullable_to_non_nullable
               as Customer?,
+      delivery: freezed == delivery
+          ? _value.delivery
+          : delivery // ignore: cast_nullable_to_non_nullable
+              as Delivery?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -237,6 +245,18 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
       return _then(_value.copyWith(customer: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DeliveryCopyWith<$Res>? get delivery {
+    if (_value.delivery == null) {
+      return null;
+    }
+
+    return $DeliveryCopyWith<$Res>(_value.delivery!, (value) {
+      return _then(_value.copyWith(delivery: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -266,6 +286,7 @@ abstract class _$$TransactionImplCopyWith<$Res>
       int tip,
       Employee? employee,
       Customer? customer,
+      Delivery? delivery,
       int? id,
       @JsonKey(name: 'transaction_details')
       List<TransactionDetail?>? transactionDetails});
@@ -274,6 +295,8 @@ abstract class _$$TransactionImplCopyWith<$Res>
   $EmployeeCopyWith<$Res>? get employee;
   @override
   $CustomerCopyWith<$Res>? get customer;
+  @override
+  $DeliveryCopyWith<$Res>? get delivery;
 }
 
 /// @nodoc
@@ -305,6 +328,7 @@ class __$$TransactionImplCopyWithImpl<$Res>
     Object? tip = null,
     Object? employee = freezed,
     Object? customer = freezed,
+    Object? delivery = freezed,
     Object? id = freezed,
     Object? transactionDetails = freezed,
   }) {
@@ -381,6 +405,10 @@ class __$$TransactionImplCopyWithImpl<$Res>
           ? _value.customer
           : customer // ignore: cast_nullable_to_non_nullable
               as Customer?,
+      delivery: freezed == delivery
+          ? _value.delivery
+          : delivery // ignore: cast_nullable_to_non_nullable
+              as Delivery?,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -415,6 +443,7 @@ class _$TransactionImpl implements _Transaction {
       required this.tip,
       this.employee,
       this.customer,
+      this.delivery,
       this.id,
       @JsonKey(name: 'transaction_details')
       final List<TransactionDetail?>? transactionDetails})
@@ -474,6 +503,8 @@ class _$TransactionImpl implements _Transaction {
   @override
   final Customer? customer;
   @override
+  final Delivery? delivery;
+  @override
   final int? id;
   final List<TransactionDetail?>? _transactionDetails;
   @override
@@ -489,7 +520,7 @@ class _$TransactionImpl implements _Transaction {
 
   @override
   String toString() {
-    return 'Transaction(transactionNumber: $transactionNumber, employeeId: $employeeId, customerId: $customerId, deliveryId: $deliveryId, orderDate: $orderDate, paidoffDate: $paidoffDate, pickupDate: $pickupDate, paymentMethod: $paymentMethod, status: $status, paymentEvidence: $paymentEvidence, usedPoint: $usedPoint, earnedPoint: $earnedPoint, currentPoint: $currentPoint, paymentAmount: $paymentAmount, totalPrice: $totalPrice, tip: $tip, employee: $employee, customer: $customer, id: $id, transactionDetails: $transactionDetails)';
+    return 'Transaction(transactionNumber: $transactionNumber, employeeId: $employeeId, customerId: $customerId, deliveryId: $deliveryId, orderDate: $orderDate, paidoffDate: $paidoffDate, pickupDate: $pickupDate, paymentMethod: $paymentMethod, status: $status, paymentEvidence: $paymentEvidence, usedPoint: $usedPoint, earnedPoint: $earnedPoint, currentPoint: $currentPoint, paymentAmount: $paymentAmount, totalPrice: $totalPrice, tip: $tip, employee: $employee, customer: $customer, delivery: $delivery, id: $id, transactionDetails: $transactionDetails)';
   }
 
   @override
@@ -531,6 +562,8 @@ class _$TransactionImpl implements _Transaction {
                 other.employee == employee) &&
             (identical(other.customer, customer) ||
                 other.customer == customer) &&
+            (identical(other.delivery, delivery) ||
+                other.delivery == delivery) &&
             (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality()
                 .equals(other._transactionDetails, _transactionDetails));
@@ -558,6 +591,7 @@ class _$TransactionImpl implements _Transaction {
         tip,
         employee,
         customer,
+        delivery,
         id,
         const DeepCollectionEquality().hash(_transactionDetails)
       ]);
@@ -597,6 +631,7 @@ abstract class _Transaction implements Transaction {
       required final int tip,
       final Employee? employee,
       final Customer? customer,
+      final Delivery? delivery,
       final int? id,
       @JsonKey(name: 'transaction_details')
       final List<TransactionDetail?>? transactionDetails}) = _$TransactionImpl;
@@ -654,6 +689,8 @@ abstract class _Transaction implements Transaction {
   Employee? get employee;
   @override
   Customer? get customer;
+  @override
+  Delivery? get delivery;
   @override
   int? get id;
   @override
