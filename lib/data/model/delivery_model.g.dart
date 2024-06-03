@@ -8,10 +8,10 @@ part of 'delivery_model.dart';
 
 _$DeliveryImpl _$$DeliveryImplFromJson(Map<String, dynamic> json) =>
     _$DeliveryImpl(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       deliveryMethod: json['delivery_method'] as String?,
-      distance: json['distance'] as int?,
-      shippingCost: json['shipping_cost'] as int?,
+      distance: (json['distance'] as num?)?.toInt(),
+      shippingCost: (json['shipping_cost'] as num?)?.toInt(),
       recipientAddress: json['recipient_address'] as String?,
     );
 

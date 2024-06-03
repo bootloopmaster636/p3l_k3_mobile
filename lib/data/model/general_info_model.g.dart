@@ -8,7 +8,7 @@ part of 'general_info_model.dart';
 
 _$GeneralInfoImpl _$$GeneralInfoImplFromJson(Map<String, dynamic> json) =>
     _$GeneralInfoImpl(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       picture: json['picture'] as String,
     );
 

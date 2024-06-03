@@ -9,9 +9,9 @@ part of 'transaction_model.dart';
 _$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
     _$TransactionImpl(
       transactionNumber: json['transaction_number'] as String?,
-      employeeId: json['employee_id'] as int?,
-      customerId: json['customer_id'] as int,
-      deliveryId: json['delivery_id'] as int?,
+      employeeId: (json['employee_id'] as num?)?.toInt(),
+      customerId: (json['customer_id'] as num).toInt(),
+      deliveryId: (json['delivery_id'] as num?)?.toInt(),
       orderDate: json['order_date'] == null
           ? null
           : DateTime.parse(json['order_date'] as String),
@@ -24,12 +24,12 @@ _$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
       paymentMethod: json['payment_method'] as String?,
       status: json['status'] as String,
       paymentEvidence: json['payment_evidence'] as String?,
-      usedPoint: json['used_point'] as int?,
-      earnedPoint: json['earned_point'] as int?,
-      currentPoint: json['current_point'] as int?,
-      paymentAmount: json['payment_amount'] as int?,
-      totalPrice: json['total_price'] as int?,
-      tip: json['tip'] as int,
+      usedPoint: (json['used_point'] as num?)?.toInt(),
+      earnedPoint: (json['earned_point'] as num?)?.toInt(),
+      currentPoint: (json['current_point'] as num?)?.toInt(),
+      paymentAmount: (json['payment_amount'] as num?)?.toInt(),
+      totalPrice: (json['total_price'] as num?)?.toInt(),
+      tip: (json['tip'] as num).toInt(),
       employee: json['employee'] == null
           ? null
           : Employee.fromJson(json['employee'] as Map<String, dynamic>),
@@ -39,7 +39,7 @@ _$TransactionImpl _$$TransactionImplFromJson(Map<String, dynamic> json) =>
       delivery: json['delivery'] == null
           ? null
           : Delivery.fromJson(json['delivery'] as Map<String, dynamic>),
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       transactionDetails: (json['transaction_details'] as List<dynamic>?)
           ?.map((e) => e == null
               ? null

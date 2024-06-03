@@ -8,16 +8,16 @@ part of 'product_model.dart';
 
 _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
     _$ProductImpl(
-      id: json['id'] as int,
-      consignorId: json['consignor_id'] as int?,
-      categoryId: json['category_id'] as int,
+      id: (json['id'] as num).toInt(),
+      consignorId: (json['consignor_id'] as num?)?.toInt(),
+      categoryId: (json['category_id'] as num).toInt(),
       name: json['product_name'] as String,
-      readyStock: json['ready_stock'] as int,
-      dailyStock: json['daily_stock'] as int,
-      price: json['product_price'] as int,
+      readyStock: (json['ready_stock'] as num).toInt(),
+      dailyStock: (json['daily_stock'] as num).toInt(),
+      price: (json['product_price'] as num).toInt(),
       status: json['product_status'] as String,
       picture: json['product_picture'] as String,
-      active: json['active'] as int,
+      active: (json['active'] as num).toInt(),
       description: json['description'] as String,
       category: json['categories'] == null
           ? null

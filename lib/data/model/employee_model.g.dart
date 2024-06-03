@@ -8,10 +8,10 @@ part of 'employee_model.dart';
 
 _$EmployeeImpl _$$EmployeeImplFromJson(Map<String, dynamic> json) =>
     _$EmployeeImpl(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       user: User.fromJson(json['users'] as Map<String, dynamic>),
       workStartDate: DateTime.parse(json['work_start_date'] as String),
-      userId: json['userId'] as int? ?? 0,
+      userId: (json['userId'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$$EmployeeImplToJson(_$EmployeeImpl instance) =>

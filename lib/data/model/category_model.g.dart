@@ -9,7 +9,7 @@ part of 'category_model.dart';
 _$ProductCategoryImpl _$$ProductCategoryImplFromJson(
         Map<String, dynamic> json) =>
     _$ProductCategoryImpl(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['category_name'] as String,
     );
 

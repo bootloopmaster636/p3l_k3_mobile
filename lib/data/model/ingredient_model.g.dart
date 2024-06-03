@@ -8,11 +8,11 @@ part of 'ingredient_model.dart';
 
 _$IngredientImpl _$$IngredientImplFromJson(Map<String, dynamic> json) =>
     _$IngredientImpl(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['ingredient_name'] as String,
-      quantity: json['quantity'] as int?,
+      quantity: (json['quantity'] as num?)?.toInt(),
       unit: json['unit'] as String,
-      active: json['active'] as int,
+      active: (json['active'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$IngredientImplToJson(_$IngredientImpl instance) {

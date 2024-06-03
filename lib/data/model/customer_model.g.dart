@@ -8,13 +8,13 @@ part of 'customer_model.dart';
 
 _$CustomerImpl _$$CustomerImplFromJson(Map<String, dynamic> json) =>
     _$CustomerImpl(
-      id: json['id'] as int,
-      point: json['point'] as int,
-      nominalBalance: json['nominal_balance'] as int,
+      id: (json['id'] as num).toInt(),
+      point: (json['point'] as num).toInt(),
+      nominalBalance: (json['nominal_balance'] as num).toInt(),
       user: json['users'] == null
           ? null
           : User.fromJson(json['users'] as Map<String, dynamic>),
-      userId: json['userId'] as int? ?? 0,
+      userId: (json['userId'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$$CustomerImplToJson(_$CustomerImpl instance) {

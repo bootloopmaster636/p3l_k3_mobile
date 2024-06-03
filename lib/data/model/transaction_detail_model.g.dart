@@ -9,13 +9,13 @@ part of 'transaction_detail_model.dart';
 _$TransactionDetailImpl _$$TransactionDetailImplFromJson(
         Map<String, dynamic> json) =>
     _$TransactionDetailImpl(
-      id: json['id'] as int?,
-      transactionId: json['transaction_id'] as int,
-      productId: json['product_id'] as int?,
-      hampersId: json['hampers_id'] as int?,
-      quantity: json['quantity'] as int,
-      price: json['price'] as int,
-      totalPrice: json['total_price'] as int,
+      id: (json['id'] as num?)?.toInt(),
+      transactionId: (json['transaction_id'] as num).toInt(),
+      productId: (json['product_id'] as num?)?.toInt(),
+      hampersId: (json['hampers_id'] as num?)?.toInt(),
+      quantity: (json['quantity'] as num).toInt(),
+      price: (json['price'] as num).toInt(),
+      totalPrice: (json['total_price'] as num).toInt(),
       product: json['product'] == null
           ? null
           : Product.fromJson(json['product'] as Map<String, dynamic>),

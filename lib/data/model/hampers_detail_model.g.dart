@@ -8,10 +8,10 @@ part of 'hampers_detail_model.dart';
 
 _$HampersDetailImpl _$$HampersDetailImplFromJson(Map<String, dynamic> json) =>
     _$HampersDetailImpl(
-      id: json['id'] as int,
-      hampersId: json['hampers_id'] as int,
-      productId: json['product_id'] as int?,
-      ingredientId: json['ingredient_id'] as int? ?? 0,
+      id: (json['id'] as num).toInt(),
+      hampersId: (json['hampers_id'] as num).toInt(),
+      productId: (json['product_id'] as num?)?.toInt(),
+      ingredientId: (json['ingredient_id'] as num?)?.toInt() ?? 0,
       product: json['product'] == null
           ? null
           : Product.fromJson(json['product'] as Map<String, dynamic>),

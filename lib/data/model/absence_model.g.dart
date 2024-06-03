@@ -8,8 +8,8 @@ part of 'absence_model.dart';
 
 _$AbsenceImpl _$$AbsenceImplFromJson(Map<String, dynamic> json) =>
     _$AbsenceImpl(
-      id: json['id'] as int,
-      employeeId: json['employees_id'] as int,
+      id: (json['id'] as num).toInt(),
+      employeeId: (json['employees_id'] as num).toInt(),
       absenceDate: DateTime.parse(json['absence_date'] as String),
       employees: Employee.fromJson(json['employees'] as Map<String, dynamic>),
     );

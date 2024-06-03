@@ -7,8 +7,8 @@ part of 'user_model.dart';
 // **************************************************************************
 
 _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
-      id: json['id'] as int,
-      roleId: json['role_id'] as int,
+      id: (json['id'] as num).toInt(),
+      roleId: (json['role_id'] as num).toInt(),
       fullName: json['fullName'] as String,
       email: json['email'] as String,
       phoneNumber: json['phoneNumber'] as String,
@@ -16,7 +16,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       dateOfBirth: json['dateOfBirth'] == null
           ? null
           : DateTime.parse(json['dateOfBirth'] as String),
-      active: json['active'] as int,
+      active: (json['active'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) {
