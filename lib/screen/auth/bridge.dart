@@ -5,7 +5,7 @@ import 'package:p3l_k3_mobile/data/model/auth_model.dart';
 import 'package:p3l_k3_mobile/logic/auth_logic.dart';
 import 'package:p3l_k3_mobile/screen/auth/screen_login.dart';
 import 'package:p3l_k3_mobile/screen/customer/home/customer_home.dart';
-import 'package:p3l_k3_mobile/screen/employee/mo_home.dart';
+import 'package:p3l_k3_mobile/screen/employee/employee_home.dart';
 
 @RoutePage()
 class BridgeScreen extends ConsumerWidget {

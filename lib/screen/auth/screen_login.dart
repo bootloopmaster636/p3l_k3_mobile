@@ -160,7 +160,7 @@ class LoginForm extends HookConsumerWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                e.response?.data.toString() ?? 'Unknown error occured',
+                                e.response?.data['message'].toString() ?? 'Unknown error occured',
                               ),
                             ),
                           );
