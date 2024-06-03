@@ -67,6 +67,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    IngredientStockReportRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const IngredientStockReportScreen(),
+      );
+    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -250,6 +256,20 @@ class HampersDetailRouteArgs {
   String toString() {
     return 'HampersDetailRouteArgs{hampersID: $hampersID, key: $key}';
   }
+}
+
+/// generated route for
+/// [IngredientStockReportScreen]
+class IngredientStockReportRoute extends PageRouteInfo<void> {
+  const IngredientStockReportRoute({List<PageRouteInfo>? children})
+      : super(
+          IngredientStockReportRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'IngredientStockReportRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

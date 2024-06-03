@@ -97,7 +97,9 @@ class ReportMenu extends StatelessWidget {
           ),
           const Gap(16),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              context.router.push(const IngredientStockReportRoute());
+            },
             child: const Text('Ingredient Report'),
           ),
         ],
