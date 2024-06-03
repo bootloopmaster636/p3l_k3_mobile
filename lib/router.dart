@@ -14,7 +14,7 @@ import 'package:p3l_k3_mobile/screen/customer/settings/order_history.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/order_on_delivery.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/profile.dart';
 import 'package:p3l_k3_mobile/screen/employee/absence_list.dart';
-import 'package:p3l_k3_mobile/screen/employee/mo_home.dart';
+import 'package:p3l_k3_mobile/screen/employee/employee_home.dart';
 import 'package:p3l_k3_mobile/screen/employee/report/ingredient_stock_report.dart';
 
 part 'router.gr.dart';
