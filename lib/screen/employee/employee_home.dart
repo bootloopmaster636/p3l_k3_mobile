@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:lottie/lottie.dart';
+import 'package:p3l_k3_mobile/data/model/auth_model.dart';
 import 'package:p3l_k3_mobile/logic/auth_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
 
@@ -55,13 +57,19 @@ class HomeMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final AsyncValue<Auth> auth = ref.watch(authLogicProvider);
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Lottie.asset('assets/anim/admin.json'),
+          ),
           Text(
-            'Welcome, ${ref.read(authLogicProvider).value?.user.fullName}!',
+            'Welcome, ${auth.value?.user.fullName}!',
             textAlign: TextAlign.start,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
@@ -71,12 +79,29 @@ class HomeMenu extends ConsumerWidget {
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const Gap(16),
-          ElevatedButton(
-            onPressed: () {
-              context.router.push(const AbsenceListRoute());
-            },
-            child: const Text('Absence Management'),
-          ),
+
+          // if role is MO
+          if (auth.value?.user.roleId == 3)
+            Column(
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: () {
+                    context.router.push(const AbsenceListRoute());
+                  },
+                  child: const Text('Absence Management'),
+                ),
+              ],
+            ),
+
+          // if role is Owner
+          if (auth.value?.user.roleId == 1)
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('Nothing to see here 😁'),
+                Text('To see report please use the report menu below......'),
+              ],
+            ),
         ],
       ),
     );
@@ -90,6 +115,7 @@ class ReportMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             'Report Menu',
