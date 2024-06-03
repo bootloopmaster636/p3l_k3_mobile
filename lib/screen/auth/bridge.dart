@@ -19,7 +19,7 @@ class BridgeScreen extends ConsumerWidget {
       if (auth.value?.user.roleId == 4 || auth.value?.accessToken == 'guest') {
         //role id 4 is customer
         return const CustomerHomeScreen();
-      } else if (auth.value?.user.roleId == 3) {
+      } else if (auth.value?.user.roleId == 3 || auth.value?.user.roleId == 1) {
         //role id 3 is MO
         return const MoScreen();
       } else {
