@@ -51,6 +51,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const EditProfileScreen(),
       );
     },
+    EmployeeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const EmployeeScreen(),
+      );
+    },
     ForgotPasswordRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -73,16 +79,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const IngredientStockReportScreen(),
       );
     },
+    IngredientUsageReportGenerateRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const IngredientUsageReportGenerateScreen(),
+      );
+    },
     LoginRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const LoginScreen(),
-      );
-    },
-    MoRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const EmployeeScreen(),
       );
     },
     OrderHistoryRoute.name: (routeData) {
@@ -207,6 +213,20 @@ class EditProfileRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [EmployeeScreen]
+class EmployeeRoute extends PageRouteInfo<void> {
+  const EmployeeRoute({List<PageRouteInfo>? children})
+      : super(
+          EmployeeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'EmployeeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [ForgotPasswordScreen]
 class ForgotPasswordRoute extends PageRouteInfo<void> {
   const ForgotPasswordRoute({List<PageRouteInfo>? children})
@@ -238,7 +258,8 @@ class HampersDetailRoute extends PageRouteInfo<HampersDetailRouteArgs> {
 
   static const String name = 'HampersDetailRoute';
 
-  static const PageInfo<HampersDetailRouteArgs> page = PageInfo<HampersDetailRouteArgs>(name);
+  static const PageInfo<HampersDetailRouteArgs> page =
+      PageInfo<HampersDetailRouteArgs>(name);
 }
 
 class HampersDetailRouteArgs {
@@ -272,6 +293,20 @@ class IngredientStockReportRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [IngredientUsageReportGenerateScreen]
+class IngredientUsageReportGenerateRoute extends PageRouteInfo<void> {
+  const IngredientUsageReportGenerateRoute({List<PageRouteInfo>? children})
+      : super(
+          IngredientUsageReportGenerateRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'IngredientUsageReportGenerateRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [LoginScreen]
 class LoginRoute extends PageRouteInfo<void> {
   const LoginRoute({List<PageRouteInfo>? children})
@@ -281,20 +316,6 @@ class LoginRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'LoginRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [EmployeeScreen]
-class MoRoute extends PageRouteInfo<void> {
-  const MoRoute({List<PageRouteInfo>? children})
-      : super(
-          MoRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'MoRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -345,7 +366,8 @@ class ProductDetailRoute extends PageRouteInfo<ProductDetailRouteArgs> {
 
   static const String name = 'ProductDetailRoute';
 
-  static const PageInfo<ProductDetailRouteArgs> page = PageInfo<ProductDetailRouteArgs>(name);
+  static const PageInfo<ProductDetailRouteArgs> page =
+      PageInfo<ProductDetailRouteArgs>(name);
 }
 
 class ProductDetailRouteArgs {

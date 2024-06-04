@@ -16,6 +16,7 @@ import 'package:p3l_k3_mobile/screen/customer/settings/profile.dart';
 import 'package:p3l_k3_mobile/screen/employee/absence_list.dart';
 import 'package:p3l_k3_mobile/screen/employee/employee_home.dart';
 import 'package:p3l_k3_mobile/screen/employee/report/ingredient_stock_report.dart';
+import 'package:p3l_k3_mobile/screen/employee/report/ingredient_usage_report.dart';
 
 part 'router.gr.dart';
 
@@ -84,7 +85,7 @@ class AppRouter extends _$AppRouter {
           path: '/myAdress',
         ),
         AutoRoute(
-          page: MoRoute.page,
+          page: EmployeeRoute.page,
           path: '/mo',
         ),
         AutoRoute(
@@ -102,6 +103,10 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: IngredientStockReportRoute.page,
           path: '/ingredientStockReport',
+        ),
+        AutoRoute(
+          page: IngredientUsageReportGenerateRoute.page,
+          path: '/ingredientUsageReport',
         ),
       ];
 

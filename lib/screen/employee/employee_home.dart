@@ -128,6 +128,12 @@ class ReportMenu extends StatelessWidget {
             },
             child: const Text('Ingredient Report'),
           ),
+          ElevatedButton(
+            onPressed: () {
+              context.router.push(const IngredientUsageReportGenerateRoute());
+            },
+            child: const Text('Ingredient Usage Report'),
+          ),
         ],
       ),
     );
