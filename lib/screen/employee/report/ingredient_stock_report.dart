@@ -15,8 +15,7 @@ class IngredientStockReportScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<List<Ingredient>> ingredientList =
-        ref.watch(ingredientLogicProvider);
+    final AsyncValue<List<Ingredient>> ingredientList = ref.watch(ingredientLogicProvider);
     final DateTime now = DateTime.now();
     final DateFormat formatter = DateFormat('MMMM');
     final String month = formatter.format(now);
@@ -63,18 +62,30 @@ class IngredientStockReportScreen extends ConsumerWidget {
                     minWidth: 600,
                     columns: const <DataColumn>[
                       DataColumn2(
-                        label: Text('No'),
+                        label: Text(
+                          'No',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         size: ColumnSize.S,
                       ),
                       DataColumn(
-                        label: Text('Ingredient Name'),
+                        label: Text(
+                          'Ingredient Name',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                       DataColumn2(
-                        label: Text('Unit'),
+                        label: Text(
+                          'Unit',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         size: ColumnSize.S,
                       ),
                       DataColumn2(
-                        label: Text('Stock'),
+                        label: Text(
+                          'Stock',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                         size: ColumnSize.S,
                       ),
                     ],
@@ -117,8 +128,7 @@ class IngredientStockReportScreen extends ConsumerWidget {
             generateAndPrintPdf(ingredientList.value!, month);
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                  content: Text('No ingredients available to print')),
+              const SnackBar(content: Text('No ingredients available to print')),
             );
           }
         },
@@ -140,24 +150,21 @@ Future<void> generateAndPrintPdf(
         pw.TableRow(
           children: <pw.Widget>[
             pw.Padding(
-              padding:
-                  const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: pw.Text(
                 'Ingredient Name',
                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
               ),
             ),
             pw.Padding(
-              padding:
-                  const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: pw.Text(
                 'Unit',
                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
               ),
             ),
             pw.Padding(
-              padding:
-                  const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: pw.Text(
                 'Quantity',
                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
@@ -169,18 +176,15 @@ Future<void> generateAndPrintPdf(
           (Ingredient ingredient) => pw.TableRow(
             children: <pw.Widget>[
               pw.Padding(
-                padding:
-                    const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding: const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: pw.Text(ingredient.name, style: const pw.TextStyle()),
               ),
               pw.Padding(
-                padding:
-                    const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding: const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: pw.Text(ingredient.unit, style: const pw.TextStyle()),
               ),
               pw.Padding(
-                padding:
-                    const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding: const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: pw.Text(
                   ingredient.quantity.toString(),
                   style: const pw.TextStyle(),
@@ -198,9 +202,7 @@ Future<void> generateAndPrintPdf(
   for (int i = 0; i < ingredients.length; i += itemsPerPage) {
     final List<Ingredient> chunk = ingredients.sublist(
       i,
-      i + itemsPerPage > ingredients.length
-          ? ingredients.length
-          : i + itemsPerPage,
+      i + itemsPerPage > ingredients.length ? ingredients.length : i + itemsPerPage,
     );
     doc.addPage(
       pw.Page(
@@ -210,8 +212,7 @@ Future<void> generateAndPrintPdf(
               'ATMA KITCHEN',
               style: pw.TextStyle(fontSize: 25, fontWeight: pw.FontWeight.bold),
             ),
-            pw.Text('Jl. Centralpark No. 10 Yogyakarta',
-                style: const pw.TextStyle()),
+            pw.Text('Jl. Centralpark No. 10 Yogyakarta', style: const pw.TextStyle()),
             pw.SizedBox(height: 20),
             pw.Text(
               'Ingredient Stock Report',
