@@ -20,8 +20,8 @@ class BridgeScreen extends ConsumerWidget {
         //role id 4 is customer
         return const CustomerHomeScreen();
       } else if (auth.value?.user.roleId == 3 || auth.value?.user.roleId == 1) {
-        //role id 3 is MO
-        return const MoScreen();
+        //role id 3 is MO, role id 1 is owner
+        return const EmployeeScreen();
       } else {
         return const LoginScreen();
       }

@@ -9,8 +9,8 @@ import 'package:p3l_k3_mobile/logic/auth_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
 
 @RoutePage()
-class MoScreen extends HookConsumerWidget {
-  const MoScreen({super.key});
+class EmployeeScreen extends HookConsumerWidget {
+  const EmployeeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

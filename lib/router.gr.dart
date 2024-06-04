@@ -82,7 +82,7 @@ abstract class _$AppRouter extends RootStackRouter {
     MoRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const MoScreen(),
+        child: const EmployeeScreen(),
       );
     },
     OrderHistoryRoute.name: (routeData) {
@@ -238,8 +238,7 @@ class HampersDetailRoute extends PageRouteInfo<HampersDetailRouteArgs> {
 
   static const String name = 'HampersDetailRoute';
 
-  static const PageInfo<HampersDetailRouteArgs> page =
-      PageInfo<HampersDetailRouteArgs>(name);
+  static const PageInfo<HampersDetailRouteArgs> page = PageInfo<HampersDetailRouteArgs>(name);
 }
 
 class HampersDetailRouteArgs {
@@ -287,7 +286,7 @@ class LoginRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [MoScreen]
+/// [EmployeeScreen]
 class MoRoute extends PageRouteInfo<void> {
   const MoRoute({List<PageRouteInfo>? children})
       : super(
@@ -346,8 +345,7 @@ class ProductDetailRoute extends PageRouteInfo<ProductDetailRouteArgs> {
 
   static const String name = 'ProductDetailRoute';
 
-  static const PageInfo<ProductDetailRouteArgs> page =
-      PageInfo<ProductDetailRouteArgs>(name);
+  static const PageInfo<ProductDetailRouteArgs> page = PageInfo<ProductDetailRouteArgs>(name);
 }
 
 class ProductDetailRouteArgs {
