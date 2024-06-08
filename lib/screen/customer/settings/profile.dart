@@ -8,6 +8,7 @@ import 'package:gap/gap.dart';
 import 'package:p3l_k3_mobile/data/model/customer_model.dart';
 import 'package:p3l_k3_mobile/logic/customer_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
+import 'package:p3l_k3_mobile/data/model/balance_history_model.dart';
 
 @RoutePage()
 class ProfileScreen extends StatelessWidget {
@@ -42,11 +43,11 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-class ProfileSettingsContent extends StatelessWidget {
+class ProfileSettingsContent extends ConsumerWidget {
   const ProfileSettingsContent({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -113,25 +114,32 @@ class ProfileSettingsContent extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 'Things you might looking for',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
             const Gap(8),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                showBalanceDialog(context, ref);
+              },
               title: Text(
-                'Order history',
+                'Show balance',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               leading: const Icon(
-                Icons.history,
+                Icons.account_balance_wallet_outlined,
                 size: 24,
               ),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                showWithdrawDialog(context, ref);
+              },
               title: Text(
-                'Transfer balance',
+                'Withdraw balance',
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               leading: const Icon(
@@ -139,6 +147,19 @@ class ProfileSettingsContent extends StatelessWidget {
                 size: 24,
               ),
             ),
+            // ListTile(
+            //   onTap: () {
+            //     context.router.push(const WithdrawHistoryRoute());
+            //   },
+            //   title: Text(
+            //     'Withdraw history',
+            //     style: Theme.of(context).textTheme.bodyMedium,
+            //   ),
+            //   leading: const Icon(
+            //     Icons.history,
+            //     size: 24,
+            //   ),
+            // ),
             const Gap(8),
             const SizedBox(
               height: 120,
@@ -154,6 +175,109 @@ class ProfileSettingsContent extends StatelessWidget {
             )
             .fadeIn(duration: 800.ms),
       ),
+    );
+  }
+
+  void showBalanceDialog(BuildContext context, WidgetRef ref) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Balance'),
+          content: Consumer(builder: (context, ref, child) {
+            final balanceFuture =
+                ref.watch(customerLogicProvider.notifier).getBalance();
+            return FutureBuilder<int>(
+              future: balanceFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return const Text('Error retrieving balance');
+                } else {
+                  return Text('Your balance is: Rp. ${snapshot.data}');
+                }
+              },
+            );
+          }),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showWithdrawDialog(BuildContext context, WidgetRef ref) {
+    final TextEditingController amountController = TextEditingController();
+    final TextEditingController bankNameController = TextEditingController();
+    final TextEditingController accountNumberController =
+        TextEditingController();
+    final TextEditingController detailInformationController =
+        TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Withdraw Balance'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              TextField(
+                controller: amountController,
+                decoration: const InputDecoration(labelText: 'Amount'),
+                keyboardType: TextInputType.number,
+              ),
+              TextField(
+                controller: bankNameController,
+                decoration: const InputDecoration(labelText: 'Bank Name'),
+              ),
+              TextField(
+                controller: accountNumberController,
+                decoration: const InputDecoration(labelText: 'Account Number'),
+              ),
+              TextField(
+                controller: detailInformationController,
+                decoration:
+                    const InputDecoration(labelText: 'Detail Information'),
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () async {
+                final int amount = int.parse(amountController.text);
+                final String bankName = bankNameController.text;
+                final String accountNumber = accountNumberController.text;
+                final String detailInformation =
+                    detailInformationController.text;
+
+                await ref.read(customerLogicProvider.notifier).withdrawBalance(
+                      amount,
+                      bankName,
+                      accountNumber,
+                      detailInformation,
+                    );
+
+                Navigator.of(context).pop();
+              },
+              child: const Text('Withdraw'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -199,7 +323,8 @@ class Header extends ConsumerWidget {
               width: 128,
               height: 128,
               child: CircleAvatar(
-                backgroundColor: Theme.of(context).colorScheme.tertiaryContainer,
+                backgroundColor:
+                    Theme.of(context).colorScheme.tertiaryContainer,
                 foregroundImage: NetworkImage(
                   'https://api.dicebear.com/8.x/adventurer/png?seed=${user.value?.user?.fullName ?? 'Unknown'}',
                 ),
@@ -221,7 +346,10 @@ class Header extends ConsumerWidget {
             const Gap(8),
             Text(
               user.value?.user?.fullName ?? 'Unknown',
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium
+                  ?.copyWith(fontWeight: FontWeight.bold),
             )
                 .animate(delay: 1000.ms)
                 .slideY(
@@ -263,7 +391,8 @@ class Header extends ConsumerWidget {
                   appearAnimationDuration: Duration(milliseconds: 100),
                   disappearAnimationDuration: Duration(milliseconds: 100),
                   modalConfiguration: ModalConfiguration(opacity: 0.2),
-                  content: Text('This is the bonus coins you get from ordering, each coin worth Rp. 100.\n\n'
+                  content: Text(
+                      'This is the bonus coins you get from ordering, each coin worth Rp. 100.\n\n'
                       'You can use it for discount at your next order.'),
                   child: Icon(
                     Icons.help_outline_outlined,
@@ -286,7 +415,8 @@ class Header extends ConsumerWidget {
                   appearAnimationDuration: Duration(milliseconds: 100),
                   disappearAnimationDuration: Duration(milliseconds: 100),
                   modalConfiguration: ModalConfiguration(opacity: 0.2),
-                  content: Text('Money will be refunded to this account when you paid but the order is cancelled.\n\n'
+                  content: Text(
+                      'Money will be refunded to this account when you paid but the order is cancelled.\n\n'
                       'You can transfer it to your bank account using "Transfer Balance" menu below.'),
                   child: Icon(
                     Icons.help_outline_outlined,

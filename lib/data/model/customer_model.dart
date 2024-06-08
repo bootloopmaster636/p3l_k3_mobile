@@ -12,10 +12,28 @@ class Customer with _$Customer {
     required int point,
     @JsonKey(name: 'nominal_balance') required int nominalBalance,
     @JsonKey(name: 'users') required User? user,
-    @Default(0) int userId, // might not be useful.. just comment it if it makes trouble
+    @Default(0) int userId,
   }) = _Customer;
 
-  factory Customer.fromJson(Map<String, dynamic> json) => _$CustomerFromJson(json);
+  factory Customer.fromJson(Map<String, dynamic> json) =>
+      _$CustomerFromJson(json);
+}
+
+@freezed
+class BalanceHistory with _$BalanceHistory {
+  const factory BalanceHistory({
+    required int id,
+    required int customerId,
+    required int nominalBalance,
+    required String bankName,
+    required String accountNumber,
+    required String date,
+    required String detailInformation,
+    required String status,
+  }) = _BalanceHistory;
+
+  factory BalanceHistory.fromJson(Map<String, dynamic> json) =>
+      _$BalanceHistoryFromJson(json);
 }
 
 Customer makeGuestCustomer() {

@@ -34,3 +34,28 @@ Map<String, dynamic> _$$CustomerImplToJson(_$CustomerImpl instance) {
   val['userId'] = instance.userId;
   return val;
 }
+
+_$BalanceHistoryImpl _$$BalanceHistoryImplFromJson(Map<String, dynamic> json) =>
+    _$BalanceHistoryImpl(
+      id: json['id'] as int,
+      customerId: json['customerId'] as int,
+      nominalBalance: json['nominalBalance'] as int,
+      bankName: json['bankName'] as String,
+      accountNumber: json['accountNumber'] as String,
+      date: json['date'] as String,
+      detailInformation: json['detailInformation'] as String,
+      status: json['status'] as String,
+    );
+
+Map<String, dynamic> _$$BalanceHistoryImplToJson(
+        _$BalanceHistoryImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'customerId': instance.customerId,
+      'nominalBalance': instance.nominalBalance,
+      'bankName': instance.bankName,
+      'accountNumber': instance.accountNumber,
+      'date': instance.date,
+      'detailInformation': instance.detailInformation,
+      'status': instance.status,
+    };

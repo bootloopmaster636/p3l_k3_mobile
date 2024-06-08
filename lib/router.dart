@@ -13,6 +13,9 @@ import 'package:p3l_k3_mobile/screen/customer/settings/edit_profile.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/order_history.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/order_on_delivery.dart';
 import 'package:p3l_k3_mobile/screen/customer/settings/profile.dart';
+import 'package:p3l_k3_mobile/screen/customer/settings/withdraw_history_page.dart';
+import 'package:p3l_k3_mobile/screen/employee/mo/absence_list.dart';
+import 'package:p3l_k3_mobile/screen/employee/mo_home.dart';
 import 'package:p3l_k3_mobile/screen/employee/absence_list.dart';
 import 'package:p3l_k3_mobile/screen/employee/employee_home.dart';
 import 'package:p3l_k3_mobile/screen/employee/report/ingredient_stock_report.dart';
@@ -82,8 +85,14 @@ class AppRouter extends _$AppRouter {
           page: EditAddressRoute.page,
           transitionsBuilder: _slideLeftWithEase,
           durationInMilliseconds: 400,
-          path: '/myAdress',
+          path: '/myAddress',
         ),
+        // CustomRoute(
+        //    page: WithdrawHistoryRoute.page,
+        //   transitionsBuilder: _slideLeftWithEase,
+        //   durationInMilliseconds: 400,
+        //   path: '/withdrawHistory',
+        // ),
         AutoRoute(
           page: EmployeeRoute.page,
           path: '/mo',
