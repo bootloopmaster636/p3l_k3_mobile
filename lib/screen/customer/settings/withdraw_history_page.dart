@@ -2,48 +2,43 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:p3l_k3_mobile/data/model/balance_history_model.dart';
+import 'package:p3l_k3_mobile/data/model/customer_model.dart';
+import 'package:p3l_k3_mobile/logic/balance_logic.dart';
 import 'package:p3l_k3_mobile/logic/customer_logic.dart';
 
 @RoutePage()
 class WithdrawHistoryScreen extends ConsumerWidget {
-  const WithdrawHistoryScreen({Key? key}) : super(key: key);
+  const WithdrawHistoryScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final customerLogic = ref.watch(customerLogicProvider);
+    final AsyncValue<Customer> customerLogic = ref.watch(customerLogicProvider);
+    final AsyncValue<List<CustomerBalanceHistory>> balanceHistory = ref.watch(balanceLogicProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Withdraw History'),
       ),
-      body: customerLogic.when(
-        data: (customer) {
-          return FutureBuilder<List<CustomerBalanceHistory>>(
-            future: ref.read(customerLogicProvider.notifier).fetchWithdrawHistory(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return const Center(child: Text('Error retrieving history'));
-              } else {
-                final histories = snapshot.data ?? [];
-                return ListView.builder(
-                  itemCount: histories.length,
-                  itemBuilder: (context, index) {
-                    final history = histories[index];
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await ref.read(balanceLogicProvider.notifier).refresh();
+        },
+        child: Center(
+          child: customerLogic.isLoading
+              ? const CircularProgressIndicator()
+              : ListView.builder(
+                  itemCount: balanceHistory.value?.length ?? 0,
+                  itemBuilder: (BuildContext context, int index) {
                     return ListTile(
-                      title: Text('Amount: Rp. ${history.nominalBalance}'),
+                      title: Text('Amount: Rp. ${balanceHistory.value?[index].nominalBalance}'),
                       subtitle: Text(
-                          'Bank: ${history.bankName}, Account: ${history.accountNumber}, Date: ${history.date}, Status: ${history.status}'),
+                        'Bank: ${balanceHistory.value?[index].bankName}, Account: ${balanceHistory.value?[index].accountNumber},'
+                        ' Date: ${balanceHistory.value?[index].date}',
+                      ),
                     );
                   },
-                );
-              }
-            },
-          );
-        },
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stack) => const Center(child: Text('Error retrieving customer data')),
+                ),
+        ),
       ),
     );
   }

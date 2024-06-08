@@ -8,13 +8,12 @@ part 'balance_history_model.g.dart';
 class CustomerBalanceHistory with _$CustomerBalanceHistory {
   const factory CustomerBalanceHistory({
     required int id,
-    required int customerId,
-    required int nominalBalance,
-    required String bankName,
-    required String accountNumber,
-    required String date,
-    required String detailInformation,
-    required String status,
+    @JsonKey(name: 'customer_id') required int customerId,
+    @JsonKey(name: 'nominal_balance') required int nominalBalance,
+    @JsonKey(name: 'bank_name') required String bankName,
+    @JsonKey(name: 'account_number') required String accountNumber,
+    required DateTime date,
+    @JsonKey(name: 'detail_information') required String detailInformation,
   }) = _CustomerBalanceHistory;
 
   factory CustomerBalanceHistory.fromJson(Map<String, dynamic> json) => _$CustomerBalanceHistoryFromJson(json);

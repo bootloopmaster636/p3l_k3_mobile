@@ -125,6 +125,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const RegisterScreen(),
       );
     },
+    WithdrawHistoryRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const WithdrawHistoryScreen(),
+      );
+    },
   };
 }
 
@@ -410,6 +416,20 @@ class RegisterRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'RegisterRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [WithdrawHistoryScreen]
+class WithdrawHistoryRoute extends PageRouteInfo<void> {
+  const WithdrawHistoryRoute({List<PageRouteInfo>? children})
+      : super(
+          WithdrawHistoryRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'WithdrawHistoryRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

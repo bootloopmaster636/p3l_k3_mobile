@@ -2,48 +2,59 @@ import 'package:auto_route/auto_route.dart';
 import 'package:el_tooltip/el_tooltip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:p3l_k3_mobile/data/model/customer_model.dart';
+import 'package:p3l_k3_mobile/logic/balance_logic.dart';
 import 'package:p3l_k3_mobile/logic/customer_logic.dart';
 import 'package:p3l_k3_mobile/router.dart';
 import 'package:p3l_k3_mobile/data/model/balance_history_model.dart';
+import 'package:toastification/toastification.dart';
 
 @RoutePage()
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: <Widget>[
-          SliverAppBar(
-            expandedHeight: 400,
-            automaticallyImplyLeading: false,
-            leading: Padding(
-              padding: const EdgeInsets.only(left: 4),
-              child: IconButton(
-                onPressed: () {
-                  context.router.navigate(const CustomerHomeRoute());
-                },
-                icon: const Icon(Icons.arrow_back),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await ref.read(customerLogicProvider.notifier).refresh();
+        },
+        triggerMode: RefreshIndicatorTriggerMode.anywhere,
+        edgeOffset: 460,
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: <Widget>[
+            SliverAppBar(
+              expandedHeight: 400,
+              automaticallyImplyLeading: false,
+              leading: Padding(
+                padding: const EdgeInsets.only(left: 4),
+                child: IconButton(
+                  onPressed: () {
+                    context.router.navigate(const CustomerHomeRoute());
+                  },
+                  icon: const Icon(Icons.arrow_back),
+                ),
+              ),
+              flexibleSpace: const FlexibleSpaceBar(
+                background: Header(),
               ),
             ),
-            flexibleSpace: const FlexibleSpaceBar(
-              background: Header(),
-            ),
-          ),
-          const ProfileSettingsContent(),
-        ],
+            const ProfileSettingsContent(),
+          ],
+        ),
       ),
     );
   }
 }
 
-class ProfileSettingsContent extends ConsumerWidget {
+class ProfileSettingsContent extends HookConsumerWidget {
   const ProfileSettingsContent({super.key});
 
   @override
@@ -123,19 +134,6 @@ class ProfileSettingsContent extends ConsumerWidget {
             const Gap(8),
             ListTile(
               onTap: () {
-                showBalanceDialog(context, ref);
-              },
-              title: Text(
-                'Show balance',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              leading: const Icon(
-                Icons.account_balance_wallet_outlined,
-                size: 24,
-              ),
-            ),
-            ListTile(
-              onTap: () {
                 showWithdrawDialog(context, ref);
               },
               title: Text(
@@ -147,19 +145,19 @@ class ProfileSettingsContent extends ConsumerWidget {
                 size: 24,
               ),
             ),
-            // ListTile(
-            //   onTap: () {
-            //     context.router.push(const WithdrawHistoryRoute());
-            //   },
-            //   title: Text(
-            //     'Withdraw history',
-            //     style: Theme.of(context).textTheme.bodyMedium,
-            //   ),
-            //   leading: const Icon(
-            //     Icons.history,
-            //     size: 24,
-            //   ),
-            // ),
+            ListTile(
+              onTap: () {
+                context.router.push(const WithdrawHistoryRoute());
+              },
+              title: Text(
+                'Withdraw history',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              leading: const Icon(
+                Icons.history,
+                size: 24,
+              ),
+            ),
             const Gap(8),
             const SizedBox(
               height: 120,
@@ -175,41 +173,6 @@ class ProfileSettingsContent extends ConsumerWidget {
             )
             .fadeIn(duration: 800.ms),
       ),
-    );
-  }
-
-  void showBalanceDialog(BuildContext context, WidgetRef ref) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Balance'),
-          content: Consumer(builder: (context, ref, child) {
-            final balanceFuture =
-                ref.watch(customerLogicProvider.notifier).getBalance();
-            return FutureBuilder<int>(
-              future: balanceFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  return const Text('Error retrieving balance');
-                } else {
-                  return Text('Your balance is: Rp. ${snapshot.data}');
-                }
-              },
-            );
-          }),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Close'),
-            ),
-          ],
-        );
-      },
     );
   }
 
@@ -251,6 +214,12 @@ class ProfileSettingsContent extends ConsumerWidget {
           ),
           actions: <Widget>[
             TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
               onPressed: () async {
                 final int amount = int.parse(amountController.text);
                 final String bankName = bankNameController.text;
@@ -258,22 +227,31 @@ class ProfileSettingsContent extends ConsumerWidget {
                 final String detailInformation =
                     detailInformationController.text;
 
-                await ref.read(customerLogicProvider.notifier).withdrawBalance(
+                await ref.read(balanceLogicProvider.notifier).withdrawBalance(
                       amount,
                       bankName,
                       accountNumber,
                       detailInformation,
                     );
-
-                Navigator.of(context).pop();
+                await ref.read(customerLogicProvider.notifier).refresh().then((void value) {
+                  Navigator.of(context).pop();
+                  toastification.show(
+                    context: context,
+                    type: ToastificationType.success,
+                    style: ToastificationStyle.flat,
+                    title: const Text('Withdraw balance success'),
+                    description: const Text(
+                      'The balance have been transferred to your bank account',
+                    ),
+                    alignment: Alignment.bottomCenter,
+                    autoCloseDuration: const Duration(seconds: 5),
+                    icon: const Icon(Icons.check_circle_outline),
+                    boxShadow: lowModeShadow,
+                    dragToClose: true,
+                  );
+                });
               },
               child: const Text('Withdraw'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancel'),
             ),
           ],
         );

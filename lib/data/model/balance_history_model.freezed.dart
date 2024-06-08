@@ -22,13 +22,17 @@ CustomerBalanceHistory _$CustomerBalanceHistoryFromJson(
 /// @nodoc
 mixin _$CustomerBalanceHistory {
   int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'customer_id')
   int get customerId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nominal_balance')
   int get nominalBalance => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bank_name')
   String get bankName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'account_number')
   String get accountNumber => throw _privateConstructorUsedError;
-  String get date => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
+  @JsonKey(name: 'detail_information')
   String get detailInformation => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,13 +48,12 @@ abstract class $CustomerBalanceHistoryCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      int customerId,
-      int nominalBalance,
-      String bankName,
-      String accountNumber,
-      String date,
-      String detailInformation,
-      String status});
+      @JsonKey(name: 'customer_id') int customerId,
+      @JsonKey(name: 'nominal_balance') int nominalBalance,
+      @JsonKey(name: 'bank_name') String bankName,
+      @JsonKey(name: 'account_number') String accountNumber,
+      DateTime date,
+      @JsonKey(name: 'detail_information') String detailInformation});
 }
 
 /// @nodoc
@@ -74,7 +77,6 @@ class _$CustomerBalanceHistoryCopyWithImpl<$Res,
     Object? accountNumber = null,
     Object? date = null,
     Object? detailInformation = null,
-    Object? status = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -100,14 +102,10 @@ class _$CustomerBalanceHistoryCopyWithImpl<$Res,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       detailInformation: null == detailInformation
           ? _value.detailInformation
           : detailInformation // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -124,13 +122,12 @@ abstract class _$$CustomerBalanceHistoryImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      int customerId,
-      int nominalBalance,
-      String bankName,
-      String accountNumber,
-      String date,
-      String detailInformation,
-      String status});
+      @JsonKey(name: 'customer_id') int customerId,
+      @JsonKey(name: 'nominal_balance') int nominalBalance,
+      @JsonKey(name: 'bank_name') String bankName,
+      @JsonKey(name: 'account_number') String accountNumber,
+      DateTime date,
+      @JsonKey(name: 'detail_information') String detailInformation});
 }
 
 /// @nodoc
@@ -153,7 +150,6 @@ class __$$CustomerBalanceHistoryImplCopyWithImpl<$Res>
     Object? accountNumber = null,
     Object? date = null,
     Object? detailInformation = null,
-    Object? status = null,
   }) {
     return _then(_$CustomerBalanceHistoryImpl(
       id: null == id
@@ -179,14 +175,10 @@ class __$$CustomerBalanceHistoryImplCopyWithImpl<$Res>
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       detailInformation: null == detailInformation
           ? _value.detailInformation
           : detailInformation // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -199,13 +191,12 @@ class _$CustomerBalanceHistoryImpl
     implements _CustomerBalanceHistory {
   const _$CustomerBalanceHistoryImpl(
       {required this.id,
-      required this.customerId,
-      required this.nominalBalance,
-      required this.bankName,
-      required this.accountNumber,
+      @JsonKey(name: 'customer_id') required this.customerId,
+      @JsonKey(name: 'nominal_balance') required this.nominalBalance,
+      @JsonKey(name: 'bank_name') required this.bankName,
+      @JsonKey(name: 'account_number') required this.accountNumber,
       required this.date,
-      required this.detailInformation,
-      required this.status});
+      @JsonKey(name: 'detail_information') required this.detailInformation});
 
   factory _$CustomerBalanceHistoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$CustomerBalanceHistoryImplFromJson(json);
@@ -213,23 +204,26 @@ class _$CustomerBalanceHistoryImpl
   @override
   final int id;
   @override
+  @JsonKey(name: 'customer_id')
   final int customerId;
   @override
+  @JsonKey(name: 'nominal_balance')
   final int nominalBalance;
   @override
+  @JsonKey(name: 'bank_name')
   final String bankName;
   @override
+  @JsonKey(name: 'account_number')
   final String accountNumber;
   @override
-  final String date;
+  final DateTime date;
   @override
+  @JsonKey(name: 'detail_information')
   final String detailInformation;
-  @override
-  final String status;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CustomerBalanceHistory(id: $id, customerId: $customerId, nominalBalance: $nominalBalance, bankName: $bankName, accountNumber: $accountNumber, date: $date, detailInformation: $detailInformation, status: $status)';
+    return 'CustomerBalanceHistory(id: $id, customerId: $customerId, nominalBalance: $nominalBalance, bankName: $bankName, accountNumber: $accountNumber, date: $date, detailInformation: $detailInformation)';
   }
 
   @override
@@ -243,8 +237,7 @@ class _$CustomerBalanceHistoryImpl
       ..add(DiagnosticsProperty('bankName', bankName))
       ..add(DiagnosticsProperty('accountNumber', accountNumber))
       ..add(DiagnosticsProperty('date', date))
-      ..add(DiagnosticsProperty('detailInformation', detailInformation))
-      ..add(DiagnosticsProperty('status', status));
+      ..add(DiagnosticsProperty('detailInformation', detailInformation));
   }
 
   @override
@@ -263,14 +256,13 @@ class _$CustomerBalanceHistoryImpl
                 other.accountNumber == accountNumber) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.detailInformation, detailInformation) ||
-                other.detailInformation == detailInformation) &&
-            (identical(other.status, status) || other.status == status));
+                other.detailInformation == detailInformation));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, customerId, nominalBalance,
-      bankName, accountNumber, date, detailInformation, status);
+      bankName, accountNumber, date, detailInformation);
 
   @JsonKey(ignore: true)
   @override
@@ -290,13 +282,13 @@ class _$CustomerBalanceHistoryImpl
 abstract class _CustomerBalanceHistory implements CustomerBalanceHistory {
   const factory _CustomerBalanceHistory(
       {required final int id,
-      required final int customerId,
-      required final int nominalBalance,
-      required final String bankName,
-      required final String accountNumber,
-      required final String date,
-      required final String detailInformation,
-      required final String status}) = _$CustomerBalanceHistoryImpl;
+      @JsonKey(name: 'customer_id') required final int customerId,
+      @JsonKey(name: 'nominal_balance') required final int nominalBalance,
+      @JsonKey(name: 'bank_name') required final String bankName,
+      @JsonKey(name: 'account_number') required final String accountNumber,
+      required final DateTime date,
+      @JsonKey(name: 'detail_information')
+      required final String detailInformation}) = _$CustomerBalanceHistoryImpl;
 
   factory _CustomerBalanceHistory.fromJson(Map<String, dynamic> json) =
       _$CustomerBalanceHistoryImpl.fromJson;
@@ -304,19 +296,22 @@ abstract class _CustomerBalanceHistory implements CustomerBalanceHistory {
   @override
   int get id;
   @override
+  @JsonKey(name: 'customer_id')
   int get customerId;
   @override
+  @JsonKey(name: 'nominal_balance')
   int get nominalBalance;
   @override
+  @JsonKey(name: 'bank_name')
   String get bankName;
   @override
+  @JsonKey(name: 'account_number')
   String get accountNumber;
   @override
-  String get date;
+  DateTime get date;
   @override
+  @JsonKey(name: 'detail_information')
   String get detailInformation;
-  @override
-  String get status;
   @override
   @JsonKey(ignore: true)
   _$$CustomerBalanceHistoryImplCopyWith<_$CustomerBalanceHistoryImpl>
