@@ -18,7 +18,7 @@ class OrderOnDeliveryScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AsyncValue<List<Transaction>> transactions = ref.watch(transactionLogicProvider);
+    final AsyncValue<List<Transaction>?> transactions = ref.watch(transactionLogicProvider);
     final List<Transaction>? transactionOnDelivery =
         transactions.value?.where((Transaction transaction) => transaction.status == 'onDelivery').toList();
 
@@ -31,7 +31,7 @@ class OrderOnDeliveryScreen extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: RefreshIndicator(
           onRefresh: () async {
-            await ref.read(transactionLogicProvider.notifier).fetchAll();
+            await ref.read(transactionLogicProvider.notifier).fetchAll('');
           },
           triggerMode: RefreshIndicatorTriggerMode.anywhere,
           child: SingleChildScrollView(
@@ -119,7 +119,7 @@ class TransactionTile extends ConsumerWidget {
                             try {
                               await finishOrder(
                                   ref.read(authLogicProvider).value?.accessToken ?? '', transaction.id ?? 0);
-                              await ref.read(transactionLogicProvider.notifier).fetchAll().then((onValue) {
+                              await ref.read(transactionLogicProvider.notifier).fetchAll('').then((onValue) {
                                 Navigator.of(context).pop();
                                 toastification.show(
                                   context: context,

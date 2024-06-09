@@ -4,18 +4,23 @@ import 'package:p3l_k3_mobile/data/api/dio.dart';
 import 'package:p3l_k3_mobile/data/model/transaction_detail_model.dart';
 import 'package:p3l_k3_mobile/data/model/transaction_model.dart';
 
-Future<List<Transaction>> getOrderHistory(String token, int customerId) async {
+Future<List<Transaction>> getOrderHistory(String token, String query) async {
   final Response response;
+  final Map<String, dynamic> data = <String, dynamic>{
+    'query': query,
+  };
 
   try {
-    response = await dio.get(
-      '/orderHistory/$customerId',
+    response = await dio.post(
+      '/searchOrderHistory',
+      data: data,
       options: Options(
         headers: <String, String>{
           'Authorization': 'Bearer $token',
         },
       ),
     );
+
     return (response.data['data'] as List<dynamic>)
         .map((dynamic e) => Transaction.fromJson(e as Map<String, dynamic>))
         .toList();

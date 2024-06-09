@@ -9,11 +9,10 @@ part 'transaction_logic.g.dart';
 @riverpod
 class TransactionLogic extends _$TransactionLogic {
   @override
-  Future<List<Transaction>> build() async {
+  Future<List<Transaction>?> build() async {
     final String token = ref.read(authLogicProvider).value?.accessToken ?? '';
-    final int customerId = ref.read(customerLogicProvider).value?.id ?? 0;
 
-    final List<Transaction> transactions = await getOrderHistory(token, customerId);
+    final List<Transaction> transactions = await getOrderHistory(token, '');
 
     // fill transactions with cart contents
     for (int i = 0; i < transactions.length; i++) {
@@ -25,13 +24,13 @@ class TransactionLogic extends _$TransactionLogic {
     return transactions;
   }
 
-  Future<void> fetchAll() async {
+  Future<void> fetchAll(String? query) async {
     final String token = ref.read(authLogicProvider).value?.accessToken ?? '';
     final int customerId = ref.read(customerLogicProvider).value?.id ?? 0;
 
     try {
       state = const AsyncLoading<List<Transaction>>();
-      final List<Transaction> transactions = await getOrderHistory(token, customerId);
+      final List<Transaction> transactions = await getOrderHistory(token, query ?? '');
 
       // fill transactions with cart contents
       for (int i = 0; i < transactions.length; i++) {
