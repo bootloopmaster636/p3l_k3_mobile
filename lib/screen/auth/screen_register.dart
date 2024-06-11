@@ -41,7 +41,7 @@ class RegisterForm extends HookConsumerWidget {
     final ValueNotifier<bool> isPasswordHidden = useState(true);
     return Form(
       child: Column(
-        children: [
+        children: <Widget>[
           TextFormField(
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
@@ -74,7 +74,7 @@ class RegisterForm extends HookConsumerWidget {
               labelText: 'Confirm Password',
             ),
           ),
-          Gap(16),
+          const Gap(16),
           SizedBox(
             width: double.infinity,
             height: 48,
@@ -95,14 +95,24 @@ class Intro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 350,
+      height: 360,
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(48),
-          bottomRight: Radius.circular(48),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: <Color>[
+            Theme.of(context).colorScheme.primaryContainer,
+            Theme.of(context).colorScheme.tertiaryContainer,
+          ],
         ),
-        color: Theme.of(context).colorScheme.secondaryContainer,
       ),
       child: Column(
         children: <Widget>[
@@ -126,14 +136,14 @@ class Intro extends StatelessWidget {
           ),
           const Gap(4),
           const Text('(and the registration is free!)'),
-          const Gap(16),
+          const Gap(24),
         ],
       ),
     );
   }
 }
 
-final List<BenefitComponentBuilder> benefits = [
+final List<BenefitComponentBuilder> benefits = <BenefitComponentBuilder>[
   const BenefitComponentBuilder(
     lottiePath: 'assets/anim/shop_mobile.json',
     message: 'Order whenever you want, wherever you want.',
