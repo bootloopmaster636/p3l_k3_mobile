@@ -13,8 +13,10 @@ class CustomerBalanceHistory with _$CustomerBalanceHistory {
     @JsonKey(name: 'bank_name') required String bankName,
     @JsonKey(name: 'account_number') required String accountNumber,
     required DateTime date,
+    required String? status,
     @JsonKey(name: 'detail_information') required String detailInformation,
   }) = _CustomerBalanceHistory;
 
-  factory CustomerBalanceHistory.fromJson(Map<String, dynamic> json) => _$CustomerBalanceHistoryFromJson(json);
+  factory CustomerBalanceHistory.fromJson(Map<String, dynamic> json) =>
+      _$CustomerBalanceHistoryFromJson(json);
 }
