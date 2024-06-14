@@ -13,7 +13,8 @@ class WithdrawHistoryScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AsyncValue<Customer> customerLogic = ref.watch(customerLogicProvider);
-    final AsyncValue<List<CustomerBalanceHistory>> balanceHistory = ref.watch(balanceLogicProvider);
+    final AsyncValue<List<CustomerBalanceHistory>> balanceHistory =
+        ref.watch(balanceLogicProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -30,10 +31,11 @@ class WithdrawHistoryScreen extends ConsumerWidget {
                   itemCount: balanceHistory.value?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
-                      title: Text('Amount: Rp. ${balanceHistory.value?[index].nominalBalance}'),
+                      title: Text(
+                          'Amount: Rp. ${balanceHistory.value?[index].nominalBalance}'),
                       subtitle: Text(
                         'Bank: ${balanceHistory.value?[index].bankName}, Account: ${balanceHistory.value?[index].accountNumber},'
-                        ' Date: ${balanceHistory.value?[index].date}',
+                        ' Date: ${balanceHistory.value?[index].date}, Status: ${balanceHistory.value?[index].status}',
                       ),
                     );
                   },
